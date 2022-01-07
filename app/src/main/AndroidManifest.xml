@@ -14,6 +14,14 @@
         android:theme="@style/Theme.Alefappk"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".ui.NavigationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NoActionBar"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
             android:name=".ui.RegisterActivity"
             android:exported="false"
             android:theme="@style/Theme.NoActionBar"
@@ -23,12 +31,14 @@
             android:exported="false"
             android:theme="@style/Theme.NoActionBar" />
         <activity
-            android:name=".MainActivity"
-            android:exported="false" />
-        <activity
             android:name=".ui.LoginActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NoActionBar" />
+        <activity
+            android:name=".ui.SplashActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
-            android:theme="@style/Theme.NoActionBar">
+            android:theme="@style/SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

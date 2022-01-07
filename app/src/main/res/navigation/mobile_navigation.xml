@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/navigation_home">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home">
+        <action
+            android:id="@+id/action_navigation_home_to_workDetailsFragment"
+            app:destination="@id/workDetailsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/navigation_work_with_us"
+        android:name="com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.workwithus.WorkWithUsFragment"
+        android:label="fragment_work_with_us"
+        tools:layout="@layout/fragment_work_with_us" />
+
+    <fragment
+        android:id="@+id/navigation_exit"
+        android:name="com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.exit.ExitFragment"
+        android:label="@string/title_exit"
+        tools:layout="@layout/fragment_exit" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.notifications.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
+
+    <fragment
+        android:id="@+id/navigation_profile"
+        android:name="com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.profile.ProfileFragment"
+        android:label="@string/title_profile"
+        tools:layout="@layout/fragment_profile">
+        <action
+            android:id="@+id/action_navigation_profile_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/workDetailsFragment"
+        android:name="com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.details.WorkDetailsFragment"
+        android:label="fragment_work_details"
+        tools:layout="@layout/fragment_work_details">
+        <action
+            android:id="@+id/action_workDetailsFragment_to_statisticsFragment"
+            app:destination="@id/statisticsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/statisticsFragment"
+        android:name="com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.statistics.StatisticsFragment"
+        android:label="fragment_statistics"
+        tools:layout="@layout/fragment_statistics" />
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.profile.EditProfileFragment"
+        android:label="fragment_edit_profile"
+        tools:layout="@layout/fragment_edit_profile" />
+
+</navigation>

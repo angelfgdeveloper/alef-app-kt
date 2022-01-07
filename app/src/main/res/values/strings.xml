@@ -15,4 +15,15 @@
     <string name="hint_name">Nombre completo</string>
     <string name="hint_conf_password">Confirmar contraseña</string>
     <string name="tv_privacy_description">Al dar clic en Registrarme declaro haber leido y aceptado los Términos y condiciones así como la Politica de Privacidad de ABC123</string>
+    <string name="title_activity_navigation">NavigationActivity</string>
+
+    <string name="title_home">Inicio</string>
+    <string name="title_notifications">Notificaciones</string>
+    <string name="title_work_with_us">Trabaja con nosotros</string>
+    <string name="title_profile">Perfil</string>
+    <string name="title_exit">Salir</string>
+
+    <string name="btn_logout_text">Cerrar Sesión</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
