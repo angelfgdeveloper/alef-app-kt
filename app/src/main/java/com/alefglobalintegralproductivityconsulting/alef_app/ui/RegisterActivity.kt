@@ -32,7 +32,7 @@ class RegisterActivity : AppCompatActivity() {
 
         mBinding.btnRegister.setOnClickListener { validUser() }
 
-        mBinding.etConfPassword.setOnEditorActionListener { v: TextView?, actionId: Int, event: KeyEvent? ->
+        mBinding.etConfPassword.setOnEditorActionListener { v: TextView?, actionId: Int, _: KeyEvent? ->
             var handled = false
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 validUser()

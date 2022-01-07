@@ -32,7 +32,7 @@ class ForgotPasswordActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayShowHomeEnabled(true)
 
         mBinding.btnRecoverPassword.setOnClickListener { v -> sendEmail() }
-        mBinding.etRecoverPassword.setOnEditorActionListener { v: TextView?, actionId: Int, event: KeyEvent? ->
+        mBinding.etRecoverPassword.setOnEditorActionListener { v: TextView?, actionId: Int, _: KeyEvent? ->
             var handled = false
             if (actionId == EditorInfo.IME_ACTION_DONE) {
                 sendEmail()
