@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">AlefApp</string>
+    <string name="title_login">Inicio de sesión</string>
+    <string name="hint_email">Usuario y/o correo electrónico</string>
+    <string name="hint_password">Contraseña</string>
+    <string name="tv_description_forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="btn_login_text">Iniciar sesión</string>
+    <string name="btn_google_text">Iniciar sesión con Google</string>
+    <string name="btn_preview_text">Da un vistazo</string>
+    <string name="tv_title_create_account">¿Aun no has registrado?</string>
+    <string name="tv_register_text">Registrarme</string>
+    <string name="tv_forgot_password_description">Ingresa tu usuario o correo electrónico, en unos momentos te enviaremos un correo con instrucciones para que vuelvas a iniciar sesión</string>
+    <string name="btn_send_text">Enviar</string>
+    <string name="tv_title_register">Registro</string>
+    <string name="hint_name">Nombre completo</string>
+    <string name="hint_conf_password">Confirmar contraseña</string>
+    <string name="tv_privacy_description">Al dar clic en Registrarme declaro haber leido y aceptado los Términos y condiciones así como la Politica de Privacidad de ABC123</string>
+</resources>
