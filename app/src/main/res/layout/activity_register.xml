@@ -48,36 +48,14 @@
                     android:layout_marginRight="8dp"
                     android:text="@string/tv_title_register"
                     android:textAlignment="center"
-                    android:textSize="24sp" />
+                    android:textSize="@dimen/text_title" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilName"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:id="@+id/tilEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="24dp"
-                    android:layout_marginRight="8dp"
-                    android:hint="@string/hint_name">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etName"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:imeOptions="actionNext"
-                        android:inputType="textPersonName|textCapWords"
-                        android:singleLine="true"
-                        android:textSize="16sp" />
-
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilEmail"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
                     android:layout_marginRight="8dp"
                     android:hint="@string/hint_email">
 
@@ -88,13 +66,12 @@
                         android:imeOptions="actionNext"
                         android:inputType="textEmailAddress"
                         android:singleLine="true"
-                        android:textSize="16sp" />
+                        android:textSize="@dimen/text_normal" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilPassword"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
@@ -110,13 +87,12 @@
                         android:imeOptions="actionNext"
                         android:inputType="textPassword"
                         android:singleLine="true"
-                        android:textSize="16sp" />
+                        android:textSize="@dimen/text_normal" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilConfPassword"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
@@ -132,7 +108,7 @@
                         android:imeOptions="actionDone"
                         android:inputType="textPassword"
                         android:singleLine="true"
-                        android:textSize="16sp" />
+                        android:textSize="@dimen/text_normal" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -147,11 +123,11 @@
                     android:text="@string/tv_privacy_description"
                     android:textAlignment="textStart"
                     android:textColor="@android:color/darker_gray"
-                    android:textSize="14sp" />
+                    android:textSize="@dimen/text_small" />
 
                 <Button
                     android:id="@+id/btnRegister"
-                    style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="8dp"
@@ -159,7 +135,7 @@
                     android:layout_marginRight="8dp"
                     android:text="@string/tv_register_text"
                     android:textAllCaps="false"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/text_normal"
                     android:textStyle="bold" />
 
             </LinearLayout>
