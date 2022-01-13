@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">AlefApp</string>
     <string name="title_login">Inicio de sesión</string>
-    <string name="hint_email">Usuario y/o correo electrónico</string>
+    <string name="hint_email">Correo electrónico</string>
     <string name="hint_password">Contraseña</string>
     <string name="tv_description_forgot_password">¿Olvidaste tu contraseña?</string>
     <string name="btn_login_text">Iniciar sesión</string>

@@ -43,12 +43,11 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun validUser() {
-        val name: String = mBinding.etName.text.toString().trim()
         val email: String = mBinding.etEmail.text.toString().trim()
         val password: String = mBinding.etPassword.text.toString().trim()
         val confPassword: String = mBinding.etConfPassword.text.toString().trim()
 
-        if (name.isNotEmpty() && email.isNotEmpty()) {
+        if (email.isNotEmpty()) {
             if (Validators.isValidEmail(email)) {
                 if (Validators.isValidPassword(password)) {
                     if (password == confPassword) {

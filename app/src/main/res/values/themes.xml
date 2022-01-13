@@ -42,6 +42,11 @@
         <item name="android:windowLightStatusBar" tools:ignore="NewApi">true</item>
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="textInputStyle">@style/EditTextStyle</item>
+    </style>
+
+    <style name="EditTextStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+
     </style>
 
     <style name="ButtonTest.MaterialDesign" parent="Widget.MaterialComponents.Button.OutlinedButton.Icon">
