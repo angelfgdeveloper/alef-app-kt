@@ -28,8 +28,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginHorizontal="@dimen/common_padding_default"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -43,9 +42,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="@dimen/common_padding_min"
+                    android:layout_marginHorizontal="@dimen/common_padding_min"
                     android:text="@string/tv_title_register"
                     android:textAlignment="center"
                     android:textSize="@dimen/text_title" />
@@ -54,9 +52,8 @@
                     android:id="@+id/tilEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="@dimen/common_padding_middle"
+                    android:layout_marginHorizontal="@dimen/common_padding_min"
                     android:hint="@string/hint_email">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -74,9 +71,8 @@
                     android:id="@+id/tilPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="@dimen/common_padding_min"
+                    android:layout_marginHorizontal="@dimen/common_padding_min"
                     android:hint="@string/hint_password"
                     app:passwordToggleEnabled="true">
 
@@ -95,9 +91,8 @@
                     android:id="@+id/tilConfPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="@dimen/common_padding_min"
+                    android:layout_marginHorizontal="@dimen/common_padding_min"
                     android:hint="@string/hint_conf_password"
                     app:passwordToggleEnabled="true">
 
@@ -116,9 +111,8 @@
                     android:id="@+id/tvPrivacy"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="@dimen/common_padding_default"
+                    android:layout_marginHorizontal="@dimen/common_padding_min"
                     android:padding="2dp"
                     android:text="@string/tv_privacy_description"
                     android:textAlignment="textStart"
@@ -130,9 +124,8 @@
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="@dimen/common_padding_min"
+                    android:layout_marginHorizontal="@dimen/common_padding_min"
                     android:text="@string/tv_register_text"
                     android:textAllCaps="false"
                     android:textSize="@dimen/text_normal"

@@ -20,9 +20,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginRight="16dp"
+                android:layout_marginTop="@dimen/common_padding_default"
+                android:layout_marginHorizontal="@dimen/common_padding_default"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical">
@@ -36,9 +35,8 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="@dimen/common_padding_min"
+                    android:layout_marginHorizontal="@dimen/common_padding_min"
                     android:text="@string/title_login"
                     android:textAlignment="center"
                     android:textSize="@dimen/text_title" />
@@ -47,9 +45,8 @@
                     android:id="@+id/tilEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="24dp"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="@dimen/common_padding_middle"
+                    android:layout_marginHorizontal="@dimen/common_padding_min"
                     android:hint="@string/hint_email">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -67,9 +64,8 @@
                     android:id="@+id/tilPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="@dimen/common_padding_min"
+                    android:layout_marginHorizontal="@dimen/common_padding_min"
                     android:hint="@string/hint_password"
                     app:passwordToggleEnabled="true">
 
@@ -88,10 +84,9 @@
                     android:id="@+id/tvForgotPassword"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="8dp"
-                    android:padding="8dp"
+                    android:layout_marginTop="@dimen/common_padding_min"
+                    android:layout_marginHorizontal="@dimen/common_padding_min"
+                    android:padding="@dimen/common_padding_min"
                     android:text="@string/tv_description_forgot_password"
                     android:textAlignment="center"
                     android:textColor="@android:color/darker_gray"
@@ -102,9 +97,8 @@
                     style="@style/Widget.MaterialComponents.Button.OutlinedButton"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="@dimen/common_padding_default"
+                    android:layout_marginHorizontal="@dimen/common_padding_min"
                     android:text="@string/btn_login_text"
                     android:textAllCaps="false"
                     android:textSize="@dimen/text_normal"
@@ -114,9 +108,8 @@
                     android:id="@+id/btnGoogle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="8dp"
+                    android:layout_marginTop="@dimen/common_padding_min"
+                    android:layout_marginHorizontal="@dimen/common_padding_min"
                     android:backgroundTint="@android:color/holo_red_dark"
                     android:text="@string/btn_google_text"
                     android:textAllCaps="false"
@@ -128,9 +121,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="2dp"
+                android:layout_marginHorizontal="@dimen/common_padding_default"
                 android:orientation="vertical">
 
                 <Button
@@ -139,10 +130,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginLeft="12dp"
-                    android:layout_marginTop="6dp"
-                    android:layout_marginRight="12dp"
-                    android:layout_marginBottom="6dp"
+                    android:layout_marginVertical="@dimen/common_padding_min"
                     android:text="@string/btn_preview_text"
                     android:textAllCaps="false"
                     android:textSize="@dimen/text_normal"
@@ -153,9 +141,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginHorizontal="@dimen/common_padding_default"
+                android:layout_marginBottom="@dimen/common_padding_default"
                 android:gravity="center"
                 android:orientation="horizontal">
 
@@ -165,7 +152,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginEnd="4dp"
                     android:gravity="center"
-                    android:padding="6dp"
+                    android:padding="@dimen/common_padding_min"
                     android:text="@string/tv_title_create_account"
                     android:textAlignment="center"
                     android:textColor="@android:color/darker_gray"
@@ -176,7 +163,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center"
-                    android:padding="6dp"
+                    android:padding="@dimen/common_padding_min"
                     android:text="@string/tv_register_text"
                     android:textSize="@dimen/text_normal"
                     android:textStyle="bold" />
