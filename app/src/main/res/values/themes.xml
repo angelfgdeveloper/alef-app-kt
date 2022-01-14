@@ -43,6 +43,9 @@
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="textInputStyle">@style/EditTextStyle</item>
+
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
     </style>
 
     <style name="EditTextStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
@@ -58,4 +61,5 @@
         <item name="iconTint">@android:color/darker_gray</item>
         <item name="strokeColor">@android:color/darker_gray</item>
     </style>
+
 </resources>

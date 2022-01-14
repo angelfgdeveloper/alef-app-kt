@@ -15,4 +15,17 @@
     <string name="hint_name">Nombre completo</string>
     <string name="hint_conf_password">Confirmar contraseña</string>
     <string name="tv_privacy_description">Al dar clic en Registrarme declaro haber leido y aceptado los Términos y condiciones así como la Politica de Privacidad de ABC123</string>
+
+    <string name="title_activity_home">HomeActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="nav_header_desc">Imagen del perfil</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Inicio</string>
+    <string name="menu_postulation">Postulaciones</string>
+    <string name="menu_alert">Alerta</string>
+    <string name="menu_work_with_us">Trabaja con nosotros</string>
+    <string name="logout">Cerrar sesiòn</string>
 </resources>
