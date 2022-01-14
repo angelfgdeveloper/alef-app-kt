@@ -28,6 +28,11 @@ class LoginActivity : AppCompatActivity() {
         }
 
         mBinding.btnLogin.setOnClickListener { validUser() }
+        mBinding.btnGoogle.setOnClickListener {
+            val intent = Intent(this@LoginActivity, AvatarActivity::class.java)
+            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            startActivity(intent)
+        }
         mBinding.tvTitleCreateAccount.setOnClickListener { goToRegister() }
         mBinding.tvCreateAccount.setOnClickListener { goToRegister() }
         mBinding.btnPreview.setOnClickListener { goToHome(false) }
