@@ -37,4 +37,7 @@
     <string name="dialog_permissions_title">Requerimos permisos</string>
     <string name="dialog_permissions_message">Requerimos permisos para el uso de la camara o la galeria</string>
     <string name="dialog_confirm">Ir a los ajustes</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="helper_required">Requerido</string>
 </resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/information_user_graph"
+    app:startDestination="@id/personalFragment">
+
+    <fragment
+        android:id="@+id/personalFragment"
+        android:name="com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.personal.PersonalFragment"
+        android:label="fragment_personal"
+        tools:layout="@layout/fragment_personal" >
+        <action
+            android:id="@+id/action_personalFragment_to_academicFragment"
+            app:destination="@id/academicFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/academicFragment"
+        android:name="com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.academic.AcademicFragment"
+        android:label="fragment_academic"
+        tools:layout="@layout/fragment_academic" />
+
+</navigation>

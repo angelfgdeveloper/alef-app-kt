@@ -19,9 +19,12 @@
         android:theme="@style/Theme.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".ui.AvatarActivity"
-            android:theme="@style/Theme.NoActionBar"
+            android:name=".ui.InformationUserActivity"
             android:exported="false" />
+        <activity
+            android:name=".ui.AvatarActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NoActionBar" />
         <activity
             android:name=".ui.HomeActivity"
             android:exported="false"

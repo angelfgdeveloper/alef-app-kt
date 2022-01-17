@@ -81,6 +81,11 @@ class AvatarActivity : AppCompatActivity() {
         mBinding.btnSelectAvatar.setOnClickListener {
             selectDialogGalleryOrCamera()
         }
+
+        mBinding.fab.setOnClickListener {
+            val intent = Intent(this, InformationUserActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun selectDialogGalleryOrCamera() {
