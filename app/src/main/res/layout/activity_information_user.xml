@@ -9,16 +9,33 @@
     <LinearLayout
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
+        android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <View
+        <com.shuhart.stepview.StepView
+            android:id="@+id/step_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/holo_purple" />
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            app:sv_selectedCircleColor="@color/purple"
+            app:sv_selectedTextColor="@color/purple"
+            app:sv_stepLineWidth="1dp"
+            app:sv_stepPadding="4dp"
+            app:sv_nextTextColor="@color/purple"
+            app:sv_nextStepLineColor="@color/purple"
+            app:sv_doneCircleColor="@color/purple"
+            app:sv_doneStepLineColor="@color/purple"
+            app:sv_doneCircleRadius="12dp"
+            app:sv_selectedCircleRadius="12dp"
+            app:sv_selectedStepNumberColor="@color/white"
+            app:sv_stepViewStyle="@style/StepView"
+            app:sv_doneStepMarkColor="@color/white"
+            app:sv_stepNumberTextSize="12sp"
+            app:sv_animationType="All"
+            app:sv_typeface="@font/roboto_regular"/>
 
     </LinearLayout>
 

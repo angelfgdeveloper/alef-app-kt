@@ -42,6 +42,7 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
                         etName.text.toString().trim()
                     )
                 )
+
                 findNavController().navigate(R.id.action_personalFragment_to_academicFragment)
             }
         }
@@ -68,4 +69,5 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
             imm?.hideSoftInputFromWindow(requireView().windowToken, 0)
         }
     }
+
 }
