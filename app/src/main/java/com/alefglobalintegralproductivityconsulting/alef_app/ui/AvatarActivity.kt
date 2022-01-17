@@ -1,15 +1,77 @@
 package com.alefglobalintegralproductivityconsulting.alef_app.ui
 
-import androidx.appcompat.app.AppCompatActivity
+import android.Manifest
+import android.app.Activity
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
+import android.provider.Settings
+import android.util.Log
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.ActivityAvatarBinding
-import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.karumi.dexter.Dexter
+import com.karumi.dexter.MultiplePermissionsReport
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
+
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import java.io.File
+
 
 class AvatarActivity : AppCompatActivity() {
 
     private lateinit var mBinding: ActivityAvatarBinding
+
+    private var resultLauncherGallery =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data: Intent? = result.data
+
+                if (data != null) {
+                    val selectedPhoto = data.data // content://gallery/photo/..
+                    val filePathColumn = arrayOf(MediaStore.Images.Media.DATA)
+                    val cursor = contentResolver.query(
+                        selectedPhoto!!,
+                        filePathColumn, null, null, null
+                    )
+                    if (cursor != null) {
+                        cursor.moveToFirst()
+                        val imgIndex = cursor.getColumnIndex(filePathColumn[0])
+                        val photoPath = cursor.getString(imgIndex)
+
+                        // Subir la foto al Viewmodel.upload(photoPath);
+                        Log.d("IMAGEN", photoPath)
+                        if (!photoPath.isEmpty()) {
+                            val imgFile = File(photoPath)
+                            if (imgFile.exists()) {
+                                val bitmap = BitmapFactory.decodeFile(imgFile.absolutePath)
+                                mBinding.civAvatar.setImageBitmap(bitmap)
+                            }
+                        }
+
+                        cursor.close()
+                    }
+                }
+            }
+        }
+
+    private var resultLauncherCamera =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data: Intent? = result.data
+                if (data != null) {
+                    val photo = data.extras?.get("data") as Bitmap
+                    mBinding.civAvatar.setImageBitmap(photo)
+                }
+            }
+        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,7 +79,110 @@ class AvatarActivity : AppCompatActivity() {
         setContentView(mBinding.root)
 
         mBinding.btnSelectAvatar.setOnClickListener {
-            Toast.makeText(this, "En desarrollo", Toast.LENGTH_SHORT).show()
+            selectDialogGalleryOrCamera()
         }
+    }
+
+    private fun selectDialogGalleryOrCamera() {
+        MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.dialog_gallery_camera_title)
+            .setNeutralButton(R.string.dialog_delete_cancel, null)
+            .setPositiveButton(R.string.dialog_gallery) { _, _ ->
+                requestGalleryPermission()
+            }
+            .setNegativeButton(R.string.dialog_camera) { _, _ ->
+                requestCameraPermission()
+            }
+            .show()
+    }
+
+    private fun requestGalleryPermission() {
+        Dexter.withContext(this)
+            .withPermissions(
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            )
+            .withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
+                    if (report!!.areAllPermissionsGranted()) {
+                        openGallery()
+                    } else if (report.isAnyPermissionPermanentlyDenied) {
+                        showSettingsDialog()
+                    }
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    permissions: MutableList<PermissionRequest>?,
+                    token: PermissionToken?
+                ) {
+                    token!!.continuePermissionRequest()
+                }
+
+            }).withErrorListener {
+                Toast.makeText(
+                    applicationContext,
+                    "Ocurrio un error en los permisos de la galeria",
+                    Toast.LENGTH_SHORT
+                ).show();
+            }.check()
+
+    }
+
+    private fun requestCameraPermission() {
+        Dexter.withContext(this)
+            .withPermissions(
+                Manifest.permission.CAMERA
+            )
+            .withListener(object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(report: MultiplePermissionsReport?) {
+                    if (report!!.areAllPermissionsGranted()) {
+                        openCamera()
+                    } else if (report.isAnyPermissionPermanentlyDenied) {
+                        showSettingsDialog()
+                    }
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    permissions: MutableList<PermissionRequest>?,
+                    token: PermissionToken?
+                ) {
+                    token!!.continuePermissionRequest()
+                }
+
+            }).withErrorListener {
+                Toast.makeText(
+                    applicationContext,
+                    "Ocurrio un error en los permisos de la camara",
+                    Toast.LENGTH_SHORT
+                ).show();
+            }.check()
+    }
+
+    private fun openGallery() {
+        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        resultLauncherGallery.launch(intent)
+    }
+
+    private fun openCamera() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        resultLauncherCamera.launch(intent)
+    }
+
+    private fun showSettingsDialog() {
+        MaterialAlertDialogBuilder(this)
+            .setTitle(R.string.dialog_permissions_title)
+            .setMessage(R.string.dialog_permissions_message)
+            .setNegativeButton(R.string.dialog_delete_cancel, null)
+            .setPositiveButton(R.string.dialog_confirm) { dialog, _ ->
+                dialog.cancel()
+                openSettings()
+            }
+            .show()
+    }
+
+    private fun openSettings() {
+        val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS)
+        val uri: Uri = Uri.fromParts("package", packageName, null)
+        intent.data = uri
+        resultLauncherCamera.launch(intent)
     }
 }

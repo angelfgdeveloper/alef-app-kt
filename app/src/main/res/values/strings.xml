@@ -29,4 +29,12 @@
     <string name="menu_work_with_us">Trabaja con nosotros</string>
     <string name="logout">Cerrar sesiòn</string>
     <string name="add_img_avatar">Agregar foto de perfil</string>
+
+    <string name="dialog_gallery_camera_title">Abrir Camara o Galeria</string>
+    <string name="dialog_delete_cancel">Cancelar</string>
+    <string name="dialog_gallery">Galeria</string>
+    <string name="dialog_camera">Camara</string>
+    <string name="dialog_permissions_title">Requerimos permisos</string>
+    <string name="dialog_permissions_message">Requerimos permisos para el uso de la camara o la galeria</string>
+    <string name="dialog_confirm">Ir a los ajustes</string>
 </resources>
