@@ -17,7 +17,8 @@ class InfoUserViewModel: ViewModel() {
 }
 
 data class InfoUser(
-    val motherLastName: String = "", 
-    val lastName: String = "", 
-    val name: String = ""
+    val lastName: String = "",
+    val motherLastName: String = "",
+    val name: String = "",
+    val dateOfBirth: String = ""
 )

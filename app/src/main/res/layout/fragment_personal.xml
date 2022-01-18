@@ -19,33 +19,105 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1"
+                android:layout_weight="@integer/layout_weight_default"
                 android:orientation="vertical">
 
-<!--                <TextView-->
-<!--                    android:layout_width="match_parent"-->
-<!--                    android:layout_height="wrap_content"-->
-<!--                    android:gravity="center"-->
-<!--                    android:text="INFORMACION PERSONAL"-->
-<!--                    android:textSize="@dimen/text_normal" />-->
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:gravity="center"-->
+                <!--                    android:text="INFORMACION PERSONAL"-->
+                <!--                    android:textSize="@dimen/text_normal" />-->
 
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/tilName"
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/common_padding_default"
-                    android:layout_marginHorizontal="@dimen/common_padding_min"
-                    android:hint="Nombre">
+                    android:orientation="horizontal">
 
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/etName"
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilLastName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:imeOptions="actionNext"
-                        android:inputType="textPersonName|textCapWords"
-                        android:textSize="@dimen/text_normal" />
+                        android:layout_marginHorizontal="@dimen/common_padding_min"
+                        android:layout_marginTop="@dimen/common_padding_default"
+                        android:layout_weight="@integer/layout_weight_default"
+                        android:hint="@string/last_name">
 
-                </com.google.android.material.textfield.TextInputLayout>
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etLastName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionNext"
+                            android:inputType="textPersonName|textCapWords"
+                            android:textSize="@dimen/text_normal" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilMotherLastName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/common_padding_min"
+                        android:layout_marginTop="@dimen/common_padding_default"
+                        android:layout_weight="@integer/layout_weight_default"
+                        android:hint="@string/mother_last_name">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etMotherLastName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionNext"
+                            android:inputType="textPersonName|textCapWords"
+                            android:textSize="@dimen/text_normal" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/common_padding_min"
+                        android:layout_marginTop="@dimen/common_padding_default"
+                        android:layout_weight="@integer/layout_weight_default"
+                        android:hint="@string/user_name">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etName"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionNext"
+                            android:inputType="textPersonName|textCapWords"
+                            android:textSize="@dimen/text_normal" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilDateOfBirth"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/common_padding_min"
+                        android:layout_marginTop="@dimen/common_padding_default"
+                        android:layout_weight="@integer/layout_weight_default"
+                        android:hint="@string/user_date">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etDateOfBirth"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionNext"
+                            android:inputType="date"
+                            android:textSize="@dimen/text_normal" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -60,7 +132,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/common_padding_default"
                     android:layout_marginVertical="@dimen/common_padding_min"
-                    android:backgroundTint="@android:color/darker_gray"
                     android:clickable="true"
                     android:focusable="true"
                     app:srcCompat="@drawable/ic_arrow_back" />
@@ -68,17 +139,16 @@
                 <View
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="1" />
+                    android:layout_weight="@integer/layout_weight_default" />
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton
                     android:id="@+id/fabNext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:enabled="false"
                     android:layout_marginHorizontal="@dimen/common_padding_default"
                     android:layout_marginVertical="@dimen/common_padding_min"
-                    android:backgroundTint="@android:color/darker_gray"
                     android:clickable="true"
+                    android:enabled="false"
                     android:focusable="true"
                     app:srcCompat="@drawable/ic_arrow_forward" />
 

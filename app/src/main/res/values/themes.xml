@@ -43,6 +43,7 @@
         <!-- Customize your theme here. -->
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="textInputStyle">@style/EditTextStyle</item>
+        <item name="floatingActionButtonStyle">@style/FloatingActionButtonStyle</item>
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -50,6 +51,15 @@
 
     <style name="EditTextStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
 
+    </style>
+
+    <style name="FloatingActionButtonStyle" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="tint">@android:color/white</item>
+        <item name="backgroundTint">@android:color/darker_gray</item>
+        <item name="borderWidth">0.5dp</item>
+        <item name="fabSize">normal</item>
+        <item name="shapeAppearance">?attr/shapeAppearanceSmallComponent</item>
+        <item name="elevation">6dp</item>
     </style>
 
     <style name="ButtonTest.MaterialDesign" parent="Widget.MaterialComponents.Button.OutlinedButton.Icon">

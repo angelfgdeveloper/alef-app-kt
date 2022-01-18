@@ -7,6 +7,9 @@ import android.os.Build
 import android.text.TextUtils
 import android.util.Patterns
 import androidx.annotation.RequiresApi
+import com.alefglobalintegralproductivityconsulting.alef_app.R
+import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.textfield.TextInputLayout
 
 class Validators {
 
@@ -34,5 +37,24 @@ class Validators {
                             || hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET)
                 } ?: false
             }
+
+        fun validateFields(
+            vararg textFields: TextInputLayout,
+            fab: FloatingActionButton,
+            context: Context
+        ): Boolean {
+            var isValid = true
+
+            for (textField in textFields) {
+                if (textField.editText?.text.toString().trim().isEmpty()) {
+                    textField.error = context.getString(R.string.helper_required)
+                    textField.editText?.requestFocus()
+                    isValid = false
+                } else textField.error = null
+            }
+
+            fab.isEnabled = isValid
+            return isValid
+        }
     }
 }

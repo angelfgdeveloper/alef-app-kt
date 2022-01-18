@@ -10,11 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.alefglobalintegralproductivityconsulting.alef_app.core.StepViewListener
+import com.alefglobalintegralproductivityconsulting.alef_app.core.Validators.Companion.validateFields
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.FragmentPersonalBinding
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.InformationUserActivity
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.InfoUser
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.InfoUserViewModel
-import com.google.android.material.textfield.TextInputLayout
 
 class PersonalFragment : Fragment(R.layout.fragment_personal) {
 
@@ -33,47 +33,67 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
         super.onViewCreated(view, savedInstanceState)
         mBinding = FragmentPersonalBinding.bind(view)
 
-        setupTextFields()
         onBackPress()
+        setupTextFields()
 
         mInfoUserViewModel.getInfoUser().observe(viewLifecycleOwner, { user ->
-            mBinding.etName.setText(user.name)
+            with(mBinding) {
+                etLastName.setText(user.lastName)
+                etMotherLastName.setText(user.motherLastName)
+                etName.setText(user.name)
+                etDateOfBirth.setText(user.dateOfBirth)
+            }
         })
     }
 
     private fun setupTextFields() {
         with(mBinding) {
-            etName.addTextChangedListener { validateFields(tilName) }
+            etLastName.addTextChangedListener {
+                validateFields(
+                    tilLastName, fab = fabNext, context = requireContext()
+                )
+            }
+            etMotherLastName.addTextChangedListener {
+                validateFields(
+                    tilMotherLastName, fab = fabNext, context = requireContext()
+                )
+            }
+            etName.addTextChangedListener {
+                validateFields(
+                    tilName, fab = fabNext, context = requireContext()
+                )
+            }
+            etDateOfBirth.addTextChangedListener {
+                validateFields(
+                    tilDateOfBirth, fab = fabNext, context = requireContext()
+                )
+            }
 
             fabReturn.setOnClickListener { requireActivity().finish() }
             fabNext.setOnClickListener {
-                mInfoUserViewModel.setInfoUser(
-                    InfoUser(
-                        "Fly",
-                        "flow",
-                        etName.text.toString().trim()
+                if (validateFields(
+                        tilDateOfBirth,
+                        tilName,
+                        tilMotherLastName,
+                        tilLastName,
+                        fab = fabNext,
+                        context = requireContext()
                     )
-                )
+                ) {
+                    mInfoUserViewModel.setInfoUser(
+                        InfoUser(
+                            etLastName.text.toString().trim(),
+                            etMotherLastName.text.toString().trim(),
+                            etName.text.toString().trim(),
+                            etDateOfBirth.text.toString().trim()
+                        )
+                    )
 
-                listener?.onSelectStepView(1, R.id.academicFragment)
+                    listener?.onSelectStepView(1, R.id.academicFragment)
 //                findNavController().navigate(R.id.action_personalFragment_to_academicFragment)
+                }
             }
         }
-    }
-
-    private fun validateFields(vararg textFields: TextInputLayout): Boolean {
-        var isValid = true
-
-        for (textField in textFields) {
-            if (textField.editText?.text.toString().trim().isEmpty()) {
-                textField.error = getString(R.string.helper_required)
-                textField.editText?.requestFocus()
-                isValid = false
-            } else textField.error = null
-        }
-
-        mBinding.fabNext.isEnabled = isValid
-        return isValid
     }
 
     private fun hideKeyboard() {

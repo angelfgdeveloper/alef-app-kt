@@ -3,14 +3,14 @@ package com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.infor
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.alefglobalintegralproductivityconsulting.alef_app.R
+import com.alefglobalintegralproductivityconsulting.alef_app.core.StepViewListener
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.FragmentAcademicBinding
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.InfoUserViewModel
-import androidx.activity.OnBackPressedCallback
-import com.alefglobalintegralproductivityconsulting.alef_app.core.StepViewListener
-import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.personal.PersonalFragment
 
 
 class AcademicFragment : Fragment(R.layout.fragment_academic) {
@@ -29,10 +29,21 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
         mBinding = FragmentAcademicBinding.bind(view)
 
         onBackPress()
+        setupTextFields()
 
         mInfoUserViewModel.getInfoUser().observe(viewLifecycleOwner, { user ->
             mBinding.tvExample.text = "Nombre: ${user.name}"
         })
+    }
+
+    private fun setupTextFields() {
+        with(mBinding) {
+            fabReturn.setOnClickListener { listener?.onSelectStepView(0, R.id.personalFragment) }
+            fabNext.setOnClickListener {
+//                listener?.onSelectStepView(2, R.id.jobFragment)
+                Toast.makeText(requireContext(), "En desarrollo", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun onBackPress() {

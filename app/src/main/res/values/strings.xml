@@ -37,7 +37,15 @@
     <string name="dialog_permissions_title">Requerimos permisos</string>
     <string name="dialog_permissions_message">Requerimos permisos para el uso de la camara o la galeria</string>
     <string name="dialog_confirm">Ir a los ajustes</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="helper_required">Requerido</string>
+    <string name="last_name">Apellido paterno</string>
+    <string name="mother_last_name">Apellido materno</string>
+    <string name="user_name">Nombre(s)</string>
+    <string name="user_date">Fecha de nacimiento</string>
+
+    <string name="info_personal">Información Personal</string>
+    <string name="info_academic">Información Academica</string>
+    <string name="info_experience_job">Información Laboral</string>
+    <string name="info_references">Referencias</string>
 </resources>

@@ -21,13 +21,13 @@ class InformationUserActivity : AppCompatActivity(), StepViewListener {
         mBinding.stepView.state
             .steps(object : ArrayList<String?>() {
                 init {
-                    add("Información Personal")
-                    add("Información Academica")
-                    add("Información Laboral")
-                    add("Referencias")
+                    add(getString(R.string.info_personal))
+                    add(getString(R.string.info_academic))
+                    add(getString(R.string.info_experience_job))
+                    add(getString(R.string.info_references))
                 }
             })
-            .stepsNumber(4)
+            .stepsNumber(resources.getInteger(R.integer.steps_number))
             .commit()
 
 //        mBinding.stepView.setOnStepClickListener { step ->
