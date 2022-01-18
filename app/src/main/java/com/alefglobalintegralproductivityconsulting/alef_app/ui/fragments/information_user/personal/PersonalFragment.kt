@@ -4,11 +4,12 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import com.alefglobalintegralproductivityconsulting.alef_app.R
+import com.alefglobalintegralproductivityconsulting.alef_app.core.StepViewListener
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.FragmentPersonalBinding
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.InformationUserActivity
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.InfoUser
@@ -21,12 +22,23 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
     private val mInfoUserViewModel: InfoUserViewModel by activityViewModels()
 
     private var mActivity: InformationUserActivity? = null
+    private var listener: StepViewListener? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (activity is StepViewListener) listener = activity as StepViewListener?
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mBinding = FragmentPersonalBinding.bind(view)
 
         setupTextFields()
+        onBackPress()
+
+        mInfoUserViewModel.getInfoUser().observe(viewLifecycleOwner, { user ->
+            mBinding.etName.setText(user.name)
+        })
     }
 
     private fun setupTextFields() {
@@ -43,7 +55,8 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
                     )
                 )
 
-                findNavController().navigate(R.id.action_personalFragment_to_academicFragment)
+                listener?.onSelectStepView(1, R.id.academicFragment)
+//                findNavController().navigate(R.id.action_personalFragment_to_academicFragment)
             }
         }
     }
@@ -68,6 +81,17 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
         if (view != null) {
             imm?.hideSoftInputFromWindow(requireView().windowToken, 0)
         }
+    }
+
+    private fun onBackPress() {
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    activity!!.finish()
+                }
+            }
+
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 
 }
