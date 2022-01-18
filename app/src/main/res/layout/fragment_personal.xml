@@ -119,11 +119,207 @@
 
                 </LinearLayout>
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilGender"
+                    style="@style/DropdownMenuStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/common_padding_min"
+                    android:layout_marginTop="@dimen/common_padding_default"
+                    android:hint="@string/user_gender">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/atvGender"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="none"
+                        android:textSize="@dimen/text_normal" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilState"
+                        style="@style/DropdownMenuStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/common_padding_min"
+                        android:layout_marginTop="@dimen/common_padding_default"
+                        android:layout_weight="@integer/layout_weight_default"
+                        android:hint="@string/user_state">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/atvState"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionNext"
+                            android:inputType="none"
+                            android:textSize="@dimen/text_normal" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilTown"
+                        style="@style/DropdownMenuStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/common_padding_min"
+                        android:layout_marginTop="@dimen/common_padding_default"
+                        android:layout_weight="@integer/layout_weight_default"
+                        android:hint="@string/user_town">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/atvTwon"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionNext"
+                            android:inputType="none"
+                            android:textSize="@dimen/text_normal" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilTelephone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/common_padding_min"
+                        android:layout_marginTop="@dimen/common_padding_default"
+                        android:layout_weight="@integer/layout_weight_default"
+                        android:hint="@string/user_phone_home"
+                        app:helperText="@string/helper_optional">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etTelephone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:textSize="@dimen/text_normal" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilMobile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/common_padding_min"
+                        android:layout_marginTop="@dimen/common_padding_default"
+                        android:layout_weight="@integer/layout_weight_default"
+                        android:hint="@string/user_cellphone">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etMobile"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionNext"
+                            android:inputType="number"
+                            android:textSize="@dimen/text_normal" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilAddress"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/common_padding_min"
+                    android:layout_marginTop="@dimen/common_padding_default"
+                    android:hint="@string/user_address"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="@integer/counter_max_length">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="textMultiLine|textCapWords"
+                        android:lines="@integer/lines"
+                        android:maxLength="@integer/counter_max_length"
+                        android:maxLines="@integer/max_lines"
+                        android:minLines="@integer/min_lines"
+                        android:scrollbars="vertical"
+                        android:singleLine="false"
+                        android:textSize="@dimen/text_normal" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilCurp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/common_padding_min"
+                    android:layout_marginTop="@dimen/common_padding_default"
+                    android:hint="@string/user_curp">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etCurp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="text|textCapCharacters"
+                        android:maxLength="@integer/counter_max_length_curp"
+                        android:textSize="@dimen/text_normal" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilRfc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/common_padding_min"
+                    android:layout_marginTop="@dimen/common_padding_default"
+                    android:hint="@string/user_rfc">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etRfc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="text|textCapCharacters"
+                        android:maxLength="@integer/counter_max_length_rfc"
+                        android:textSize="@dimen/text_normal" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilNss"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/common_padding_min"
+                    android:layout_marginTop="@dimen/common_padding_default"
+                    android:hint="@string/user_nss">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etNss"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionDone"
+                        android:inputType="text|textCapCharacters"
+                        android:maxLength="@integer/counter_max_length_nss"
+                        android:textSize="@dimen/text_normal" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_padding_default"
                 android:orientation="horizontal">
 
                 <com.google.android.material.floatingactionbutton.FloatingActionButton

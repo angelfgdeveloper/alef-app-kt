@@ -2,6 +2,7 @@ package com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.infor
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -10,7 +11,7 @@ import androidx.fragment.app.activityViewModels
 import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.alefglobalintegralproductivityconsulting.alef_app.core.StepViewListener
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.FragmentAcademicBinding
-import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.InfoUserViewModel
+import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.InfoUserViewModel
 
 
 class AcademicFragment : Fragment(R.layout.fragment_academic) {
@@ -32,6 +33,7 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
         setupTextFields()
 
         mInfoUserViewModel.getInfoUser().observe(viewLifecycleOwner, { user ->
+            Log.d("AcademicFragment", user.toString())
             mBinding.tvExample.text = "Nombre: ${user.name}"
         })
     }

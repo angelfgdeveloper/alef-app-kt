@@ -53,6 +53,10 @@
 
     </style>
 
+    <style name="DropdownMenuStyle" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu">
+
+    </style>
+
     <style name="FloatingActionButtonStyle" parent="Widget.MaterialComponents.FloatingActionButton">
         <item name="tint">@android:color/white</item>
         <item name="backgroundTint">@android:color/darker_gray</item>

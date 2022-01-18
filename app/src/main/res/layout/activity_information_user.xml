@@ -10,7 +10,7 @@
         android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -20,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="@dimen/common_padding_default"
+            android:layout_weight="@integer/layout_weight_default"
             app:sv_selectedCircleColor="@color/black"
             app:sv_selectedTextColor="@color/black"
             app:sv_stepLineWidth="0.5dp"
@@ -37,6 +38,11 @@
             app:sv_stepNumberTextSize="@dimen/text_small"
             app:sv_animationType="All"
             app:sv_typeface="@font/roboto_regular"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0.5dp"
+            android:background="@android:color/darker_gray" />
 
     </LinearLayout>
 

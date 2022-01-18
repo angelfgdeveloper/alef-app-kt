@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <integer name="layout_weight_default">1</integer>
+
     <integer name="steps_number">4</integer>
+
+    <integer name="counter_max_length">150</integer>
+    <integer name="lines">3</integer>
+    <integer name="max_lines">4</integer>
+    <integer name="min_lines">2</integer>
+
+    <integer name="counter_max_length_curp">18</integer>
+    <integer name="counter_max_length_rfc">13</integer>
+    <integer name="counter_max_length_nss">11</integer>
 </resources>

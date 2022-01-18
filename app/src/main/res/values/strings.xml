@@ -17,11 +17,11 @@
     <string name="tv_privacy_description">Al dar clic en Registrarme declaro haber leido y aceptado los Términos y condiciones así como la Politica de Privacidad de ABC123</string>
 
     <string name="title_activity_home">HomeActivity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="navigation_drawer_open">Abrir barra de navegaciòn</string>
+    <string name="navigation_drawer_close">Cerrar barra de navegaciòn</string>
 
-    <string name="nav_header_desc">Imagen del perfil</string>
-    <string name="action_settings">Settings</string>
+    <string name="nav_header_desc">Imàgen del perfil</string>
+    <string name="action_settings">Ajustes</string>
 
     <string name="menu_home">Inicio</string>
     <string name="menu_postulation">Postulaciones</string>
@@ -39,6 +39,8 @@
     <string name="dialog_confirm">Ir a los ajustes</string>
 
     <string name="helper_required">Requerido</string>
+    <string name="helper_optional">Opcional</string>
+
     <string name="last_name">Apellido paterno</string>
     <string name="mother_last_name">Apellido materno</string>
     <string name="user_name">Nombre(s)</string>
@@ -48,4 +50,13 @@
     <string name="info_academic">Información Academica</string>
     <string name="info_experience_job">Información Laboral</string>
     <string name="info_references">Referencias</string>
+    <string name="user_gender">Género</string>
+    <string name="user_state">Estado</string>
+    <string name="user_town">Municipio</string>
+    <string name="user_phone_home">Teléfono (Casa)</string>
+    <string name="user_cellphone">Teléfono (Celular)</string>
+    <string name="user_address">Dirección</string>
+    <string name="user_curp">CURP</string>
+    <string name="user_rfc">RFC</string>
+    <string name="user_nss">Número de seguro social</string>
 </resources>
