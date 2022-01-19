@@ -17,6 +17,7 @@ import com.alefglobalintegralproductivityconsulting.alef_app.databinding.Fragmen
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.InformationUserActivity
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.InfoUser
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.InfoUserViewModel
+import kotlinx.android.synthetic.main.fragment_personal.*
 
 class PersonalFragment : Fragment(R.layout.fragment_personal) {
 
@@ -27,6 +28,8 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
     private var listener: StepViewListener? = null
 
     private var mGender = ""
+    private var mState = ""
+    private var mTown = ""
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -48,6 +51,8 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
                 etName.setText(user.name)
                 etDateOfBirth.setText(user.dateOfBirth)
                 atvGender.setText(user.gender)
+                atvState.setText(user.state)
+                atvTwon.setText(user.town)
                 etTelephone.setText(user.telephone)
                 etMobile.setText(user.cellphone)
                 etAddress.setText(user.address)
@@ -56,6 +61,7 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
                 etNss.setText(user.nss)
             }
         })
+
     }
 
     private fun addSelectData() {
@@ -73,6 +79,45 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
                 }
             }
         })
+
+        mInfoUserViewModel.getStateList().observe(viewLifecycleOwner, { state ->
+            val adapterState = ArrayAdapter(requireContext(), R.layout.dropdown_menu_item, state)
+
+            with(mBinding) {
+                atvState.setAdapter(adapterState)
+                atvState.setOnItemClickListener { parent, _, position, id ->
+                    mState = parent.getItemAtPosition(position).toString()
+
+                    if (mState.isNotEmpty()) {
+                        mInfoUserViewModel.getTownList().observe(viewLifecycleOwner, { town ->
+                            val adapterTown = ArrayAdapter(requireContext(), R.layout.dropdown_menu_item, town)
+
+                            with(mBinding) {
+                                atvTwon.setAdapter(adapterTown)
+                                atvTwon.setOnItemClickListener { parent, _, position, id ->
+                                    mTown = parent.getItemAtPosition(position).toString()
+                                }
+                            }
+                        })
+                    }
+
+                }
+            }
+        })
+
+        // TODO: correccion de bug
+        if (atvState.text.toString().isNotEmpty()) {
+            mInfoUserViewModel.getTownList().observe(viewLifecycleOwner, { town ->
+                val adapterTown = ArrayAdapter(requireContext(), R.layout.dropdown_menu_item, town)
+
+                with(mBinding) {
+                    atvTwon.setAdapter(adapterTown)
+                    atvTwon.setOnItemClickListener { parent, _, position, id ->
+                        mTown = parent.getItemAtPosition(position).toString()
+                    }
+                }
+            })
+        }
 
     }
 
@@ -92,6 +137,12 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
             }
             atvGender.addTextChangedListener {
                 validateFields(tilGender, fab = fabNext, context = requireContext())
+            }
+            atvState.addTextChangedListener {
+                validateFields(tilState, fab = fabNext, context = requireContext())
+            }
+            atvTwon.addTextChangedListener {
+                validateFields(tilTown, fab = fabNext, context = requireContext())
             }
             etMobile.addTextChangedListener {
                 validateFields(tilMobile, fab = fabNext, context = requireContext())
@@ -117,6 +168,8 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
                         tilCurp,
                         tilAddress,
                         tilMobile,
+                        tilTown,
+                        tilState,
                         tilGender,
                         tilDateOfBirth,
                         tilName,
@@ -133,8 +186,8 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
                             name = etName.text.toString().trim(),
                             dateOfBirth = etDateOfBirth.text.toString().trim(),
                             gender = atvGender.text.toString().trim(),
-                            state = "",
-                            town = "",
+                            state = atvState.text.toString().trim(),
+                            town = atvTwon.text.toString().trim(),
                             telephone = etTelephone.text.toString().trim(),
                             cellphone = etMobile.text.toString().trim(),
                             address = etAddress.text.toString().trim(),
