@@ -20,6 +20,7 @@ import com.alefglobalintegralproductivityconsulting.alef_app.databinding.Fragmen
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.InformationUserActivity
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.InfoUser
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.InfoUserViewModel
+import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.fragment_personal.*
 
 
@@ -126,44 +127,23 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
     }
 
     private fun setupTextFields() {
+
         with(mBinding) {
-            etLastName.addTextChangedListener {
-                validateFields(tilLastName, fab = fabNext, context = requireContext())
-            }
-            etMotherLastName.addTextChangedListener {
-                validateFields(tilMotherLastName, fab = fabNext, context = requireContext())
-            }
-            etName.addTextChangedListener {
-                validateFields(tilName, fab = fabNext, context = requireContext())
-            }
-            etDateOfBirth.addTextChangedListener {
-                validateFields(tilDateOfBirth, fab = fabNext, context = requireContext())
-            }
-            atvGender.addTextChangedListener {
-                validateFields(tilGender, fab = fabNext, context = requireContext())
-            }
-            atvState.addTextChangedListener {
-                validateFields(tilState, fab = fabNext, context = requireContext())
-            }
-            atvTwon.addTextChangedListener {
-                validateFields(tilTown, fab = fabNext, context = requireContext())
-            }
-            etSuburb.addTextChangedListener {
-                validateFields(tilSuburb, fab = fabNext, context = requireContext())
-            }
-            etStreet.addTextChangedListener {
-                validateFields(tilStreet, fab = fabNext, context = requireContext())
-            }
-            etNumberHome.addTextChangedListener {
-                validateFields(tilNumberHome, fab = fabNext, context = requireContext())
-            }
-            etCP.addTextChangedListener {
-                validateFields(tilCP, fab = fabNext, context = requireContext())
-            }
-            etMobile.addTextChangedListener {
-                validateFields(tilMobile, fab = fabNext, context = requireContext())
+
+            val fields = arrayListOf(
+                tilLastName, tilMotherLastName, tilName, tilDateOfBirth, tilGender, tilState,
+                tilTown, tilSuburb, tilStreet, tilNumberHome, tilCP, tilMobile
+            )
+
+            fields.forEach { textInputLayout ->
+                textInputLayout.editText?.addTextChangedListener {
+                    validateFields(textInputLayout, fab = fabNext, context = requireContext())
+                }
             }
 
+//            etLastName.addTextChangedListener {
+//                validateFields(tilLastName, fab = fabNext, context = requireContext())
+//            }
             etMobile.setOnEditorActionListener { _: TextView?, actionId: Int, _: KeyEvent? ->
                 var handled = false
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
