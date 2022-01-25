@@ -55,9 +55,12 @@ data class InfoUser(
     val gender: String = "",
     val state: String = "",
     val town: String = "",
+    val suburb: String = "",
+    val street: String = "",
+    val numberHome: Int = 0,
+    val postalCode: Int = 0,
     val telephone: String = "",
     val cellphone: String = "",
-    val address: String = "",
     val curp: String = "",
     val rfc: String = "",
     val nss: String = ""

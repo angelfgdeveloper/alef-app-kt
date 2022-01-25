@@ -2,9 +2,12 @@ package com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.infor
 
 import android.content.Context
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.addTextChangedListener
@@ -18,6 +21,7 @@ import com.alefglobalintegralproductivityconsulting.alef_app.ui.InformationUserA
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.InfoUser
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.InfoUserViewModel
 import kotlinx.android.synthetic.main.fragment_personal.*
+
 
 class PersonalFragment : Fragment(R.layout.fragment_personal) {
 
@@ -53,12 +57,12 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
                 atvGender.setText(user.gender)
                 atvState.setText(user.state)
                 atvTwon.setText(user.town)
+                etSuburb.setText(user.suburb)
+                etStreet.setText(user.street)
+                etNumberHome.setText(user.numberHome.toString())
+                etCP.setText(user.postalCode.toString())
                 etTelephone.setText(user.telephone)
                 etMobile.setText(user.cellphone)
-                etAddress.setText(user.address)
-                etCurp.setText(user.curp)
-                etRfc.setText(user.rfc)
-                etNss.setText(user.nss)
             }
         })
 
@@ -144,63 +148,74 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
             atvTwon.addTextChangedListener {
                 validateFields(tilTown, fab = fabNext, context = requireContext())
             }
+            etSuburb.addTextChangedListener {
+                validateFields(tilSuburb, fab = fabNext, context = requireContext())
+            }
+            etStreet.addTextChangedListener {
+                validateFields(tilStreet, fab = fabNext, context = requireContext())
+            }
+            etNumberHome.addTextChangedListener {
+                validateFields(tilNumberHome, fab = fabNext, context = requireContext())
+            }
+            etCP.addTextChangedListener {
+                validateFields(tilCP, fab = fabNext, context = requireContext())
+            }
             etMobile.addTextChangedListener {
                 validateFields(tilMobile, fab = fabNext, context = requireContext())
             }
-            etAddress.addTextChangedListener {
-                validateFields(tilAddress, fab = fabNext, context = requireContext())
-            }
-            etCurp.addTextChangedListener {
-                validateFields(tilCurp, fab = fabNext, context = requireContext())
-            }
-            etRfc.addTextChangedListener {
-                validateFields(tilRfc, fab = fabNext, context = requireContext())
-            }
-            etNss.addTextChangedListener {
-                validateFields(tilNss, fab = fabNext, context = requireContext())
+
+            etMobile.setOnEditorActionListener { _: TextView?, actionId: Int, _: KeyEvent? ->
+                var handled = false
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    goToAcademic()
+                    handled = true
+                }
+                handled
             }
 
             fabReturn.setOnClickListener { requireActivity().finish() }
-            fabNext.setOnClickListener {
-                if (validateFields(
-                        tilNss,
-                        tilRfc,
-                        tilCurp,
-                        tilAddress,
-                        tilMobile,
-                        tilTown,
-                        tilState,
-                        tilGender,
-                        tilDateOfBirth,
-                        tilName,
-                        tilMotherLastName,
-                        tilLastName,
-                        fab = fabNext,
-                        context = requireContext()
-                    )
-                ) {
-                    mInfoUserViewModel.setInfoUser(
-                        InfoUser(
-                            lastName = etLastName.text.toString().trim(),
-                            motherLastName = etMotherLastName.text.toString().trim(),
-                            name = etName.text.toString().trim(),
-                            dateOfBirth = etDateOfBirth.text.toString().trim(),
-                            gender = atvGender.text.toString().trim(),
-                            state = atvState.text.toString().trim(),
-                            town = atvTwon.text.toString().trim(),
-                            telephone = etTelephone.text.toString().trim(),
-                            cellphone = etMobile.text.toString().trim(),
-                            address = etAddress.text.toString().trim(),
-                            curp = etCurp.text.toString().trim(),
-                            rfc = etRfc.text.toString().trim(),
-                            nss = etNss.text.toString().trim()
-                        )
-                    )
+            fabNext.setOnClickListener { goToAcademic() }
+        }
+    }
 
-                    listener?.onSelectStepView(1, R.id.academicFragment)
+    private fun goToAcademic() {
+        if (validateFields(
+                tilMobile,
+                tilCP,
+                tilNumberHome,
+                tilStreet,
+                tilSuburb,
+                tilTown,
+                tilState,
+                tilGender,
+                tilDateOfBirth,
+                tilName,
+                tilMotherLastName,
+                tilLastName,
+                fab = fabNext,
+                context = requireContext()
+            )
+        ) {
+            mInfoUserViewModel.setInfoUser(
+                InfoUser(
+                    lastName = etLastName.text.toString().trim(),
+                    motherLastName = etMotherLastName.text.toString().trim(),
+                    name = etName.text.toString().trim(),
+                    dateOfBirth = etDateOfBirth.text.toString().trim(),
+                    gender = atvGender.text.toString().trim(),
+                    state = atvState.text.toString().trim(),
+                    town = atvTwon.text.toString().trim(),
+                    suburb = etSuburb.text.toString().trim(),
+                    street = etStreet.text.toString().trim(),
+                    numberHome = etNumberHome.text.toString().toInt(),
+                    postalCode = etCP.text.toString().toInt(),
+                    telephone = etTelephone.text.toString().trim(),
+                    cellphone = etMobile.text.toString().trim()
+                )
+            )
+
+            listener?.onSelectStepView(1, R.id.academicFragment)
 //                findNavController().navigate(R.id.action_personalFragment_to_academicFragment)
-                }
-            }
         }
     }
 

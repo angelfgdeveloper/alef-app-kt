@@ -4,9 +4,10 @@
 
     <integer name="steps_number">4</integer>
 
-    <integer name="counter_max_length">150</integer>
+    <integer name="counter_max_length">100</integer>
+    <integer name="line">1</integer>
     <integer name="lines">3</integer>
-    <integer name="max_lines">4</integer>
+    <integer name="max_lines">3</integer>
     <integer name="min_lines">2</integer>
 
     <integer name="counter_max_length_curp">18</integer>

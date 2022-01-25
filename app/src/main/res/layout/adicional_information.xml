@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!--Gone-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/common_padding_min"
+        android:layout_marginTop="@dimen/common_padding_default"
+        android:hint="@string/user_address"
+        app:counterEnabled="true"
+        app:counterMaxLength="@integer/counter_max_length">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionNext"
+            android:inputType="textMultiLine|textCapWords"
+            android:lines="@integer/lines"
+            android:maxLength="@integer/counter_max_length"
+            android:maxLines="@integer/max_lines"
+            android:minLines="@integer/min_lines"
+            android:scrollbars="vertical"
+            android:singleLine="false"
+            android:textSize="@dimen/text_normal" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilCurp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/common_padding_min"
+        android:layout_marginTop="@dimen/common_padding_default"
+        android:hint="@string/user_curp">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etCurp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionNext"
+            android:inputType="text|textCapCharacters"
+            android:maxLength="@integer/counter_max_length_curp"
+            android:textSize="@dimen/text_normal" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilRfc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/common_padding_min"
+        android:layout_marginTop="@dimen/common_padding_default"
+        android:hint="@string/user_rfc">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etRfc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionNext"
+            android:inputType="text|textCapCharacters"
+            android:maxLength="@integer/counter_max_length_rfc"
+            android:textSize="@dimen/text_normal" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/tilNss"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/common_padding_min"
+        android:layout_marginTop="@dimen/common_padding_default"
+        android:hint="@string/user_nss"
+        android:visibility="gone">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/etNss"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:imeOptions="actionDone"
+            android:inputType="text|textCapCharacters"
+            android:maxLength="@integer/counter_max_length_nss"
+            android:textSize="@dimen/text_normal" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+</LinearLayout>

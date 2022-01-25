@@ -59,4 +59,8 @@
     <string name="user_curp">CURP</string>
     <string name="user_rfc">RFC</string>
     <string name="user_nss">Número de seguro social</string>
+    <string name="user_suburb">Fraccionamiento ó colonia</string>
+    <string name="user_street">Calle</string>
+    <string name="user_number_home">Número (Int. / Ext.)</string>
+    <string name="user_postal_code">Código postal</string>
 </resources>
