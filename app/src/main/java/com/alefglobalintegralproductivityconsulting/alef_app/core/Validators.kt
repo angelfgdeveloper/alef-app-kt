@@ -6,7 +6,9 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.text.TextUtils
 import android.util.Patterns
+import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
+import androidx.fragment.app.FragmentActivity
 import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputLayout
@@ -55,6 +57,29 @@ class Validators {
 
             fab.isEnabled = isValid
             return isValid
+        }
+
+        fun onBackPress(
+            activity: FragmentActivity,
+            listener: StepViewListener? = null,
+            stepView: ArrayList<Int>
+        ) {
+            val callback: OnBackPressedCallback =
+                object : OnBackPressedCallback(true) {
+                    override fun handleOnBackPressed() {
+                        if (listener != null) {
+                            if (stepView.size > 0) {
+                                val step = stepView[0]
+                                val id = stepView[1]
+                                listener.onSelectStepView(step, id)
+                            }
+                        } else {
+                            activity.finish()
+                        }
+                    }
+                }
+
+            activity.onBackPressedDispatcher.addCallback(activity, callback)
         }
     }
 }

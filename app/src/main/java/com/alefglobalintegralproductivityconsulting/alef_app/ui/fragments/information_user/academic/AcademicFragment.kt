@@ -5,11 +5,11 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.alefglobalintegralproductivityconsulting.alef_app.core.StepViewListener
+import com.alefglobalintegralproductivityconsulting.alef_app.core.Validators.Companion.onBackPress
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.FragmentAcademicBinding
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.InfoUserViewModel
 
@@ -29,7 +29,8 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
         super.onViewCreated(view, savedInstanceState)
         mBinding = FragmentAcademicBinding.bind(view)
 
-        onBackPress()
+        val stepView = arrayListOf(0, R.id.personalFragment)
+        onBackPress(requireActivity(), listener, stepView)
         setupTextFields()
 
         mInfoUserViewModel.getInfoUser().observe(viewLifecycleOwner, { user ->
@@ -48,14 +49,4 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
         }
     }
 
-    private fun onBackPress() {
-        val callback: OnBackPressedCallback =
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    listener?.onSelectStepView(0, R.id.personalFragment)
-                }
-            }
-
-        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
-    }
 }

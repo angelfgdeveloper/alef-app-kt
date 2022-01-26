@@ -9,18 +9,17 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
 import android.widget.TextView
 import android.widget.Toast
-import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.alefglobalintegralproductivityconsulting.alef_app.core.StepViewListener
+import com.alefglobalintegralproductivityconsulting.alef_app.core.Validators.Companion.onBackPress
 import com.alefglobalintegralproductivityconsulting.alef_app.core.Validators.Companion.validateFields
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.FragmentPersonalBinding
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.InformationUserActivity
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.InfoUser
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.InfoUserViewModel
-import com.google.android.material.textfield.TextInputLayout
 import kotlinx.android.synthetic.main.fragment_personal.*
 
 
@@ -45,7 +44,7 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
         super.onViewCreated(view, savedInstanceState)
         mBinding = FragmentPersonalBinding.bind(view)
 
-        onBackPress()
+        onBackPress(requireActivity(), null, arrayListOf())
         addSelectData()
         setupTextFields()
 
@@ -141,9 +140,6 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
                 }
             }
 
-//            etLastName.addTextChangedListener {
-//                validateFields(tilLastName, fab = fabNext, context = requireContext())
-//            }
             etMobile.setOnEditorActionListener { _: TextView?, actionId: Int, _: KeyEvent? ->
                 var handled = false
                 if (actionId == EditorInfo.IME_ACTION_DONE) {
@@ -204,17 +200,6 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
         if (view != null) {
             imm?.hideSoftInputFromWindow(requireView().windowToken, 0)
         }
-    }
-
-    private fun onBackPress() {
-        val callback: OnBackPressedCallback =
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    activity!!.finish()
-                }
-            }
-
-        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
     }
 
     override fun onStart() {
