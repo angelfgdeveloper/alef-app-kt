@@ -63,4 +63,10 @@
     <string name="user_street">Calle</string>
     <string name="user_number_home">Número (Int. / Ext.)</string>
     <string name="user_postal_code">Código postal</string>
+    <string name="last_grade_title">Último grado alcanzado</string>
+    <string name="user_level_academic">Nivel académico</string>
+    <string name="user_school">Instituto</string>
+    <string name="user_academic_advance">Avance académico</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.information_user.academic.AcademicFragment">
 
     <ScrollView
@@ -22,14 +22,89 @@
                 android:layout_weight="@integer/layout_weight_default"
                 android:orientation="vertical">
 
+                <!--                <TextView-->
+                <!--                    android:layout_width="match_parent"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:gravity="center"-->
+                <!--                    android:text="INFORMACION PERSONAL"-->
+                <!--                    android:textSize="@dimen/text_normal" />-->
+
                 <TextView
-                    android:id="@+id/tvExample"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="bottom"
-                    android:gravity="center"
-                    android:text="INFORMACION ACADEMICA"
-                    android:textSize="@dimen/text_normal" />
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/common_padding_min"
+                    android:layout_marginTop="@dimen/common_padding_default"
+                    android:text="@string/last_grade_title"
+                    android:textSize="@dimen/text_normal"
+                    android:textStyle="bold" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilAcademicLevel"
+                    style="@style/DropdownMenuStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/common_padding_min"
+                    android:layout_marginTop="@dimen/common_padding_default"
+                    android:hint="@string/user_level_academic">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/atvAcademicLevel"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="none"
+                        android:textSize="@dimen/text_normal" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:id="@+id/llAcademic"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilSchool"
+                        android:layout_width="match_parent"
+                        android:layout_height="0dp"
+                        android:layout_marginHorizontal="@dimen/common_padding_min"
+                        android:layout_marginTop="@dimen/common_padding_default"
+                        android:layout_weight="@integer/layout_weight_default"
+                        android:hint="@string/user_school">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etSchool"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionNext"
+                            android:inputType="text|textCapWords"
+                            android:textSize="@dimen/text_normal" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilAcademicAdvance"
+                        style="@style/DropdownMenuStyle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/common_padding_min"
+                        android:layout_marginTop="@dimen/common_padding_default"
+                        android:hint="@string/user_academic_advance">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/atvAcademicAdvance"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionNext"
+                            android:inputType="none"
+                            android:textSize="@dimen/text_normal" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                </LinearLayout>
+
 
             </LinearLayout>
 
@@ -57,10 +132,10 @@
                     android:id="@+id/fabNext"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:enabled="false"
                     android:layout_marginHorizontal="@dimen/common_padding_default"
                     android:layout_marginVertical="@dimen/common_padding_min"
                     android:clickable="true"
+                    android:enabled="false"
                     android:focusable="true"
                     app:srcCompat="@drawable/ic_arrow_forward" />
 

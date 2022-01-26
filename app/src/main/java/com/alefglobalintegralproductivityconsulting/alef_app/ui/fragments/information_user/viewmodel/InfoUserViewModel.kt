@@ -6,16 +6,27 @@ import androidx.lifecycle.ViewModel
 
 class InfoUserViewModel : ViewModel() {
 
+    // Datos Generales
     private val mInfoUser = MutableLiveData<InfoUser>()
     private val mGender = MutableLiveData<List<String>>()
     private val mState = MutableLiveData<List<String>>()
     private val mTown = MutableLiveData<List<String>>()
 
+    // Datos Academicos
+    private val mAcademicUser = MutableLiveData<AcademicUser>()
+    private val mAcademicLevel = MutableLiveData<List<String>>()
+
     fun setInfoUser(infoUser: InfoUser) {
         mInfoUser.value = infoUser
     }
 
+    fun setAcademicUser(academicUser: AcademicUser) {
+        mAcademicUser.value = academicUser
+    }
+
     fun getInfoUser(): LiveData<InfoUser> = mInfoUser
+
+    fun getAcademicUser(): LiveData<AcademicUser> = mAcademicUser
 
     fun getGenderList(): LiveData<List<String>> {
         val genderList = arrayListOf("Masculino", "Femenino", "Otro")
@@ -45,6 +56,12 @@ class InfoUserViewModel : ViewModel() {
         return mTown
     }
 
+    fun getAcademicLevelList(): MutableLiveData<List<String>> {
+        val academicLevel = arrayListOf("Primaria", "Secundaria", "Bachillerato", "Universidad")
+        mAcademicLevel.value = academicLevel
+        return mAcademicLevel
+    }
+
 }
 
 data class InfoUser(
@@ -63,5 +80,21 @@ data class InfoUser(
     val cellphone: String = "",
     val curp: String = "",
     val rfc: String = "",
-    val nss: String = ""
+    val nss: String = "",
+    val academicUser: AcademicUser? = null
+)
+
+data class AcademicUser(
+    val levelAcademic: String = "",
+    val school: String = "",
+    val academicAdvance: String = "",
+    val startMonth: String = "",
+    val startYear: Int = 0,
+    val endMonth: String = "",
+    val endYear: Int = 0,
+    val certificate: String = "",
+    val titleAchieved: String = "",
+    val identificationCard: String = ""
+
+    // TODO: Posgrado ..
 )

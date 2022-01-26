@@ -44,7 +44,7 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
         super.onViewCreated(view, savedInstanceState)
         mBinding = FragmentPersonalBinding.bind(view)
 
-        onBackPress(requireActivity(), null, arrayListOf())
+        onBackPress(requireActivity())
         addSelectData()
         setupTextFields()
 
@@ -64,6 +64,7 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
                 etTelephone.setText(user.telephone)
                 etMobile.setText(user.cellphone)
             }
+            addSelectData()
         })
 
     }
@@ -109,7 +110,6 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
             }
         })
 
-        // TODO: correccion de bug
         if (atvState.text.toString().isNotEmpty()) {
             mInfoUserViewModel.getTownList().observe(viewLifecycleOwner, { town ->
                 val adapterTown = ArrayAdapter(requireContext(), R.layout.dropdown_menu_item, town)
@@ -186,7 +186,7 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
                     numberHome = etNumberHome.text.toString().toInt(),
                     postalCode = etCP.text.toString().toInt(),
                     telephone = etTelephone.text.toString().trim(),
-                    cellphone = etMobile.text.toString().trim()
+                    cellphone = etMobile.text.toString().trim(),
                 )
             )
 

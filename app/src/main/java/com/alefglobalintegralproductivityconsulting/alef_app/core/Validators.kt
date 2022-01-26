@@ -60,22 +60,12 @@ class Validators {
         }
 
         fun onBackPress(
-            activity: FragmentActivity,
-            listener: StepViewListener? = null,
-            stepView: ArrayList<Int>
+            activity: FragmentActivity
         ) {
             val callback: OnBackPressedCallback =
                 object : OnBackPressedCallback(true) {
                     override fun handleOnBackPressed() {
-                        if (listener != null) {
-                            if (stepView.size > 0) {
-                                val step = stepView[0]
-                                val id = stepView[1]
-                                listener.onSelectStepView(step, id)
-                            }
-                        } else {
-                            activity.finish()
-                        }
+                        activity.finish()
                     }
                 }
 
