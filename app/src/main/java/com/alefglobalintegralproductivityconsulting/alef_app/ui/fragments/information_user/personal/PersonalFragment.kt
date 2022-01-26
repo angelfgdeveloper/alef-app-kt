@@ -22,7 +22,6 @@ import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.inform
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.InfoUserViewModel
 import kotlinx.android.synthetic.main.fragment_personal.*
 
-
 class PersonalFragment : Fragment(R.layout.fragment_personal) {
 
     private lateinit var mBinding: FragmentPersonalBinding
@@ -95,7 +94,8 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
 
                     if (mState.isNotEmpty()) {
                         mInfoUserViewModel.getTownList().observe(viewLifecycleOwner, { town ->
-                            val adapterTown = ArrayAdapter(requireContext(), R.layout.dropdown_menu_item, town)
+                            val adapterTown =
+                                ArrayAdapter(requireContext(), R.layout.dropdown_menu_item, town)
 
                             with(mBinding) {
                                 atvTwon.setAdapter(adapterTown)

@@ -15,6 +15,7 @@ class InfoUserViewModel : ViewModel() {
     // Datos Academicos
     private val mAcademicUser = MutableLiveData<AcademicUser>()
     private val mAcademicLevel = MutableLiveData<List<String>>()
+    private val mAcademicAdvance = MutableLiveData<List<String>>()
 
     fun setInfoUser(infoUser: InfoUser) {
         mInfoUser.value = infoUser
@@ -60,6 +61,12 @@ class InfoUserViewModel : ViewModel() {
         val academicLevel = arrayListOf("Primaria", "Secundaria", "Bachillerato", "Universidad")
         mAcademicLevel.value = academicLevel
         return mAcademicLevel
+    }
+
+    fun getAcademicAdvanceList(): MutableLiveData<List<String>> {
+        val academicAdvance = arrayListOf("En curso", "Trunca", "Terminado")
+        mAcademicAdvance.value = academicAdvance
+        return mAcademicAdvance
     }
 
 }

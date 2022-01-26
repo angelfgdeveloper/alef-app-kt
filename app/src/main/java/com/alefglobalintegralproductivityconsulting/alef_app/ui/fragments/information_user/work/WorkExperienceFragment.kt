@@ -1,26 +1,20 @@
-package com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.academic
+package com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.work
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
-import androidx.core.widget.addTextChangedListener
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.alefglobalintegralproductivityconsulting.alef_app.core.StepViewListener
-import com.alefglobalintegralproductivityconsulting.alef_app.core.Validators
-import com.alefglobalintegralproductivityconsulting.alef_app.databinding.FragmentPostgraduateBinding
+import com.alefglobalintegralproductivityconsulting.alef_app.databinding.FragmentWorkExperienceBinding
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.InfoUserViewModel
 
+class WorkExperienceFragment : Fragment(R.layout.fragment_work_experience) {
 
-class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
-
-    private lateinit var mBinding: FragmentPostgraduateBinding
+    private lateinit var mBinding: FragmentWorkExperienceBinding
     private val mInfoUserViewModel: InfoUserViewModel by activityViewModels()
     private var listener: StepViewListener? = null
 
@@ -31,15 +25,7 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mBinding = FragmentPostgraduateBinding.bind(view)
-
-        mInfoUserViewModel.getInfoUser().observe(viewLifecycleOwner, {
-            Log.d("PostgraduateFragment", it.toString())
-        })
-
-        mInfoUserViewModel.getAcademicUser().observe(viewLifecycleOwner, {
-            Log.d("PostgraduateFragment", it.toString())
-        })
+        mBinding = FragmentWorkExperienceBinding.bind(view)
 
         onBackPress()
         setupTextFields()

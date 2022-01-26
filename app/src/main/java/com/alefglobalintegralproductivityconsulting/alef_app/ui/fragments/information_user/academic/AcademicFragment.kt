@@ -2,6 +2,7 @@ package com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.infor
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -17,7 +18,6 @@ import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.inform
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.InfoUserViewModel
 import kotlinx.android.synthetic.main.fragment_academic.*
 
-
 class AcademicFragment : Fragment(R.layout.fragment_academic) {
 
     private lateinit var mBinding: FragmentAcademicBinding
@@ -25,6 +25,7 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
     private var listener: StepViewListener? = null
 
     private var mAcademicLevel = ""
+    private var mAcademicAdvance = ""
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -44,12 +45,35 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                 atvAcademicLevel.setText(academicUser?.levelAcademic)
                 if (atvAcademicLevel.text.toString().isNotEmpty()) {
                     llAcademic.visibility = View.VISIBLE
+
+                    etSchool.setText(academicUser?.school)
+                    atvAcademicAdvance.setText(academicUser?.academicAdvance)
+
+                    setAcademicAdvance()
+
+                    if (atvAcademicAdvance.text.toString().isNotEmpty()) {
+                        llPeriod.visibility = View.VISIBLE
+                    } else {
+                        llPeriod.visibility = View.GONE
+                    }
+
                 } else {
                     llAcademic.visibility = View.GONE
+                    llPeriod.visibility = View.GONE
+                    etSchool.setText("")
+                    atvAcademicAdvance.setText("")
                 }
 
             }
         })
+
+//        if (mAcademicLevel.isNotEmpty()) {
+//            val fields = arrayListOf(
+//                tilSchool, tilAcademicAdvance
+//            )
+//
+//            Log.d("mAcademicLevel", fields.toString())
+//        }
     }
 
     private fun addSelectData() {
@@ -61,17 +85,39 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                 atvAcademicLevel.setOnItemClickListener { parent, _, position, id ->
                     mAcademicLevel = parent.getItemAtPosition(position).toString()
                     llAcademic.visibility = View.VISIBLE
+                    llPeriod.visibility = View.GONE
+
+                    etSchool.setText("")
+                    atvAcademicAdvance.setText("")
+                    setAcademicAdvance()
                 }
             }
         })
 
     }
 
+    private fun setAcademicAdvance() {
+        mInfoUserViewModel.getAcademicAdvanceList().observe(viewLifecycleOwner, { academicAdvance ->
+            val adapter =
+                ArrayAdapter(requireContext(), R.layout.dropdown_menu_item, academicAdvance)
+
+            with(mBinding) {
+                atvAcademicAdvance.setAdapter(adapter)
+                atvAcademicAdvance.setOnItemClickListener { parent, _, position, id ->
+                    mAcademicAdvance = parent.getItemAtPosition(position).toString()
+
+                    llPeriod.visibility = View.VISIBLE
+                }
+            }
+
+        })
+    }
+
     private fun setupTextFields() {
         with(mBinding) {
 
             val fields = arrayListOf(
-                tilAcademicLevel
+                tilAcademicLevel, tilSchool, tilAcademicAdvance
             )
 
             fields.forEach { textInputLayout ->
@@ -89,8 +135,6 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                 sendDataOptionFragment(false)
             }
             fabNext.setOnClickListener {
-//                listener?.onSelectStepView(2, R.id.jobFragment)
-                Toast.makeText(requireContext(), "En desarrollo", Toast.LENGTH_SHORT).show()
                 sendDataOptionFragment(true)
             }
         }
@@ -98,6 +142,8 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
 
     private fun sendDataOptionFragment(isSave: Boolean) {
         if (validateFields(
+                tilAcademicAdvance,
+                tilSchool,
                 tilAcademicLevel,
                 fab = fabNext,
                 context = requireContext()
@@ -105,18 +151,17 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
         ) {
             mInfoUserViewModel.setAcademicUser(
                 AcademicUser(
-                    levelAcademic = atvAcademicLevel.text.toString().trim()
+                    levelAcademic = atvAcademicLevel.text.toString().trim(),
+                    school = etSchool.text.toString().trim(),
+                    academicAdvance = atvAcademicAdvance.text.toString().trim()
                 )
             )
 
             if (isSave) {
-                if (atvAcademicLevel.text.toString().equals("Universidad")) {
+                if (atvAcademicLevel.text.toString() == "Universidad") {
                     listener?.onSelectStepView(1, R.id.postgraduateFragment)
                 } else {
-                    Toast.makeText(
-                        requireContext(),
-                        "Preguntar por trabajo", Toast.LENGTH_SHORT)
-                        .show()
+                    listener?.onSelectStepView(2, R.id.workExperienceFragment)
                 }
                 addSelectData()
             }

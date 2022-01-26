@@ -23,12 +23,25 @@
         <action
             android:id="@+id/action_academicFragment_to_postgraduateFragment"
             app:destination="@id/postgraduateFragment" />
+        <action
+            android:id="@+id/action_academicFragment_to_workExperienceFragment"
+            app:destination="@id/workExperienceFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/postgraduateFragment"
         android:name="com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.academic.PostgraduateFragment"
         android:label="fragment_postgraduate"
-        tools:layout="@layout/fragment_postgraduate" />
+        tools:layout="@layout/fragment_postgraduate" >
+        <action
+            android:id="@+id/action_postgraduateFragment_to_workExperienceFragment"
+            app:destination="@id/workExperienceFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/workExperienceFragment"
+        android:name="com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.work.WorkExperienceFragment"
+        android:label="fragment_work_experience"
+        tools:layout="@layout/fragment_work_experience" />
 
 </navigation>
