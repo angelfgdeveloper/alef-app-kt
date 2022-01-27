@@ -16,6 +16,7 @@ class InfoUserViewModel : ViewModel() {
     private val mAcademicUser = MutableLiveData<AcademicUser>()
     private val mAcademicLevel = MutableLiveData<List<String>>()
     private val mAcademicAdvance = MutableLiveData<List<String>>()
+    private val mMonth = MutableLiveData<List<String>>()
 
     fun setInfoUser(infoUser: InfoUser) {
         mInfoUser.value = infoUser
@@ -67,6 +68,26 @@ class InfoUserViewModel : ViewModel() {
         val academicAdvance = arrayListOf("En curso", "Trunca", "Terminado")
         mAcademicAdvance.value = academicAdvance
         return mAcademicAdvance
+    }
+
+    fun getMonthList(): MutableLiveData<List<String>> {
+        val months = arrayListOf(
+            "Enero",
+            "Febrero",
+            "Marzo",
+            "Abril",
+            "Mayo",
+            "Junio",
+            "Julio",
+            "Agosto",
+            "Septiembre",
+            "Octubre",
+            "Noviembre",
+            "Diciembre",
+        )
+
+        mMonth.value = months
+        return mMonth
     }
 
 }

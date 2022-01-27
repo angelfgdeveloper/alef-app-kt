@@ -6,8 +6,6 @@ import androidx.navigation.Navigation
 import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.alefglobalintegralproductivityconsulting.alef_app.core.StepViewListener
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.ActivityInformationUserBinding
-import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.academic.AcademicFragment
-import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.personal.PersonalFragment
 
 class InformationUserActivity : AppCompatActivity(), StepViewListener {
 
@@ -23,8 +21,7 @@ class InformationUserActivity : AppCompatActivity(), StepViewListener {
                 init {
                     add(getString(R.string.info_personal))
                     add(getString(R.string.info_academic))
-                    add(getString(R.string.info_experience_job))
-                    add(getString(R.string.info_references))
+                    add(getString(R.string.info_work_experience))
                 }
             })
             .stepsNumber(resources.getInteger(R.integer.steps_number))

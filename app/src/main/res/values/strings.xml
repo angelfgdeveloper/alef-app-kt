@@ -41,15 +41,15 @@
     <string name="helper_required">Requerido</string>
     <string name="helper_optional">Opcional</string>
 
-    <string name="last_name">Apellido paterno</string>
-    <string name="mother_last_name">Apellido materno</string>
-    <string name="user_name">Nombre(s)</string>
-    <string name="user_date">Fecha de nacimiento</string>
-
     <string name="info_personal">Información Personal</string>
     <string name="info_academic">Información Academica</string>
-    <string name="info_experience_job">Información Laboral</string>
+    <string name="info_work_experience">Información Laboral</string>
     <string name="info_references">Referencias</string>
+
+    <string name="user_last_name">Apellido paterno</string>
+    <string name="user_mother_last_name">Apellido materno</string>
+    <string name="user_name">Nombre(s)</string>
+    <string name="user_date">Fecha de nacimiento</string>
     <string name="user_gender">Género</string>
     <string name="user_state">Estado</string>
     <string name="user_town">Municipio</string>
@@ -67,10 +67,12 @@
     <string name="user_level_academic">Nivel académico</string>
     <string name="user_school">Instituto</string>
     <string name="user_academic_advance">Avance académico</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+
     <string name="period_start_title">Periodo de inicio</string>
     <string name="month_text">Mes</string>
     <string name="year_text">Año</string>
     <string name="period_end_title">Periodo de término</string>
+    <string name="certificated_title">Título alcanzado</string>
+    <string name="user_certificate">Certificado</string>
+    <string name="user_title_achieved">Título</string>
 </resources>

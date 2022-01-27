@@ -41,7 +41,7 @@
                         android:layout_marginHorizontal="@dimen/common_padding_min"
                         android:layout_marginTop="@dimen/common_padding_default"
                         android:layout_weight="@integer/layout_weight_default"
-                        android:hint="@string/last_name">
+                        android:hint="@string/user_last_name">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etLastName"
@@ -60,7 +60,7 @@
                         android:layout_marginHorizontal="@dimen/common_padding_min"
                         android:layout_marginTop="@dimen/common_padding_default"
                         android:layout_weight="@integer/layout_weight_default"
-                        android:hint="@string/mother_last_name">
+                        android:hint="@string/user_mother_last_name">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etMotherLastName"
