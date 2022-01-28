@@ -1,29 +1,71 @@
 package com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.home
 
 import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
-import android.widget.TextView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.viewModels
 import com.alefglobalintegralproductivityconsulting.alef_app.R
+import com.alefglobalintegralproductivityconsulting.alef_app.core.Result
+import com.alefglobalintegralproductivityconsulting.alef_app.data.model.Vacant
+import com.alefglobalintegralproductivityconsulting.alef_app.data.remote.RemoteVacantDataSource
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.FragmentHomeBinding
+import com.alefglobalintegralproductivityconsulting.alef_app.domain.VacantRepoImpl
+import com.alefglobalintegralproductivityconsulting.alef_app.presentation.VacantViewModel
+import com.alefglobalintegralproductivityconsulting.alef_app.presentation.VacantViewModelFactory
+import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.home.adapter.VacantAdapter
 
-class HomeFragment : Fragment(R.layout.fragment_home) {
+class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantClickListener {
 
-    private lateinit var mHomeViewModel: HomeViewModel
     private lateinit var mBinding: FragmentHomeBinding
+
+    private lateinit var mAdapter: VacantAdapter
+
+    private val mViewModel by viewModels<VacantViewModel> {
+        VacantViewModelFactory(
+            VacantRepoImpl(RemoteVacantDataSource())
+        )
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        mHomeViewModel = ViewModelProvider(this)[HomeViewModel::class.java]
         mBinding = FragmentHomeBinding.bind(view)
 
-        mHomeViewModel.titleHome.observe(viewLifecycleOwner, { title ->
-            mBinding.tvHome.text = title
+        mViewModel.fetchVacancies().observe(viewLifecycleOwner, { result ->
+            when (result) {
+                is Result.Failure -> {
+                    mBinding.llLoading.visibility = View.GONE
+                    Toast.makeText(
+                        requireContext(),
+                        "Ocurrio un error: ${result.exception}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                is Result.Loading -> {
+                    mBinding.llLoading.visibility = View.VISIBLE
+                }
+                is Result.Success -> {
+                    mBinding.llLoading.visibility = View.GONE
+
+                    if (result.data.isEmpty()) {
+                        mBinding.llDisconnected.visibility = View.VISIBLE
+                        mBinding.llConnected.visibility = View.GONE
+                        return@observe
+                    } else {
+                        mBinding.llDisconnected.visibility = View.GONE
+                        mBinding.llConnected.visibility = View.VISIBLE
+                    }
+
+                    mAdapter = VacantAdapter(result.data, this)
+                    mBinding.rvVacancies.adapter = mAdapter
+                }
+            }
         })
 
+    }
+
+    override fun onVacantClick(vacant: Vacant) {
+        Log.d("HomeFragment", vacant.toString())
     }
 }
