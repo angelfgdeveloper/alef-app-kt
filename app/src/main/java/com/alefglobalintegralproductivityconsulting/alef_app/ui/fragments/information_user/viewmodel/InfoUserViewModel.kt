@@ -65,7 +65,7 @@ class InfoUserViewModel : ViewModel() {
     }
 
     fun getAcademicAdvanceList(): MutableLiveData<List<String>> {
-        val academicAdvance = arrayListOf("En curso", "Trunca", "Terminado")
+        val academicAdvance = arrayListOf("En curso", "Trunca", "Terminado", "Terminado y con cédula")
         mAcademicAdvance.value = academicAdvance
         return mAcademicAdvance
     }

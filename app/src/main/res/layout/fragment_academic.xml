@@ -280,7 +280,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/common_padding_default"
-                        android:hint="@string/user_title_achieved">
+                        android:hint="@string/user_identification_card">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etIdentificationCard"
