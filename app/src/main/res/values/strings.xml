@@ -23,10 +23,14 @@
     <string name="nav_header_desc">Imàgen del perfil</string>
     <string name="action_settings">Ajustes</string>
 
-    <string name="menu_home">Inicio</string>
+    <string name="menu_home">Novedades</string>
     <string name="menu_postulation">Postulaciones</string>
-    <string name="menu_alert">Alerta</string>
+    <string name="menu_favorites">Favoritos</string>
+    <string name="menu_notification">Notificaciones</string>
+    <string name="menu_curriculum">Mi curriculum</string>
     <string name="menu_work_with_us">Trabaja con nosotros</string>
+    <string name="menu_settings">Ajustes</string>
+
     <string name="logout">Cerrar sesiòn</string>
     <string name="add_img_avatar">Agregar foto de perfil</string>
 
@@ -76,4 +80,6 @@
     <string name="user_certificate">Certificado</string>
     <string name="user_title_achieved">Título</string>
     <string name="user_identification_card">Cédula profesional</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

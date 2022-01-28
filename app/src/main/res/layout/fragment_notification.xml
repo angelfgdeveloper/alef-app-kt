@@ -4,18 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.home.HomeFragment">
+    tools:context=".ui.fragments.notification.NotificationFragment">
 
     <TextView
-        android:id="@+id/tvHome"
+        android:id="@+id/tvAlert"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:text="Alertas"
         android:textAlignment="center"
         android:textSize="@dimen/text_title_big"
-        android:text="Home"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

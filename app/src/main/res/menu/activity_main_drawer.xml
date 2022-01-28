@@ -13,12 +13,24 @@
             android:icon="@drawable/ic_menu_postulation"
             android:title="@string/menu_postulation" />
         <item
-            android:id="@+id/nav_alert"
-            android:icon="@drawable/ic_menu_alert_notifications"
-            android:title="@string/menu_alert" />
+            android:id="@+id/nav_favorites"
+            android:icon="@drawable/ic_menu_favorites"
+            android:title="@string/menu_favorites" />
+        <item
+            android:id="@+id/nav_notification"
+            android:icon="@drawable/ic_menu_notification"
+            android:title="@string/menu_notification" />
+        <item
+            android:id="@+id/nav_curriculum"
+            android:icon="@drawable/ic_menu_curriculum"
+            android:title="@string/menu_curriculum" />
         <item
             android:id="@+id/nav_work_with_us"
             android:icon="@drawable/ic_menu_work_with_us"
             android:title="@string/menu_work_with_us" />
+        <item
+            android:id="@+id/nav_settings"
+            android:icon="@drawable/ic_menu_settings"
+            android:title="@string/menu_settings" />
     </group>
 </menu>

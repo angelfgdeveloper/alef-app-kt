@@ -31,8 +31,8 @@ class HomeActivity : AppCompatActivity() {
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home, R.id.nav_postulation, R.id.nav_alert,
-                R.id.nav_work_with_us
+                R.id.nav_home, R.id.nav_postulation, R.id.nav_favorites, R.id.nav_notification,
+                R.id.nav_curriculum, R.id.nav_work_with_us, R.id.nav_settings
             ), drawerLayout
         )
 
