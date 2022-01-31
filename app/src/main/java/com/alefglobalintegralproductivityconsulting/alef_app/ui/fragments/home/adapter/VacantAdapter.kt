@@ -70,6 +70,14 @@ class VacantAdapter(
                 } else {
                     llSalary.visibility = View.GONE
                 }
+
+                cbFavorite.setOnCheckedChangeListener { _, checked ->
+                    if (checked) {
+
+                    } else {
+
+                    }
+                }
             }
 //            Glide.with(context)
 //                .load("https://image.tmdb.org/t/p/w500/${item.poster_path}")
