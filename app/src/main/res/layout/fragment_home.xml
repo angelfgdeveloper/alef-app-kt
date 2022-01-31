@@ -13,6 +13,27 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/llTestCompany"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/purple"
+            android:visibility="visible"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/text_small"
+                android:paddingVertical="@dimen/common_padding_min"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_weight="@integer/layout_weight_default"
+                android:gravity="center"
+                android:text="Por favor, de contestar el Test. Se finalizara en 2hr." />
+
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/common_padding_min"

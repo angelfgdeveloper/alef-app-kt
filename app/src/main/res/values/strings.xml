@@ -86,4 +86,6 @@
     <string name="search_location">Ubicación</string>
     <string name="search_btn">Buscar</string>
     <string name="no_vacancies">Sin vacantes por el momento</string>
+    <string name="mark_all_as_read">Marcar todos como visto</string>
+    <string name="no_notify">Sin notificaciones</string>
 </resources>

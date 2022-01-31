@@ -9,22 +9,21 @@ import androidx.fragment.app.viewModels
 import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.alefglobalintegralproductivityconsulting.alef_app.core.Result
 import com.alefglobalintegralproductivityconsulting.alef_app.data.model.Vacant
-import com.alefglobalintegralproductivityconsulting.alef_app.data.remote.RemoteVacantDataSource
+import com.alefglobalintegralproductivityconsulting.alef_app.data.remote.home.RemoteHomeDataSource
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.FragmentHomeBinding
-import com.alefglobalintegralproductivityconsulting.alef_app.domain.VacantRepoImpl
-import com.alefglobalintegralproductivityconsulting.alef_app.presentation.VacantViewModel
-import com.alefglobalintegralproductivityconsulting.alef_app.presentation.VacantViewModelFactory
+import com.alefglobalintegralproductivityconsulting.alef_app.domain.home.HomeRepoImpl
+import com.alefglobalintegralproductivityconsulting.alef_app.presentation.HomeViewModel
+import com.alefglobalintegralproductivityconsulting.alef_app.presentation.HomeViewModelFactory
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.home.adapter.VacantAdapter
 
 class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantClickListener {
 
     private lateinit var mBinding: FragmentHomeBinding
-
     private lateinit var mAdapter: VacantAdapter
 
-    private val mViewModel by viewModels<VacantViewModel> {
-        VacantViewModelFactory(
-            VacantRepoImpl(RemoteVacantDataSource())
+    private val mViewModel by viewModels<HomeViewModel> {
+        HomeViewModelFactory(
+            HomeRepoImpl(RemoteHomeDataSource())
         )
     }
 
