@@ -12,8 +12,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.alefglobalintegralproductivityconsulting.alef_app.core.StepViewListener
-import com.alefglobalintegralproductivityconsulting.alef_app.core.Validators.Companion.onBackPress
-import com.alefglobalintegralproductivityconsulting.alef_app.core.Validators.Companion.validateFields
+import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.Validators.Companion.onBackPress
+import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.Validators.Companion.validateFields
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.FragmentPersonalBinding
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.InfoUser
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.InfoUserViewModel

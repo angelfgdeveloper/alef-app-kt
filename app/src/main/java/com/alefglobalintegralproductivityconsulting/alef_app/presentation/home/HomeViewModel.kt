@@ -1,4 +1,4 @@
-package com.alefglobalintegralproductivityconsulting.alef_app.presentation
+package com.alefglobalintegralproductivityconsulting.alef_app.presentation.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

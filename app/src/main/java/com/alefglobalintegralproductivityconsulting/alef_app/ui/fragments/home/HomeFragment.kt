@@ -12,8 +12,8 @@ import com.alefglobalintegralproductivityconsulting.alef_app.data.model.Vacant
 import com.alefglobalintegralproductivityconsulting.alef_app.data.remote.home.RemoteHomeDataSource
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.FragmentHomeBinding
 import com.alefglobalintegralproductivityconsulting.alef_app.domain.home.HomeRepoImpl
-import com.alefglobalintegralproductivityconsulting.alef_app.presentation.HomeViewModel
-import com.alefglobalintegralproductivityconsulting.alef_app.presentation.HomeViewModelFactory
+import com.alefglobalintegralproductivityconsulting.alef_app.presentation.home.HomeViewModel
+import com.alefglobalintegralproductivityconsulting.alef_app.presentation.home.HomeViewModelFactory
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.home.adapter.VacantAdapter
 
 class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantClickListener {
@@ -31,6 +31,10 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
         super.onViewCreated(view, savedInstanceState)
         mBinding = FragmentHomeBinding.bind(view)
 
+        setupVacancies()
+    }
+
+    private fun setupVacancies() {
         mViewModel.fetchVacancies().observe(viewLifecycleOwner, { result ->
             when (result) {
                 is Result.Failure -> {
@@ -61,7 +65,6 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
                 }
             }
         })
-
     }
 
     override fun onVacantClick(vacant: Vacant) {

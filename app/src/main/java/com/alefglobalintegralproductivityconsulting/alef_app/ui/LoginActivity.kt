@@ -4,8 +4,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.alefglobalintegralproductivityconsulting.alef_app.core.AppConstants
-import com.alefglobalintegralproductivityconsulting.alef_app.core.Validators
+import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.Validators
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {

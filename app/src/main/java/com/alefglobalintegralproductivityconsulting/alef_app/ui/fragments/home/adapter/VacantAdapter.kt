@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.alefglobalintegralproductivityconsulting.alef_app.core.BaseViewHolder
+import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.Timestamp
+import com.alefglobalintegralproductivityconsulting.alef_app.data.model.Notification
 import com.alefglobalintegralproductivityconsulting.alef_app.data.model.Vacant
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.ItemVacantBinding
 
@@ -49,8 +51,9 @@ class VacantAdapter(
     ) : BaseViewHolder<Vacant>(binding.root) {
         override fun bind(item: Vacant) {
             with(binding) {
+                addVancantTimestamp(item)
+
                 tvLocation.text = item.location
-                tvTimestamp.text = item.timestamp
                 tvTitleVacant.text = item.title
                 tvCompany.text = item.company
                 tvDescription.text = item.description
@@ -83,6 +86,17 @@ class VacantAdapter(
 //                .load("https://image.tmdb.org/t/p/w500/${item.poster_path}")
 //                .centerCrop()
 //                .into(binding.imageViewMovie)
+
+        }
+
+        private fun addVancantTimestamp(vacant: Vacant) {
+            with(binding) {
+                val createdAt = (vacant.timestamp?.time?.div(1000L))?.let {
+                    Timestamp.getTimeAgo(it.toInt())
+                }
+
+                tvTimestamp.text = createdAt
+            }
         }
     }
 

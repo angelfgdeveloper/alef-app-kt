@@ -8,7 +8,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.alefglobalintegralproductivityconsulting.alef_app.core.Validators
+import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.Validators
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.ActivityForgotPasswordBinding
 
 class ForgotPasswordActivity : AppCompatActivity() {

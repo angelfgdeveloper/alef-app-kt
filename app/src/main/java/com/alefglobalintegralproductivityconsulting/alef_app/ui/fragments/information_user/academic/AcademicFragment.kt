@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.alefglobalintegralproductivityconsulting.alef_app.core.StepViewListener
-import com.alefglobalintegralproductivityconsulting.alef_app.core.Validators.Companion.validateFields
+import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.Validators.Companion.validateFields
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.FragmentAcademicBinding
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.AcademicUser
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.InfoUserViewModel

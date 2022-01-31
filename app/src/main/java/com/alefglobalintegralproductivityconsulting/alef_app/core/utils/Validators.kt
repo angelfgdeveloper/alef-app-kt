@@ -1,4 +1,4 @@
-package com.alefglobalintegralproductivityconsulting.alef_app.core
+package com.alefglobalintegralproductivityconsulting.alef_app.core.utils
 
 import android.content.Context
 import android.net.ConnectivityManager

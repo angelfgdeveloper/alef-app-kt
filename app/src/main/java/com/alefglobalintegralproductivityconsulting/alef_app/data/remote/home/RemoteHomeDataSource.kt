@@ -1,5 +1,6 @@
 package com.alefglobalintegralproductivityconsulting.alef_app.data.remote.home
 
+import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.Timestamp
 import com.alefglobalintegralproductivityconsulting.alef_app.data.model.Vacant
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -19,7 +20,7 @@ class RemoteHomeDataSource {
                     Vacant(
                         id = 1,
                         location = "Iztacalco, CDMX, Granjas México",
-                        timestamp = "Hace 2 días",
+                        timestamp = Timestamp.getDateTime("Mon Jan 31 15:19:40 CST 2022"),
                         title = "Recomendado Asesor telefónico ATC Turno VESPERTINO - Apoyo de TRANSPORTE",
                         company = "Atento Mexicana, S.A. de C.V.",
                         description = "Prestaciones de ley (IMSS, vacaciones, aguinaldo) Plan de crecimiento personal y laboral Ayuda de transporte",
@@ -33,7 +34,7 @@ class RemoteHomeDataSource {
                     Vacant(
                         id = 2,
                         location = "Iztacalco, CDMX",
-                        timestamp = "Hace una semana",
+                        timestamp = Timestamp.getDateTime("Mon Jan 10 10:00:00 CST 2022"),
                         title = "Ejecutivo Atención a cliente Call Center",
                         company = "Atento Mexicana, S.A. de C.V.",
                         description = "¿Quieres comenzar tu carrera dentro de una empresa con prestigio " +
