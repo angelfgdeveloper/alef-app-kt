@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white_light_grey"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cvPostulation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        app:cardCornerRadius="@dimen/common_padding_default"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="@dimen/common_padding_min">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/common_padding_min"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/tvTitleVacant"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@integer/layout_weight_default"
+                    android:ellipsize="end"
+                    android:gravity="center_vertical"
+                    android:maxLines="@integer/min_lines"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_title"
+                    android:textStyle="bold"
+                    tools:text="Completa tu perfil" />
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="?android:attr/listDivider" />
+
+            <TextView
+                android:id="@+id/tvDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_padding_min"
+                android:ellipsize="end"
+                android:maxLines="@integer/max_lines"
+                android:textSize="@dimen/text_normal"
+                tools:text="Description.." />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_padding_min"
+                android:text="@string/title_advance_postulation"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_normal"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/llAdvancePostulation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_padding_min"
+                android:orientation="vertical">
+
+                <com.shuhart.stepview.StepView
+                    android:id="@+id/stepView"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="@integer/layout_weight_default"
+                    android:paddingHorizontal="@dimen/common_padding_default"
+                    app:sv_animationType="All"
+                    app:sv_doneCircleColor="@android:color/darker_gray"
+                    app:sv_doneCircleRadius="12dp"
+                    app:sv_doneStepLineColor="@android:color/darker_gray"
+                    app:sv_doneStepMarkColor="@color/white"
+                    app:sv_doneTextColor="@android:color/darker_gray"
+                    app:sv_nextStepLineColor="@color/black"
+                    app:sv_nextTextColor="@color/black"
+                    app:sv_selectedCircleColor="@color/black"
+                    app:sv_selectedCircleRadius="12dp"
+                    app:sv_selectedStepNumberColor="@color/white"
+                    app:sv_selectedTextColor="@color/black"
+                    app:sv_stepLineWidth="0.5dp"
+                    app:sv_stepNumberTextSize="@dimen/text_small"
+                    app:sv_stepPadding="4dp"
+                    app:sv_stepViewStyle="@style/StepView"
+                    app:sv_typeface="@font/roboto_regular" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:background="@android:color/darker_gray" />
+
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btnCancelPostulation"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_marginVertical="@dimen/common_padding_min"
+                android:text="@string/btn_cancel_postulation"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

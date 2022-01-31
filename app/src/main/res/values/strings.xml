@@ -88,4 +88,6 @@
     <string name="no_vacancies">Sin vacantes por el momento</string>
     <string name="mark_all_as_read">Marcar todos como visto</string>
     <string name="no_notify">Sin notificaciones</string>
+    <string name="title_advance_postulation">Avance de postulación</string>
+    <string name="btn_cancel_postulation">Cancelar postulación</string>
 </resources>

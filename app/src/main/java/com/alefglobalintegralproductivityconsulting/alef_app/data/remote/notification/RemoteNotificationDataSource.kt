@@ -35,7 +35,7 @@ class RemoteNotificationDataSource {
         return newNotifyList
     }
 
-    fun notificationsList(markAll: Boolean): ArrayList<Notification> {
+    private fun notificationsList(markAll: Boolean): ArrayList<Notification> {
         val notificationList: ArrayList<Notification> = ArrayList()
 
         notificationList.add(
