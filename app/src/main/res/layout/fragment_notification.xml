@@ -13,6 +13,7 @@
         android:orientation="vertical">
 
         <Button
+            android:id="@+id/btnMarkAllView"
             style="@style/Widget.MaterialComponents.Button.TextButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

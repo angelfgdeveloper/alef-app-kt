@@ -7,5 +7,5 @@ data class Notification(
     val title: String = "",
     var timestamp: Date? = null,
     val description: String = "",
-    val isView: Boolean = false,
+    var isView: Boolean = false,
 )

@@ -4,4 +4,5 @@ import com.alefglobalintegralproductivityconsulting.alef_app.data.model.Notifica
 
 interface NotificationRepo {
     suspend fun getNotifications(): List<Notification>
+    suspend fun setMarkViewAllNotifications(markAll: Boolean): List<Notification>
 }

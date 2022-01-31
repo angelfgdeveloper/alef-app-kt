@@ -1,5 +1,6 @@
 package com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.notification.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -12,7 +13,7 @@ import com.alefglobalintegralproductivityconsulting.alef_app.data.model.Notifica
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.ItemNotificationBinding
 
 class NotificationAdapter(
-    private val notificationList: List<Notification>,
+    private var notificationList: List<Notification>,
     private val itemClickListener: OnNotificationClickListener
 ) : RecyclerView.Adapter<BaseViewHolder<*>>() {
 
@@ -43,6 +44,12 @@ class NotificationAdapter(
     }
 
     override fun getItemCount(): Int = notificationList.size
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun setMarkAllView(newNotificationList: List<Notification>) {
+        this.notificationList = newNotificationList
+        notifyDataSetChanged()
+    }
 
     private inner class NotificationViewHolder(
         val binding: ItemNotificationBinding,

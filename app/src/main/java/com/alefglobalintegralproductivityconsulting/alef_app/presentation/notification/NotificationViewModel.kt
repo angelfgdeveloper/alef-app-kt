@@ -19,6 +19,16 @@ class NotificationViewModel(private val repo: NotificationRepo) : ViewModel() {
         }
 
     }
+
+    fun setMarkViewAllNotifications(markAll: Boolean) = liveData(Dispatchers.IO) {
+        emit(Result.Loading())
+
+        try {
+            emit(Result.Success(repo.setMarkViewAllNotifications(markAll)))
+        } catch (e: Exception) {
+            emit(Result.Failure(e))
+        }
+    }
 }
 
 class NotificationViewModelFactory(private val repo: NotificationRepo) : ViewModelProvider.Factory {

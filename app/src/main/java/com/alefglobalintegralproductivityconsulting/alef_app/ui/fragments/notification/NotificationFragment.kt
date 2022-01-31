@@ -34,6 +34,7 @@ class NotificationFragment : Fragment(R.layout.fragment_notification),
         mBinding = FragmentNotificationBinding.bind(view)
 
         setupNotifications()
+        setupMarkViewAllNotifications()
     }
 
     private fun setupNotifications() {
@@ -64,6 +65,49 @@ class NotificationFragment : Fragment(R.layout.fragment_notification),
 
                     mAdapter = NotificationAdapter(result.data, this)
                     mBinding.rvNotifications.adapter = mAdapter
+                }
+            }
+
+        }
+    }
+
+    private fun setupMarkViewAllNotifications() {
+        mBinding.btnMarkAllView.setOnClickListener {
+            selectedMark()
+        }
+    }
+
+    private fun selectedMark() {
+        mViewModel.setMarkViewAllNotifications(true).observe(viewLifecycleOwner) { result ->
+            when (result) {
+                is Result.Failure -> {
+                    mBinding.llLoading.visibility = View.GONE
+                    Toast.makeText(
+                        requireContext(),
+                        "Ocurrio un error: ${result.exception}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                is Result.Loading -> {
+                    mBinding.llLoading.visibility = View.VISIBLE
+                }
+                is Result.Success -> {
+                    mBinding.llLoading.visibility = View.GONE
+
+                    if (result.data.isEmpty()) {
+                        mBinding.llDisconnected.visibility = View.VISIBLE
+                        mBinding.llConnected.visibility = View.GONE
+                        return@observe
+                    } else {
+                        mBinding.llDisconnected.visibility = View.GONE
+                        mBinding.llConnected.visibility = View.VISIBLE
+                    }
+
+                    for (isMak in result.data) {
+                        mBinding.btnMarkAllView.isEnabled = isMak.isView
+                    }
+
+                    mAdapter.setMarkAllView(result.data)
                 }
             }
 

@@ -7,4 +7,6 @@ class NotificationRepoImpl(
     private val dataSource: RemoteNotificationDataSource
 ) : NotificationRepo {
     override suspend fun getNotifications(): List<Notification> = dataSource.getNotifications()
+    override suspend fun setMarkViewAllNotifications(markAll: Boolean): List<Notification> =
+        dataSource.setMarkViewAllNotifications(markAll)
 }
