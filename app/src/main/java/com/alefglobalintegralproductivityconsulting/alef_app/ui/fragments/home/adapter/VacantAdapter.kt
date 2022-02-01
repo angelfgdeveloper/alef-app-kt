@@ -27,7 +27,7 @@ class VacantAdapter(
         )
         val holder = VacantViewHolder(itemBinding, parent.context)
 
-        itemBinding.root.setOnClickListener {
+        itemBinding.cvVacant.setOnClickListener {
             val position =
                 holder.bindingAdapterPosition.takeIf { it != DiffUtil.DiffResult.NO_POSITION }
                     ?: return@setOnClickListener
