@@ -91,4 +91,10 @@
     <string name="title_advance_postulation">Avance de postulación</string>
     <string name="btn_cancel_postulation">Cancelar postulación</string>
     <string name="no_favorites">Sin vacantes favoritas</string>
+    <string name="title_change_password">Cambiar contraseña</string>
+    <string name="btn_save_changes">Guardar cambios</string>
+    <string name="title_notify">Notificaciones</string>
+    <string name="title_about_us">Acerca de</string>
+    <string name="title_privacy_policies">Aviso legal y Política de privacidad</string>
+    <string name="app_version">Versión 1.0.0</string>
 </resources>
