@@ -17,145 +17,162 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/purple"
-            android:visibility="visible"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="visible">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_small"
-                android:paddingVertical="@dimen/common_padding_min"
-                android:textColor="@color/white"
-                android:textStyle="bold"
                 android:layout_weight="@integer/layout_weight_default"
                 android:gravity="center"
-                android:text="Por favor, de contestar el Test. Se finalizara en 2hr." />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/common_padding_min"
-            android:orientation="vertical">
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilSearch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_padding_default"
-                android:hint="@string/search_job">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etSearch"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:imeOptions="actionNext"
-                    android:inputType="text"
-                    android:singleLine="true"
-                    android:textSize="@dimen/text_normal" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tilLocation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_padding_default"
-                android:hint="@string/search_location">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etLocation"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:imeOptions="actionDone"
-                    android:inputType="text"
-                    android:singleLine="true"
-                    android:textSize="@dimen/text_normal" />
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <Button
-                android:id="@+id/btnSearch"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/common_padding_default"
-                android:backgroundTint="@color/purple_700"
-                android:text="@string/search_btn"
-                android:textAllCaps="false"
-                android:textSize="@dimen/text_normal"
+                android:paddingVertical="@dimen/common_padding_min"
+                android:text="Por favor, de contestar el Test. Se finalizara en 2hr."
+                android:textColor="@color/white"
+                android:textSize="@dimen/text_small"
                 android:textStyle="bold" />
 
         </LinearLayout>
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/nestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:fillViewport="true"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <LinearLayout
-                android:id="@+id/llLoading"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:visibility="gone">
+                android:orientation="vertical">
 
-                <ProgressBar
-                    android:id="@+id/progressBar"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:indeterminate="true" />
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/llDisconnected"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <!--                <ImageView-->
-                <!--                    android:id="@+id/ivHome"-->
-                <!--                    android:layout_width="150dp"-->
-                <!--                    android:layout_height="150dp"-->
-                <!--                    android:layout_gravity="center"-->
-                <!--                    android:layout_marginStart="8dp"-->
-                <!--                    android:layout_marginEnd="8dp"-->
-                <!--                    android:src="@drawable/ic_img_home" />-->
-
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/common_padding_middle"
-                    android:layout_marginTop="@dimen/common_padding_default"
-                    android:text="@string/no_vacancies"
-                    android:textAlignment="center"
-                    android:textSize="@dimen/text_normal" />
+                    android:layout_marginHorizontal="@dimen/common_padding_min"
+                    android:orientation="vertical">
 
-            </LinearLayout>
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/common_padding_default"
+                        android:hint="@string/search_job">
 
-            <LinearLayout
-                android:id="@+id/llConnected"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:orientation="vertical"
-                android:visibility="gone">
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etSearch"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionNext"
+                            android:inputType="text"
+                            android:singleLine="true"
+                            android:textSize="@dimen/text_normal" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/rvVacancies"
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/tilLocation"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/common_padding_default"
+                        android:hint="@string/search_location">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etLocation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"
+                            android:singleLine="true"
+                            android:textSize="@dimen/text_normal" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <Button
+                        android:id="@+id/btnSearch"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/common_padding_default"
+                        android:backgroundTint="@color/purple_700"
+                        android:text="@string/search_btn"
+                        android:textAllCaps="false"
+                        android:textSize="@dimen/text_normal"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    tools:listitem="@layout/item_vacant" />
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/llLoading"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <ProgressBar
+                            android:id="@+id/progressBar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:indeterminate="true" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llDisconnected"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <!--                <ImageView-->
+                        <!--                    android:id="@+id/ivHome"-->
+                        <!--                    android:layout_width="150dp"-->
+                        <!--                    android:layout_height="150dp"-->
+                        <!--                    android:layout_gravity="center"-->
+                        <!--                    android:layout_marginStart="8dp"-->
+                        <!--                    android:layout_marginEnd="8dp"-->
+                        <!--                    android:src="@drawable/ic_img_home" />-->
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/common_padding_middle"
+                            android:layout_marginTop="@dimen/common_padding_default"
+                            android:text="@string/no_vacancies"
+                            android:textAlignment="center"
+                            android:textSize="@dimen/text_normal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llConnected"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/rvVacancies"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                            tools:listitem="@layout/item_vacant" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
-        </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
 
