@@ -4,11 +4,11 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.alefglobalintegralproductivityconsulting.alef_app.core.BaseViewHolder
 import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.Timestamp
-import com.alefglobalintegralproductivityconsulting.alef_app.data.model.Notification
 import com.alefglobalintegralproductivityconsulting.alef_app.data.model.Vacant
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.ItemVacantBinding
 
@@ -74,11 +74,10 @@ class VacantAdapter(
                     llSalary.visibility = View.GONE
                 }
 
+                cbFavorite.isChecked = item.isFavorite
                 cbFavorite.setOnCheckedChangeListener { _, checked ->
                     if (checked) {
-
-                    } else {
-
+                        Toast.makeText(context, "Agregado a favoritos", Toast.LENGTH_SHORT).show()
                     }
                 }
             }

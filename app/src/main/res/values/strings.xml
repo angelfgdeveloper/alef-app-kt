@@ -90,4 +90,5 @@
     <string name="no_notify">Sin notificaciones</string>
     <string name="title_advance_postulation">Avance de postulación</string>
     <string name="btn_cancel_postulation">Cancelar postulación</string>
+    <string name="no_favorites">Sin vacantes favoritas</string>
 </resources>
