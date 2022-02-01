@@ -1,12 +1,14 @@
 package com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.home
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.alefglobalintegralproductivityconsulting.alef_app.R
+import com.alefglobalintegralproductivityconsulting.alef_app.core.AppConstants
 import com.alefglobalintegralproductivityconsulting.alef_app.core.Result
 import com.alefglobalintegralproductivityconsulting.alef_app.data.model.Vacant
 import com.alefglobalintegralproductivityconsulting.alef_app.data.remote.home.RemoteHomeDataSource
@@ -15,6 +17,7 @@ import com.alefglobalintegralproductivityconsulting.alef_app.domain.home.HomeRep
 import com.alefglobalintegralproductivityconsulting.alef_app.presentation.home.HomeViewModel
 import com.alefglobalintegralproductivityconsulting.alef_app.presentation.home.HomeViewModelFactory
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.home.adapter.VacantAdapter
+import com.google.gson.Gson
 
 class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantClickListener {
 
@@ -68,6 +71,10 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
     }
 
     override fun onVacantClick(vacant: Vacant) {
-        Log.d("HomeFragment", vacant.toString())
+        val gson = Gson()
+        val jsonVacant = gson.toJson(vacant)
+
+        val bundle = bundleOf(AppConstants.DETAILS_VACANT to jsonVacant)
+        findNavController().navigate(R.id.action_nav_home_to_vacantDetailsFragment, bundle)
     }
 }
