@@ -19,6 +19,11 @@
         android:theme="@style/Theme.NoActionBar"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".ui.HomeActivity"
+            android:exported="false"
+            android:label="@string/title_activity_home"
+            android:theme="@style/Theme.NoActionBar" />
+        <activity
             android:name=".ui.InformationUserActivity"
             android:exported="false" />
         <activity
@@ -26,9 +31,8 @@
             android:exported="false"
             android:theme="@style/Theme.NoActionBar" />
         <activity
-            android:name=".ui.HomeActivity"
+            android:name=".ui.ForgotPasswordActivity"
             android:exported="false"
-            android:label="@string/title_activity_home"
             android:theme="@style/Theme.NoActionBar" />
         <activity
             android:name=".ui.RegisterActivity"
@@ -36,11 +40,11 @@
             android:theme="@style/Theme.NoActionBar"
             android:windowSoftInputMode="stateHidden" />
         <activity
-            android:name=".ui.ForgotPasswordActivity"
+            android:name=".ui.LoginActivity"
             android:exported="false"
             android:theme="@style/Theme.NoActionBar" />
         <activity
-            android:name=".ui.LoginActivity"
+            android:name=".ui.SplashScreenActivity"
             android:exported="true"
             android:theme="@style/Theme.NoActionBar">
             <intent-filter>
