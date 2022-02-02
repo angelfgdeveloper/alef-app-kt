@@ -2,6 +2,9 @@ package com.alefglobalintegralproductivityconsulting.alef_app.ui
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.KeyEvent
+import android.view.inputmethod.EditorInfo
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.Validators
@@ -20,21 +23,32 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun methods() {
-        mBinding.tvForgotPassword.setOnClickListener {
-            val intent = Intent(this, ForgotPasswordActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
-        }
+        with(mBinding) {
+            tvForgotPassword.setOnClickListener {
+                val intent = Intent(this@LoginActivity, ForgotPasswordActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
+            }
 
-        mBinding.btnLogin.setOnClickListener { validUser() }
-        mBinding.btnGoogle.setOnClickListener {
-            val intent = Intent(this@LoginActivity, AvatarActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-            startActivity(intent)
+            btnLogin.setOnClickListener { validUser() }
+            btnGoogle.setOnClickListener {
+                val intent = Intent(this@LoginActivity, AvatarActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+                startActivity(intent)
+            }
+            tvTitleCreateAccount.setOnClickListener { goToRegister() }
+            tvCreateAccount.setOnClickListener { goToRegister() }
+            btnPreview.setOnClickListener { goToHome(false) }
+
+            etPassword.setOnEditorActionListener { _: TextView?, actionId: Int, _: KeyEvent? ->
+                var handled = false
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    validUser()
+                    handled = true
+                }
+                handled
+            }
         }
-        mBinding.tvTitleCreateAccount.setOnClickListener { goToRegister() }
-        mBinding.tvCreateAccount.setOnClickListener { goToRegister() }
-        mBinding.btnPreview.setOnClickListener { goToHome(false) }
     }
 
     private fun validUser() {
@@ -65,6 +79,7 @@ class LoginActivity : AppCompatActivity() {
 //        intent.putExtra(AppConstants.IS_LOGIN_USER, isLoginUser)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
+        finish()
 //
 //        if (isLoginUser) {
 //            val userToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkFuZ2VsIiwiaWF0IjoxNTE2MjM5MDIyfQ.5sqP7aP7XI_UOCQLvRQuWTDCusnyq-WVsBex8rrX_ic"
