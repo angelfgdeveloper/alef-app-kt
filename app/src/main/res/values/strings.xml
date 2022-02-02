@@ -97,4 +97,7 @@
     <string name="title_about_us">Acerca de</string>
     <string name="title_privacy_policies">Aviso legal y Política de privacidad</string>
     <string name="app_version">Versión 1.0.0</string>
+    <string name="btn_apply">Postularme</string>
+    <string name="text_salary">Sueldo</string>
+    <string name="text_description">Descripción</string>
 </resources>
