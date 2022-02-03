@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alefglobalintegralproductivityconsulting.alef_app.core.BaseViewHolder
 import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.Timestamp
 import com.alefglobalintegralproductivityconsulting.alef_app.data.model.Vacant
+import com.alefglobalintegralproductivityconsulting.alef_app.data.model.VacantInfoExtra
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.ItemVacantBinding
 
 class VacantAdapter(
@@ -18,7 +19,7 @@ class VacantAdapter(
 ) : RecyclerView.Adapter<BaseViewHolder<*>>() {
 
     interface OnVacantClickListener {
-        fun onVacantClick(vacant: Vacant)
+        fun onVacantClick(vacant: Vacant, vacantInfoExtra: VacantInfoExtra?)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
@@ -31,7 +32,7 @@ class VacantAdapter(
             val position =
                 holder.bindingAdapterPosition.takeIf { it != DiffUtil.DiffResult.NO_POSITION }
                     ?: return@setOnClickListener
-            itemClickListener.onVacantClick(vacantList[position])
+            itemClickListener.onVacantClick(vacantList[position], vacantList[position].vacantInfoExtra)
         }
 
         return holder
@@ -62,11 +63,11 @@ class VacantAdapter(
                     llSalary.visibility = View.VISIBLE
 
                     if (item.firstSalary != -1 && item.secondSalary != -1) {
-                        tvSalary.text = "$${item.firstSalary} - $${item.secondSalary}"
+                        tvSalary.text = "$${item.firstSalary} - $${item.secondSalary} MXN"
                     } else if (item.firstSalary != -1) {
-                        tvSalary.text = "$${item.firstSalary}"
+                        tvSalary.text = "$${item.firstSalary} MXN"
                     } else if (item.secondSalary != -1) {
-                        tvSalary.text = "$${item.secondSalary}"
+                        tvSalary.text = "$${item.secondSalary} MXN"
                     }
 
                     tvPayments.text = item.paymentMethod

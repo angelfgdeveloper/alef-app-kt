@@ -1,8 +1,9 @@
 package com.alefglobalintegralproductivityconsulting.alef_app.ui
 
+import android.content.res.ColorStateList
 import android.os.Bundle
-import android.view.Menu
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -40,6 +41,11 @@ class HomeActivity : AppCompatActivity() {
         navView.setupWithNavController(navController)
 
         mBinding.btnLogout.setOnClickListener { finish() }
+
+        navView.itemTextColor =
+            ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
+        navView.itemIconTintList =
+            ColorStateList.valueOf(ContextCompat.getColor(this, android.R.color.darker_gray))
 
     }
 

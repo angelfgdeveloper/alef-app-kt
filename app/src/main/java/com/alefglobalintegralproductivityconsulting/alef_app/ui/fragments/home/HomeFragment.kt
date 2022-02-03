@@ -11,6 +11,7 @@ import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.alefglobalintegralproductivityconsulting.alef_app.core.AppConstants
 import com.alefglobalintegralproductivityconsulting.alef_app.core.Result
 import com.alefglobalintegralproductivityconsulting.alef_app.data.model.Vacant
+import com.alefglobalintegralproductivityconsulting.alef_app.data.model.VacantInfoExtra
 import com.alefglobalintegralproductivityconsulting.alef_app.data.remote.home.RemoteHomeDataSource
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.FragmentHomeBinding
 import com.alefglobalintegralproductivityconsulting.alef_app.domain.home.HomeRepoImpl
@@ -70,11 +71,15 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
         })
     }
 
-    override fun onVacantClick(vacant: Vacant) {
+    override fun onVacantClick(vacant: Vacant, vacantInfoExtra: VacantInfoExtra?) {
         val gson = Gson()
         val jsonVacant = gson.toJson(vacant)
+        val jsonVacantInfoExtra = gson.toJson(vacantInfoExtra)
 
-        val bundle = bundleOf(AppConstants.DETAILS_VACANT to jsonVacant)
+        val bundle = bundleOf(
+            AppConstants.DETAILS_VACANT to jsonVacant,
+            AppConstants.VACANT_INFO_EXTRA to jsonVacantInfoExtra
+        )
         findNavController().navigate(R.id.action_nav_home_to_vacantDetailsFragment, bundle)
     }
 }

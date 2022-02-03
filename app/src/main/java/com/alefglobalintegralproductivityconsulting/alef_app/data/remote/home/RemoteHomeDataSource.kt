@@ -1,7 +1,9 @@
 package com.alefglobalintegralproductivityconsulting.alef_app.data.remote.home
 
 import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.Timestamp
+import com.alefglobalintegralproductivityconsulting.alef_app.data.model.DAYS
 import com.alefglobalintegralproductivityconsulting.alef_app.data.model.Vacant
+import com.alefglobalintegralproductivityconsulting.alef_app.data.model.VacantInfoExtra
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -16,6 +18,22 @@ class RemoteHomeDataSource {
             launch {
                 delay(300)
 
+                val workDay = HashMap<Int, String>()
+                workDay.put(DAYS.MONDAY.num, "10:00 a 15:00")
+                workDay.put(DAYS.TUESDAY.num, "10:00 a 15:00")
+                workDay.put(DAYS.WEDNESDAY.num, "10:00 a 15:00")
+                workDay.put(DAYS.THURSDAY.num, "10:00 a 15:00")
+                workDay.put(DAYS.FRIDAY.num, "10:00 a 15:00")
+                workDay.put(DAYS.SATURDAY.num, "No se trabaja")
+                workDay.put(DAYS.SUNDAY.num, "No se trabaja")
+
+                val availability = HashMap<String, Boolean>()
+                availability.put("Cambiar de turno", false)
+                availability.put("Viajar", true)
+                availability.put("Prima Vacacional", false)
+                availability.put("Seguro social", true)
+                availability.put("Infonavit", true)
+
                 vacantList.add(
                     Vacant(
                         id = 1,
@@ -27,7 +45,13 @@ class RemoteHomeDataSource {
                         firstSalary = 15000,
                         secondSalary = 20000,
                         paymentMethod = "Mensuales",
-                        isFavorite = false
+                        isFavorite = false,
+                        vacantInfoExtra = VacantInfoExtra(
+                            companyPaid = true,
+                            workDay = workDay,
+                            mode = "Remoto",
+                            availability = availability
+                        )
                     )
                 )
 
@@ -42,10 +66,14 @@ class RemoteHomeDataSource {
                         firstSalary = 1500,
                         secondSalary = 2000,
                         paymentMethod = "Semanales",
-                        isFavorite = true
+                        isFavorite = true,
+                        vacantInfoExtra = VacantInfoExtra(
+                            companyPaid = false,
+                            workDay = workDay,
+                            mode = "Home office & presencial"
+                        )
                     )
                 )
-
 
                 vacantList.add(
                     Vacant(
@@ -56,7 +84,12 @@ class RemoteHomeDataSource {
                         company = "Atento Mexicana, S.A. de C.V.",
                         description = "¿Quieres comenzar tu carrera dentro de una empresa con prestigio " +
                                 "internacional? Esta es tu oportunidada AGENTE DE ATENCIÓN A CLIENTES",
-                        isFavorite = true
+                        isFavorite = true,
+                        vacantInfoExtra = VacantInfoExtra(
+                            companyPaid = false,
+                            workDay = workDay,
+                            mode = "Presencial"
+                        )
                     )
                 )
             }

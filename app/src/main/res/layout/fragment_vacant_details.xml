@@ -47,8 +47,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_weight="1"
                     android:textColor="@android:color/black"
+                    android:layout_weight="@integer/layout_weight_default"
                     android:textSize="@dimen/text_small"
                     android:textStyle="bold"
                     tools:text="Alef company" />
@@ -132,11 +132,113 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/llCompanyInfoExtra"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/common_padding_min"
                 android:layout_marginTop="@dimen/common_padding_min"
                 android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="@integer/layout_weight_default"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/text_workDay"
+                                android:textAllCaps="true"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/text_normal"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginTop="@dimen/common_padding_min"
+                                android:background="@android:color/darker_gray" />
+
+                            <LinearLayout
+                                android:id="@+id/llWorkDay"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/common_padding_min"
+                            android:layout_weight="@integer/layout_weight_default"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/text_mode"
+                                android:textAllCaps="true"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/text_normal"
+                                android:textStyle="bold" />
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginTop="@dimen/common_padding_min"
+                                android:background="@android:color/darker_gray" />
+
+                            <TextView
+                                android:id="@+id/tvMode"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:gravity="center_vertical"
+                                android:padding="@dimen/common_padding_min"
+                                android:textSize="@dimen/text_normal"
+                                tools:text="Remoto" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvTitleAvailability"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_padding_min"
+                    android:text="@string/text_availability"
+                    android:textAllCaps="true"
+                    android:textColor="@android:color/black"
+                    android:textSize="@dimen/text_normal"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
+
+                <View
+                    android:id="@+id/vAvailability"
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="@dimen/common_padding_min"
+                    android:background="@android:color/darker_gray"
+                    android:visibility="gone" />
+
+                <LinearLayout
+                    android:id="@+id/llCompanyInfoExtra"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
 
             </LinearLayout>
 
@@ -150,11 +252,11 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@string/text_description"
                     android:textAllCaps="true"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/text_normal"
-                    android:textStyle="bold"
-                    android:text="@string/text_description" />
+                    android:textStyle="bold" />
 
                 <View
                     android:layout_width="match_parent"
@@ -184,11 +286,11 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:text="@string/text_salary"
                     android:textAllCaps="true"
                     android:textColor="@android:color/black"
                     android:textSize="@dimen/text_normal"
-                    android:textStyle="bold"
-                    android:text="@string/text_salary" />
+                    android:textStyle="bold" />
 
                 <View
                     android:layout_width="match_parent"
@@ -199,8 +301,9 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    android:orientation="horizontal">
+                    android:layout_marginBottom="@dimen/common_padding_default"
+                    android:orientation="horizontal"
+                    android:visibility="visible">
 
                     <TextView
                         android:id="@+id/tvSalary"
@@ -221,7 +324,7 @@
                         android:layout_gravity="center"
                         android:padding="@dimen/common_padding_min"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/text_normal"
+                        android:textSize="@dimen/text_title"
                         android:textStyle="bold"
                         tools:text="Mensuales" />
 

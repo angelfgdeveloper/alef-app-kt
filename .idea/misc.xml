@@ -4,10 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/drawable/ic_image.xml" value="0.23697916666666666" />
+        <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/drawable/ic_menu_home.xml" value="0.13518518518518519" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/drawable/side_nav_bar.xml" value="0.23697916666666666" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/activity_avatar.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/activity_forgot_password.xml" value="0.22083333333333333" />
-        <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/activity_home.xml" value="0.22" />
+        <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/activity_home.xml" value="0.2" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/activity_information_user.xml" value="0.2" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/activity_login.xml" value="0.22" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/activity_main.xml" value="0.22083333333333333" />
@@ -28,13 +29,16 @@
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/fragment_postgraduate.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/fragment_postulation.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/fragment_settings.xml" value="0.20677083333333332" />
-        <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/fragment_vacant_details.xml" value="0.25" />
+        <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/fragment_vacant_details.xml" value="0.22" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/fragment_work_experience.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/fragment_work_us.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/ic_img_work_with_us.xml" value="0.22083333333333333" />
+        <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/item_availability.xml" value="0.33" />
+        <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/item_header_vacant.xml" value="0.22" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/item_notification.xml" value="0.2" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/item_postulation.xml" value="0.25" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/item_vacant.xml" value="0.25" />
+        <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/item_workday.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/nav_header_home.xml" value="0.22" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/menu/activity_main_drawer.xml" value="0.25" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/menu/home.xml" value="0.22083333333333333" />

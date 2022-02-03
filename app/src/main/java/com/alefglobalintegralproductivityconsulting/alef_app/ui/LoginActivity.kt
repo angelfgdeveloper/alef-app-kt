@@ -79,7 +79,7 @@ class LoginActivity : AppCompatActivity() {
 //        intent.putExtra(AppConstants.IS_LOGIN_USER, isLoginUser)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
-        finish()
+//        finish()
 //
 //        if (isLoginUser) {
 //            val userToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkFuZ2VsIiwiaWF0IjoxNTE2MjM5MDIyfQ.5sqP7aP7XI_UOCQLvRQuWTDCusnyq-WVsBex8rrX_ic"

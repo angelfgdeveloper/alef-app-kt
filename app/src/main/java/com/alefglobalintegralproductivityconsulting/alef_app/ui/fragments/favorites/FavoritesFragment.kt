@@ -8,6 +8,7 @@ import androidx.fragment.app.viewModels
 import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.alefglobalintegralproductivityconsulting.alef_app.core.Result
 import com.alefglobalintegralproductivityconsulting.alef_app.data.model.Vacant
+import com.alefglobalintegralproductivityconsulting.alef_app.data.model.VacantInfoExtra
 import com.alefglobalintegralproductivityconsulting.alef_app.data.remote.home.RemoteHomeDataSource
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.FragmentFavoritesBinding
 import com.alefglobalintegralproductivityconsulting.alef_app.domain.home.HomeRepoImpl
@@ -73,7 +74,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites), VacantAdapter.O
         })
     }
 
-    override fun onVacantClick(vacant: Vacant) {
+    override fun onVacantClick(vacant: Vacant, vacantInfoExtra: VacantInfoExtra?) {
 
     }
 }

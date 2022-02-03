@@ -101,4 +101,9 @@
     <string name="text_salary">Sueldo</string>
     <string name="text_description">Descripción</string>
     <string name="title_loading_splash">Cargando..</string>
+    <string name="cb_yes">Si</string>
+    <string name="cb_no">No</string>
+    <string name="text_availability">Disponibilidad</string>
+    <string name="text_workDay">Jornada laboral</string>
+    <string name="text_mode">Modalidad</string>
 </resources>
