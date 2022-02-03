@@ -45,7 +45,7 @@ class HomeActivity : AppCompatActivity() {
         navView.itemTextColor =
             ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
         navView.itemIconTintList =
-            ColorStateList.valueOf(ContextCompat.getColor(this, android.R.color.darker_gray))
+            ColorStateList.valueOf(ContextCompat.getColor(this, android.R.color.black))
 
     }
 

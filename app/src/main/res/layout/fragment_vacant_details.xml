@@ -47,8 +47,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textColor="@android:color/black"
                     android:layout_weight="@integer/layout_weight_default"
+                    android:textColor="@android:color/black"
                     android:textSize="@dimen/text_small"
                     android:textStyle="bold"
                     tools:text="Alef company" />
@@ -58,9 +58,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:src="@drawable/ic_state_circle"
+                    android:src="@drawable/ic_success"
                     android:visibility="visible"
-                    app:tint="@android:color/holo_blue_dark" />
+                    app:tint="@color/teal_700" />
 
             </LinearLayout>
 
@@ -116,7 +116,7 @@
                     android:id="@+id/cbFavorite"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:button="@drawable/ic_menu_favorites"
+                    android:button="@drawable/ic_like_favorite"
                     android:gravity="center"
                     android:minWidth="0dp"
                     android:minHeight="0dp" />
