@@ -23,4 +23,7 @@
     <color name="green_dark">#1A4C1C</color>
     <color name="grey_dark">#575757</color>
 
+    <color name="green_success">#4BB543</color>
+    <color name="blue_edit">#0f52b9</color>
+
 </resources>

@@ -62,6 +62,9 @@
         <item name="checkedIconVisible">true</item>
     </style>
 
+    <style name="SwitchMaterialStyle" parent="Widget.MaterialComponents.CompoundButton.Switch">
+    </style>
+
     <style name="FloatingActionButtonStyle" parent="Widget.MaterialComponents.FloatingActionButton">
         <item name="tint">@android:color/white</item>
         <item name="backgroundTint">@android:color/darker_gray</item>

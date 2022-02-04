@@ -26,7 +26,7 @@
                 android:gravity="center_horizontal"
                 android:orientation="horizontal">
 
-                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                <de.hdodenhof.circleimageview.CircleImageView
                     android:id="@+id/civAvatar"
                     android:layout_width="120dp"
                     android:layout_height="120dp"
@@ -85,6 +85,743 @@
                 android:layout_height="0.5dp"
                 android:layout_marginTop="@dimen/common_padding_default"
                 android:background="@android:color/darker_gray" />
+
+            <com.google.android.material.switchmaterial.SwitchMaterial
+                android:id="@+id/swRelocate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_padding_min"
+                android:checked="true"
+                android:text="Dispuesto a reubicarme"
+                android:textSize="@dimen/text_normal" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginTop="@dimen/common_padding_default"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/common_padding_min"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tvTitleDataGeneral"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/common_padding_default"
+                            android:layout_marginVertical="@dimen/common_padding_min"
+                            android:text="Datos personales"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_title"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/ivWarnDataGeneral"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/common_padding_default"
+                            android:src="@drawable/ic_warning"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvTitleDataGeneral"
+                            app:layout_constraintStart_toEndOf="@+id/tvTitleDataGeneral"
+                            app:layout_constraintTop_toTopOf="@+id/tvTitleDataGeneral"
+                            app:tint="@color/amber" />
+
+                        <ImageView
+                            android:id="@+id/ivEditDataGeneral"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/common_padding_default"
+                            android:src="@drawable/ic_edit"
+                            app:layout_constraintBottom_toBottomOf="@+id/ivWarnDataGeneral"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/ivWarnDataGeneral"
+                            app:tint="@color/blue_edit" />
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cvDataGeneral"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/common_padding_min"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            app:cardCornerRadius="@dimen/common_padding_default"
+                            app:cardElevation="4dp"
+                            app:cardUseCompatPadding="true"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/ivEditDataGeneral"
+                            app:layout_constraintStart_toStartOf="@+id/tvTitleDataGeneral"
+                            app:layout_constraintTop_toBottomOf="@+id/tvTitleDataGeneral">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:padding="@dimen/common_padding_min">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Nombre completo:"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tvName"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/common_padding_min"
+                                        android:layout_weight="@integer/layout_weight_default"
+                                        android:text="Mark Zuckererg"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Fecha de nacimiento:"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tvDate"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/common_padding_min"
+                                        android:layout_weight="@integer/layout_weight_default"
+                                        android:text="15 de Diciembre de 2023"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Lugar de nacimiento:"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tvBirthplace"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/common_padding_min"
+                                        android:layout_weight="@integer/layout_weight_default"
+                                        android:text="Durango, Dgo."
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Domicilio:"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tvFullAddress"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/common_padding_min"
+                                        android:layout_weight="@integer/layout_weight_default"
+                                        android:text="Calle street #165, Fracc. Dolor bendig C.P. 3400"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Curp:"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tvCURP"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/common_padding_min"
+                                        android:layout_weight="@integer/layout_weight_default"
+                                        android:text="Sin datos"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Rfc:"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tvRFC"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/common_padding_min"
+                                        android:layout_weight="@integer/layout_weight_default"
+                                        android:text="Sin datos"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Número de seguro social:"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tvNSS"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/common_padding_min"
+                                        android:layout_weight="@integer/layout_weight_default"
+                                        android:text="Sin datos"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="@dimen/common_padding_default"
+                    android:background="@android:color/darker_gray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tvTitleDataAcademic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/common_padding_default"
+                            android:layout_marginVertical="@dimen/common_padding_min"
+                            android:text="Datos academicos"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_title"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/ivWarnDataAcademic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/common_padding_default"
+                            android:src="@drawable/ic_check_circle"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvTitleDataAcademic"
+                            app:layout_constraintStart_toEndOf="@+id/tvTitleDataAcademic"
+                            app:layout_constraintTop_toTopOf="@+id/tvTitleDataAcademic"
+                            app:tint="@color/green_success" />
+
+                        <ImageView
+                            android:id="@+id/ivEditDataAcademic"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/common_padding_default"
+                            android:src="@drawable/ic_edit"
+                            app:layout_constraintBottom_toBottomOf="@+id/ivWarnDataAcademic"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/ivWarnDataAcademic"
+                            app:tint="@color/blue_edit" />
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cvDataAcademic"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/common_padding_min"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            app:cardCornerRadius="@dimen/common_padding_default"
+                            app:cardElevation="4dp"
+                            app:cardUseCompatPadding="true"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/ivEditDataAcademic"
+                            app:layout_constraintStart_toStartOf="@+id/tvTitleDataAcademic"
+                            app:layout_constraintTop_toBottomOf="@+id/tvTitleDataAcademic">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:padding="@dimen/common_padding_min">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Estudió:"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tvÍnstitute"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/common_padding_min"
+                                        android:layout_weight="@integer/layout_weight_default"
+                                        android:text="Instituto Tecnologico de Monterrey"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Titulo:"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tvTitleAchieved"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/common_padding_min"
+                                        android:layout_weight="@integer/layout_weight_default"
+                                        android:text="Ingenerio de software"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Fecha de término:"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tvEndDate"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/common_padding_min"
+                                        android:layout_weight="@integer/layout_weight_default"
+                                        android:text="Febrero de 2023"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="@dimen/common_padding_default"
+                    android:background="@android:color/darker_gray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tvTitleDataLabor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/common_padding_default"
+                            android:layout_marginVertical="@dimen/common_padding_min"
+                            android:text="Datos laborales"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_title"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/ivWarnDataLabor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/common_padding_default"
+                            android:src="@drawable/ic_check_circle"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvTitleDataLabor"
+                            app:layout_constraintStart_toEndOf="@+id/tvTitleDataLabor"
+                            app:layout_constraintTop_toTopOf="@+id/tvTitleDataLabor"
+                            app:tint="@color/green_success" />
+
+                        <ImageView
+                            android:id="@+id/ivEditDataLabor"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/common_padding_default"
+                            android:src="@drawable/ic_edit"
+                            app:layout_constraintBottom_toBottomOf="@+id/ivWarnDataLabor"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/ivWarnDataLabor"
+                            app:tint="@color/blue_edit" />
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cvDataLabor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/common_padding_min"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            app:cardCornerRadius="@dimen/common_padding_default"
+                            app:cardElevation="4dp"
+                            app:cardUseCompatPadding="true"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/ivEditDataLabor"
+                            app:layout_constraintStart_toStartOf="@+id/tvTitleDataLabor"
+                            app:layout_constraintTop_toBottomOf="@+id/tvTitleDataLabor">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:padding="@dimen/common_padding_min">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Empresa:"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tvCompany"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/common_padding_min"
+                                        android:layout_weight="@integer/layout_weight_default"
+                                        android:text="Indeend Company"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Fecha de inicio:"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tvStartDateWork"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/common_padding_min"
+                                        android:layout_weight="@integer/layout_weight_default"
+                                        android:text="Julio de 2020"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Fecha de término:"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+                                        android:id="@+id/tvEndDateWork"
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/common_padding_min"
+                                        android:layout_weight="@integer/layout_weight_default"
+                                        android:text="Marzo de 2022"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="@dimen/common_padding_default"
+                    android:background="@android:color/darker_gray" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:id="@+id/tvTitleReferences"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/common_padding_default"
+                            android:layout_marginVertical="@dimen/common_padding_min"
+                            android:text="Referencias"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/text_title"
+                            android:textStyle="bold"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:id="@+id/ivWarnReferences"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/common_padding_default"
+                            android:src="@drawable/ic_warning"
+                            app:layout_constraintBottom_toBottomOf="@+id/tvTitleReferences"
+                            app:layout_constraintStart_toEndOf="@+id/tvTitleReferences"
+                            app:layout_constraintTop_toTopOf="@+id/tvTitleReferences"
+                            app:tint="@color/amber" />
+
+                        <ImageView
+                            android:id="@+id/ivEditReferences"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/common_padding_default"
+                            android:src="@drawable/ic_edit"
+                            app:layout_constraintBottom_toBottomOf="@+id/ivWarnReferences"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="@+id/ivWarnReferences"
+                            app:tint="@color/blue_edit" />
+
+                        <androidx.cardview.widget.CardView
+                            android:id="@+id/cvReferences"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/common_padding_min"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?attr/selectableItemBackground"
+                            app:cardCornerRadius="@dimen/common_padding_default"
+                            app:cardElevation="4dp"
+                            app:cardUseCompatPadding="true"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="@+id/ivEditReferences"
+                            app:layout_constraintStart_toStartOf="@+id/tvTitleReferences"
+                            app:layout_constraintTop_toBottomOf="@+id/tvTitleReferences">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:padding="@dimen/common_padding_min">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/tvReferenceOne"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="#1 Referencia"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal"
+                                        android:textStyle="bold" />
+
+                                    <ImageView
+                                        android:id="@+id/ivReferenceOne"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/common_padding_min"
+                                        android:src="@drawable/ic_check_circle"
+                                        app:tint="@color/green_success" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/tvReferenceTwo"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="#2 Referencia"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal"
+                                        android:textStyle="bold" />
+
+                                    <ImageView
+                                        android:id="@+id/ivReferenceTwo"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/common_padding_min"
+                                        android:src="@drawable/ic_warning"
+                                        app:tint="@color/amber" />
+
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:id="@+id/tvReferenceThree"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="#3 Referencia"
+                                        android:textColor="@android:color/black"
+                                        android:textSize="@dimen/text_normal"
+                                        android:textStyle="bold" />
+
+                                    <ImageView
+                                        android:id="@+id/ivReferenceThree"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/common_padding_min"
+                                        android:src="@drawable/ic_warning"
+                                        app:tint="@color/amber" />
+
+                                </LinearLayout>
+
+                            </LinearLayout>
+
+                        </androidx.cardview.widget.CardView>
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5dp"
+                    android:layout_marginTop="@dimen/common_padding_default"
+                    android:background="@android:color/darker_gray" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
