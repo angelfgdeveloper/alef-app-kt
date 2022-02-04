@@ -73,12 +73,11 @@
                 android:textStyle="bold" />
 
             <com.google.android.material.chip.Chip
-                android:id="@+id/chip"
+                android:id="@+id/chipIsVisible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:singleLine="true"
-                app:chipIcon="@drawable/ic_success"
                 android:layout_marginTop="@dimen/common_padding_default"
+                android:checked="true"
                 android:text="Perfil: Visible" />
 
             <View

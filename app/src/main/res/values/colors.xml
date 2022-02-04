@@ -15,4 +15,12 @@
     <color name="red">#F44336</color>
     <color name="purple">#7B1FA2</color>
     <color name="white_light_grey">#f8f8f8</color>
+
+    <!-- Color chip background - active & desactive -->
+    <color name="green_light">#C68FF451</color>
+    <color name="grey_light">#D7D8DA</color>
+    <!-- Color chip text & icon - active & desactive -->
+    <color name="green_dark">#1A4C1C</color>
+    <color name="grey_dark">#575757</color>
+
 </resources>

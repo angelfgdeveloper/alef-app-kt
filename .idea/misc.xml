@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/drawable/bg_chip_state.xml" value="0.23697916666666666" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/drawable/ic_image.xml" value="0.23697916666666666" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/drawable/ic_like_favorite.xml" value="0.23697916666666666" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/drawable/ic_menu_home.xml" value="0.13518518518518519" />
@@ -24,7 +25,7 @@
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/dropdown_menu_item.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/fragment_academic.xml" value="0.2" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/fragment_alert.xml" value="0.22083333333333333" />
-        <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/fragment_curriculum.xml" value="0.25" />
+        <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/fragment_curriculum.xml" value="0.33" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/fragment_favorites.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/fragment_home.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/fragment_notification.xml" value="0.22083333333333333" />

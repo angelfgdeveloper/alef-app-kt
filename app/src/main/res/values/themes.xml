@@ -44,17 +44,22 @@
         <item name="android:fontFamily">@font/roboto_regular</item>
         <item name="textInputStyle">@style/EditTextStyle</item>
         <item name="floatingActionButtonStyle">@style/FloatingActionButtonStyle</item>
+        <item name="chipStyle">@style/ChipStyle</item>
 
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="EditTextStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+    <style name="EditTextStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense" />
 
-    </style>
+    <style name="DropdownMenuStyle" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu" />
 
-    <style name="DropdownMenuStyle" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense.ExposedDropdownMenu">
-
+    <style name="ChipStyle" parent="@style/Widget.MaterialComponents.Chip.Choice">
+        <item name="chipBackgroundColor">@color/bg_color_chip_state</item>
+        <item name="android:textColor">@color/text_color_chip_state</item>
+        <item name="checkedIconTint">@color/text_color_chip_state</item>
+        <item name="checkedIcon">@drawable/ic_success</item>
+        <item name="checkedIconVisible">true</item>
     </style>
 
     <style name="FloatingActionButtonStyle" parent="Widget.MaterialComponents.FloatingActionButton">
