@@ -104,4 +104,5 @@
     <string name="text_availability">Disponibilidad</string>
     <string name="text_workDay">Jornada laboral</string>
     <string name="text_mode">Modalidad</string>
+    <string name="warn_text_last_academic">Por favor no olvides tener los documentos marcados en \"Si\" a la mano</string>
 </resources>

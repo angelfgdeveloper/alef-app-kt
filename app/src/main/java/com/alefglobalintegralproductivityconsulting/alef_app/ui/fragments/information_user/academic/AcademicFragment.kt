@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.RadioButton
 import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -15,6 +16,7 @@ import com.alefglobalintegralproductivityconsulting.alef_app.databinding.Fragmen
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.AcademicUser
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.InfoUserViewModel
 import kotlinx.android.synthetic.main.fragment_academic.*
+
 
 class AcademicFragment : Fragment(R.layout.fragment_academic) {
 
@@ -49,73 +51,78 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                     etSchool.setText(academicUser?.school)
                     atvAcademicAdvance.setText(academicUser?.academicAdvance)
 
-                    setAcademicAdvance(false)
+                    atvAcademicLevel.setText(academicUser.levelAcademic)
 
-                    if (atvAcademicAdvance.text.toString().isNotEmpty()) {
+                    if (atvAcademicLevel.text.isNotEmpty()) {
                         llPeriod.visibility = View.VISIBLE
+                        if (atvAcademicLevel.text.toString() == "Primaria" ||
+                            atvAcademicLevel.text.toString() == "Secundaria"
+                        ) {
+                            setAcademicAdvance(false)
+                            val academicLevel = atvAcademicLevel.text.toString()
+                            when (atvAcademicAdvance.text.toString()) {
+                                "En curso", "Trunca", "Terminado" -> {
+                                    llCertificated.visibility = View.GONE
+                                }
+                                "Grado técnico" -> {
+                                    when (academicLevel) {
+                                        "Bachillerato", "Universidad" -> {
+                                            llCertificated.visibility = View.VISIBLE
+                                        }
+                                    }
+                                }
+                            }
 
-                        atvStartMonth.setText(academicUser?.startMonth)
-                        etStartYear.setText(
-                            if (academicUser?.startYear.toString()
-                                    .toInt() == 0
-                            ) "" else academicUser?.startYear.toString()
-                        )
+                            atvStartMonth.setText(academicUser?.startMonth)
+                            etStartYear.setText(academicUser?.startYear.toString())
+                            atvEndMonth.setText(academicUser?.endMonth)
+                            etEndYear.setText(academicUser?.endYear.toString())
 
-                        atvEndMonth.setText(academicUser?.endMonth)
-                        etEndYear.setText(
-                            if (academicUser?.endYear.toString()
-                                    .toInt() == 0
-                            ) "" else academicUser?.endYear.toString()
-                        )
+                            addMonths()
+                        } else {
+                            setAcademicAdvance(true)
+                            val academicLevel = atvAcademicLevel.text.toString()
+                            when (atvAcademicAdvance.text.toString()) {
+                                "En curso", "Trunca", "Terminado" -> {
+                                    llCertificated.visibility = View.GONE
+                                }
+                                "Grado técnico" -> {
+                                    when (academicLevel) {
+                                        "Bachillerato", "Universidad" -> {
+                                            llCertificated.visibility = View.VISIBLE
+                                        }
+                                    }
+                                }
+                            }
 
-                        addMonths()
+                            atvStartMonth.setText(academicUser?.startMonth)
+                            etStartYear.setText(academicUser?.startYear.toString())
+                            atvEndMonth.setText(academicUser?.endMonth)
+                            etEndYear.setText(academicUser?.endYear.toString())
+
+                            addMonths()
+                        }
                     } else {
                         llPeriod.visibility = View.GONE
-
                         atvStartMonth.setText("")
                         etStartYear.setText("")
-                        etEndYear.setText("")
                         atvEndMonth.setText("")
-
-                        addMonths()
-                    }
-
-                    if (atvAcademicAdvance.text.toString() == "Terminado" ||
-                        atvAcademicAdvance.text.toString() == "Terminado y con cédula"
-                    ) {
-                        llCertificated.visibility = View.VISIBLE
-                        etCertificate.setText(academicUser?.certificate.toString())
-                        etTitleAchieved.setText(academicUser?.titleAchieved.toString())
-                        etIdentificationCard.setText(academicUser?.identificationCard.toString())
-                    } else if (atvAcademicLevel.text.toString() == "Primaria") {
+                        etEndYear.setText("")
                         llCertificated.visibility = View.GONE
-                        etCertificate.setText("")
-                        etTitleAchieved.setText("")
-                        etIdentificationCard.setText("")
-                    } else {
-                        llCertificated.visibility = View.GONE
-                        etCertificate.setText("")
-                        etTitleAchieved.setText("")
-                        etIdentificationCard.setText("")
                     }
 
                 } else {
                     llAcademic.visibility = View.GONE
                     etSchool.setText("")
                     atvAcademicAdvance.setText("")
-
+                    atvAcademicLevel.setText("")
                     llPeriod.visibility = View.GONE
                     atvStartMonth.setText("")
                     etStartYear.setText("")
-                    etEndYear.setText("")
                     atvEndMonth.setText("")
-
+                    etEndYear.setText("")
                     llCertificated.visibility = View.GONE
-                    etCertificate.setText("")
-                    etTitleAchieved.setText("")
-                    etIdentificationCard.setText("")
                 }
-
             }
         }
     }
@@ -135,24 +142,14 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                     etSchool.setText("")
                     atvAcademicAdvance.setText("")
 
-                    atvStartMonth.setText("")
-                    etStartYear.setText("")
-                    etEndYear.setText("")
-                    atvEndMonth.setText("")
-
-                    etCertificate.setText("")
-                    etTitleAchieved.setText("")
-                    etIdentificationCard.setText("")
-
-
-
-                    if (atvAcademicLevel.text.toString() == "Primaria" ||
-                        atvAcademicLevel.text.toString() == "Secundaria"
-                    ) {
+                    if (mAcademicLevel == "Primaria") {
+                        setAcademicAdvance(false)
+                    } else if (mAcademicLevel == "Secundaria") {
                         setAcademicAdvance(false)
                     } else {
                         setAcademicAdvance(true)
                     }
+
                 }
             }
         }
@@ -160,7 +157,6 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
     }
 
     private fun setAcademicAdvance(isHigher: Boolean) {
-
         mInfoUserViewModel.getAcademicAdvanceList().observe(viewLifecycleOwner) { academicAdvance ->
             val academicList = mutableListOf<String>()
 
@@ -168,6 +164,7 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                 academicList.addAll(academicAdvance)
             } else {
                 academicList.addAll(academicAdvance)
+                academicList.removeFirst()
                 academicList.removeLast()
             }
 
@@ -179,27 +176,27 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                     mAcademicAdvance = parent.getItemAtPosition(position).toString()
                     llPeriod.visibility = View.VISIBLE
 
-                    addMonths()
-
                     atvStartMonth.setText("")
                     etStartYear.setText("")
-                    etEndYear.setText("")
                     atvEndMonth.setText("")
+                    etEndYear.setText("")
 
-                    if (mAcademicAdvance == "Terminado" || mAcademicAdvance == "Terminado y con cédula") {
-                        llCertificated.visibility = View.VISIBLE
-                    } else if (atvAcademicLevel.text.toString() == "Primaria") {
-                        llCertificated.visibility = View.GONE
-                        etCertificate.setText("")
-                        etTitleAchieved.setText("")
-                        etIdentificationCard.setText("")
-                    } else {
-                        llCertificated.visibility = View.GONE
-                        etCertificate.setText("")
-                        etTitleAchieved.setText("")
-                        etIdentificationCard.setText("")
+                    val academicLevel = atvAcademicLevel.text.toString()
+                    when (mAcademicAdvance) {
+                        "En curso", "Trunca", "Terminado" -> {
+                            llCertificated.visibility = View.GONE
+                        }
+                        "Grado técnico" -> {
+                            when (academicLevel) {
+                                "Bachillerato", "Universidad" -> {
+                                    llCertificated.visibility = View.VISIBLE
+                                }
+                            }
+                        }
                     }
 
+                    fabNext.isEnabled = true
+                    addMonths()
                 }
             }
 
@@ -214,12 +211,15 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                 atvStartMonth.setAdapter(adapter)
                 atvStartMonth.setOnItemClickListener { parent, _, position, id ->
                     mStartMonth = parent.getItemAtPosition(position).toString()
+                    fabNext.isEnabled = true
                 }
 
                 atvEndMonth.setAdapter(adapter)
                 atvEndMonth.setOnItemClickListener { parent, _, position, id ->
                     mEndMonth = parent.getItemAtPosition(position).toString()
+                    fabNext.isEnabled = true
                 }
+
             }
 
         }
@@ -227,27 +227,6 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
 
     private fun setupTextFields() {
         with(mBinding) {
-
-            val fields = arrayListOf(
-                tilEndYear,
-                tilEndMonth,
-                tilStartYear,
-                tilStartMonth,
-                tilAcademicAdvance,
-                tilSchool,
-                tilAcademicLevel,
-            )
-
-            fields.forEach { textInputLayout ->
-                textInputLayout.editText?.addTextChangedListener {
-                    validateFields(
-                        textInputLayout,
-                        fab = fabNext,
-                        context = requireContext()
-                    )
-                }
-            }
-
             fabReturn.setOnClickListener {
                 listener?.onSelectStepView(0, R.id.personalFragment)
                 sendDataOptionFragment(false)
@@ -272,114 +251,94 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                     context = requireContext()
                 )
             ) {
+                val fields = arrayListOf(
+                    tilEndYear,
+                    tilStartYear,
+                    tilSchool,
+                )
 
-                if ((atvAcademicLevel.text.toString() == "Universidad" ||
-                            atvAcademicLevel.text.toString() == "Bachillerato") &&
-                    atvAcademicAdvance.text.toString() == "Terminado y con cédula"
-                ) {
-
-                    val fields = arrayListOf(
-                        tilIdentificationCard,
-                        tilTitleAchieved,
-                        tilCertificate
-                    )
-
-                    fields.forEach { textInputLayout ->
-                        textInputLayout.editText?.addTextChangedListener {
-                            validateFields(
-                                textInputLayout,
-                                fab = fabNext,
-                                context = requireContext()
-                            )
-                        }
-                    }
-
-                    if (validateFields(
-                            tilIdentificationCard,
-                            tilTitleAchieved,
-                            tilCertificate,
-                            tilEndYear,
-                            tilEndMonth,
-                            tilStartYear,
-                            tilStartMonth,
-                            tilAcademicAdvance,
-                            tilSchool,
-                            tilAcademicLevel,
+                fields.forEach { textInputLayout ->
+                    textInputLayout.editText?.addTextChangedListener {
+                        validateFields(
+                            textInputLayout,
                             fab = fabNext,
                             context = requireContext()
                         )
-                    ) {
-
-                        mInfoUserViewModel.setAcademicUser(
-                            AcademicUser(
-                                levelAcademic = atvAcademicLevel.text.toString().trim(),
-                                school = etSchool.text.toString().trim(),
-                                academicAdvance = atvAcademicAdvance.text.toString().trim(),
-                                startMonth = atvStartMonth.text.toString().trim(),
-                                startYear = etStartYear.text.toString().toInt(),
-                                endMonth = atvEndMonth.text.toString().trim(),
-                                endYear = etEndYear.text.toString().toInt(),
-                                certificate = etCertificate.text.toString(),
-                                titleAchieved = etTitleAchieved.text.toString(),
-                                identificationCard = etIdentificationCard.text.toString()
-                            )
-                        )
-
-                        listener?.onSelectStepView(1, R.id.postgraduateFragment)
                     }
+                }
 
-                } else if (
-                    (atvAcademicLevel.text.toString() != "Primaria" ||
-                            atvAcademicLevel.text.toString() != "Secundaria") &&
-                    atvAcademicAdvance.text.toString() == "Terminado"
-                ) {
-                    val fields = arrayListOf(
-                        tilTitleAchieved,
-                        tilCertificate
-                    )
+                if (atvAcademicAdvance.text.toString() == "Grado técnico") {
+                    with(mBinding) {
 
-                    fields.forEach { textInputLayout ->
-                        textInputLayout.editText?.addTextChangedListener {
-                            validateFields(
-                                textInputLayout,
-                                fab = fabNext,
-                                context = requireContext()
-                            )
+                        var certificate = false
+                        if (rbYesCertificate.isChecked) {
+                            certificate = true
+                        } else if (rbNoCertificate.isChecked) {
+                            certificate = false
+                        }
+
+                        var titleAchieved = false
+                        if (rbYesTitleAchieved.isChecked) {
+                            titleAchieved = true
+                        } else if (rbNoTitleAchieved.isChecked) {
+                            titleAchieved = false
+                        }
+
+                        var identificationCard = false
+                        if (rbYesIdentificationCard.isChecked) {
+                            identificationCard = true
+                        } else if (rbNoIdentificationCard.isChecked) {
+                            identificationCard = false
+                        }
+
+                        if (certificate || titleAchieved || identificationCard) {
+
+                            if (rbYesIdentificationCard.isChecked) {
+                                mInfoUserViewModel.setAcademicUser(
+                                    AcademicUser(
+                                        levelAcademic = atvAcademicLevel.text.toString().trim(),
+                                        school = etSchool.text.toString().trim(),
+                                        academicAdvance = atvAcademicAdvance.text.toString().trim(),
+                                        startMonth = atvStartMonth.text.toString().trim(),
+                                        startYear = if (etStartYear.text.toString()
+                                                .isEmpty()
+                                        ) 0 else etStartYear.text.toString().toInt(),
+                                        endMonth = atvEndMonth.text.toString().trim(),
+                                        endYear = if (etEndYear.text.toString()
+                                                .isEmpty()
+                                        ) 0 else etEndYear.text.toString().toInt(),
+                                        certificate = certificate,
+                                        titleAchieved = titleAchieved,
+                                        identificationCard = true
+                                    )
+                                )
+
+                                listener?.onSelectStepView(1, R.id.postgraduateFragment)
+                            } else {
+                                mInfoUserViewModel.setAcademicUser(
+                                    AcademicUser(
+                                        levelAcademic = atvAcademicLevel.text.toString().trim(),
+                                        school = etSchool.text.toString().trim(),
+                                        academicAdvance = atvAcademicAdvance.text.toString().trim(),
+                                        startMonth = atvStartMonth.text.toString().trim(),
+                                        startYear = if (etStartYear.text.toString()
+                                                .isEmpty()
+                                        ) 0 else etStartYear.text.toString().toInt(),
+                                        endMonth = atvEndMonth.text.toString().trim(),
+                                        endYear = if (etEndYear.text.toString()
+                                                .isEmpty()
+                                        ) 0 else etEndYear.text.toString().toInt(),
+                                        certificate = certificate,
+                                        titleAchieved = titleAchieved,
+                                        identificationCard = false
+                                    )
+                                )
+
+                                listener?.onSelectStepView(2, R.id.workExperienceFragment)
+                            }
+
                         }
                     }
-
-                    if (validateFields(
-                            tilTitleAchieved,
-                            tilCertificate,
-                            tilEndYear,
-                            tilEndMonth,
-                            tilStartYear,
-                            tilStartMonth,
-                            tilAcademicAdvance,
-                            tilSchool,
-                            tilAcademicLevel,
-                            fab = fabNext,
-                            context = requireContext()
-                        )
-                    ) {
-
-                        mInfoUserViewModel.setAcademicUser(
-                            AcademicUser(
-                                levelAcademic = atvAcademicLevel.text.toString().trim(),
-                                school = etSchool.text.toString().trim(),
-                                academicAdvance = atvAcademicAdvance.text.toString().trim(),
-                                startMonth = atvStartMonth.text.toString().trim(),
-                                startYear = etStartYear.text.toString().toInt(),
-                                endMonth = atvEndMonth.text.toString().trim(),
-                                endYear = etEndYear.text.toString().toInt(),
-                                certificate = etCertificate.text.toString(),
-                                titleAchieved = etTitleAchieved.text.toString(),
-                            )
-                        )
-
-                        listener?.onSelectStepView(2, R.id.workExperienceFragment)
-                    }
-
                 } else {
                     mInfoUserViewModel.setAcademicUser(
                         AcademicUser(
@@ -387,36 +346,55 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                             school = etSchool.text.toString().trim(),
                             academicAdvance = atvAcademicAdvance.text.toString().trim(),
                             startMonth = atvStartMonth.text.toString().trim(),
-                            startYear = etStartYear.text.toString().toInt(),
+                            startYear = if (etStartYear.text.toString()
+                                    .isEmpty()
+                            ) 0 else etStartYear.text.toString().toInt(),
                             endMonth = atvEndMonth.text.toString().trim(),
-                            endYear = etEndYear.text.toString().toInt()
+                            endYear = if (etEndYear.text.toString()
+                                    .isEmpty()
+                            ) 0 else etEndYear.text.toString().toInt()
                         )
                     )
-
                     listener?.onSelectStepView(2, R.id.workExperienceFragment)
                 }
-                addSelectData()
+
             }
         } else {
-            mInfoUserViewModel.setAcademicUser(
-                AcademicUser(
-                    levelAcademic = atvAcademicLevel.text.toString().trim(),
-                    school = etSchool.text.toString().trim(),
-                    academicAdvance = atvAcademicAdvance.text.toString().trim(),
-                    startMonth = atvStartMonth.text.toString().trim(),
-                    startYear = if (etStartYear.text.toString()
-                            .isEmpty()
-                    ) 0 else etStartYear.text.toString().toInt(),
-                    endMonth = atvEndMonth.text.toString().trim(),
-                    endYear = if (etEndYear.text.toString()
-                            .isEmpty()
-                    ) 0 else etEndYear.text.toString().toInt(),
-                    certificate = etCertificate.text.toString(),
-                    titleAchieved = etTitleAchieved.text.toString(),
-                    identificationCard = etIdentificationCard.text.toString()
+            if (atvAcademicAdvance.text.toString() == "Grado técnico") {
+                mInfoUserViewModel.setAcademicUser(
+                    AcademicUser(
+                        levelAcademic = atvAcademicLevel.text.toString().trim(),
+                        school = etSchool.text.toString().trim(),
+                        academicAdvance = atvAcademicAdvance.text.toString().trim(),
+                        startMonth = atvStartMonth.text.toString().trim(),
+                        startYear = if (etStartYear.text.toString()
+                                .isEmpty()
+                        ) 0 else etStartYear.text.toString().toInt(),
+                        endMonth = atvEndMonth.text.toString().trim(),
+                        endYear = if (etEndYear.text.toString()
+                                .isEmpty()
+                        ) 0 else etEndYear.text.toString().toInt()
+                    )
                 )
-            )
+            } else {
+                mInfoUserViewModel.setAcademicUser(
+                    AcademicUser(
+                        levelAcademic = atvAcademicLevel.text.toString().trim(),
+                        school = etSchool.text.toString().trim(),
+                        academicAdvance = atvAcademicAdvance.text.toString().trim(),
+                        startMonth = atvStartMonth.text.toString().trim(),
+                        startYear = if (etStartYear.text.toString()
+                                .isEmpty()
+                        ) 0 else etStartYear.text.toString().toInt(),
+                        endMonth = atvEndMonth.text.toString().trim(),
+                        endYear = if (etEndYear.text.toString()
+                                .isEmpty()
+                        ) 0 else etEndYear.text.toString().toInt()
+                    )
+                )
+            }
         }
+
     }
 
     private fun onBackPress() {

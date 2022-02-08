@@ -231,66 +231,137 @@
                         android:text="@string/certificated_title"
                         android:textSize="@dimen/text_normal" />
 
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="@dimen/common_padding_min"
+                        android:text="@string/warn_text_last_academic"
+                        android:textSize="@dimen/text_small" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tvCertificate"
+                            android:layout_width="150dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center"
+                            android:paddingHorizontal="@dimen/common_padding_min"
+                            android:text="@string/user_certificate"
+                            android:textSize="@dimen/text_normal" />
+
+                        <RadioGroup
+                            android:id="@+id/rgCertificate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="@dimen/common_padding_min">
+
+                            <RadioButton
+                                android:id="@+id/rbYesCertificate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/common_padding_min"
+                                android:layout_weight="@integer/layout_weight_default"
+                                android:text="@string/cb_yes" />
+
+                            <RadioButton
+                                android:id="@+id/rbNoCertificate"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/common_padding_min"
+                                android:layout_weight="@integer/layout_weight_default"
+                                android:text="@string/cb_no" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/common_padding_min"
                         android:orientation="horizontal">
 
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/tilCertificate"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/tvTitleAchieved"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/common_padding_min"
-                            android:layout_weight="@integer/layout_weight_default"
-                            android:hint="@string/user_certificate">
+                            android:layout_gravity="center"
+                            android:paddingHorizontal="@dimen/common_padding_min"
+                            android:text="@string/user_title_achieved"
+                            android:textSize="@dimen/text_normal" />
 
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/etCertificate"
-                                android:layout_width="match_parent"
+                        <RadioGroup
+                            android:id="@+id/rgTitleAchieved"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="@dimen/common_padding_min">
+
+                            <RadioButton
+                                android:id="@+id/rbYesTitleAchieved"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:imeOptions="actionNext"
-                                android:inputType="text|textCapWords"
-                                android:textSize="@dimen/text_normal" />
+                                android:layout_marginEnd="@dimen/common_padding_min"
+                                android:layout_weight="@integer/layout_weight_default"
+                                android:text="@string/cb_yes" />
 
-                        </com.google.android.material.textfield.TextInputLayout>
-
-                        <com.google.android.material.textfield.TextInputLayout
-                            android:id="@+id/tilTitleAchieved"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/common_padding_min"
-                            android:layout_weight="@integer/layout_weight_default"
-                            android:hint="@string/user_title_achieved">
-
-                            <com.google.android.material.textfield.TextInputEditText
-                                android:id="@+id/etTitleAchieved"
-                                android:layout_width="match_parent"
+                            <RadioButton
+                                android:id="@+id/rbNoTitleAchieved"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:imeOptions="actionNext"
-                                android:inputType="text|textCapWords"
-                                android:textSize="@dimen/text_normal" />
+                                android:layout_marginStart="@dimen/common_padding_min"
+                                android:layout_weight="@integer/layout_weight_default"
+                                android:text="@string/cb_no" />
 
-                        </com.google.android.material.textfield.TextInputLayout>
+                        </RadioGroup>
 
                     </LinearLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/tilIdentificationCard"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/common_padding_default"
-                        android:hint="@string/user_identification_card">
+                        android:layout_marginTop="@dimen/common_padding_min"
+                        android:orientation="horizontal">
 
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etIdentificationCard"
-                            android:layout_width="match_parent"
+                        <TextView
+                            android:id="@+id/tvIdentificationCard"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
-                            android:imeOptions="actionDone"
-                            android:inputType="text|textCapWords"
+                            android:layout_gravity="center"
+                            android:paddingHorizontal="@dimen/common_padding_min"
+                            android:text="@string/user_identification_card"
                             android:textSize="@dimen/text_normal" />
 
-                    </com.google.android.material.textfield.TextInputLayout>
+                        <RadioGroup
+                            android:id="@+id/rgIdentificationCard"
+                            android:layout_width="wrap_content"
+                            android:layout_height="35dp"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="@dimen/common_padding_min">
+
+                            <RadioButton
+                                android:id="@+id/rbYesIdentificationCard"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/common_padding_min"
+                                android:layout_weight="@integer/layout_weight_default"
+                                android:text="@string/cb_yes" />
+
+                            <RadioButton
+                                android:id="@+id/rbNoIdentificationCard"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginStart="@dimen/common_padding_min"
+                                android:layout_weight="@integer/layout_weight_default"
+                                android:text="@string/cb_no" />
+
+                        </RadioGroup>
+
+                    </LinearLayout>
 
                 </LinearLayout>
 

@@ -65,7 +65,7 @@ class InfoUserViewModel : ViewModel() {
     }
 
     fun getAcademicAdvanceList(): MutableLiveData<List<String>> {
-        val academicAdvance = arrayListOf("En curso", "Trunca", "Terminado", "Terminado y con cédula")
+        val academicAdvance = arrayListOf("En curso", "Trunca", "Terminado", "Grado técnico")
         mAcademicAdvance.value = academicAdvance
         return mAcademicAdvance
     }
@@ -120,9 +120,9 @@ data class AcademicUser(
     val startYear: Int = 0,
     val endMonth: String = "",
     val endYear: Int = 0,
-    val certificate: String = "",
-    val titleAchieved: String = "",
-    val identificationCard: String = ""
+    val certificate: Boolean = false,
+    val titleAchieved: Boolean = false,
+    val identificationCard: Boolean = false
 
     // TODO: Posgrado ..
 )
