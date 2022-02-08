@@ -3,16 +3,15 @@ package com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.infor
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.alefglobalintegralproductivityconsulting.alef_app.core.StepViewListener
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.FragmentPostgraduateBinding
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.InfoUserViewModel
-
 
 class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
 
@@ -61,7 +60,7 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
                 }
             }
 
-        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
 
 }

@@ -428,7 +428,7 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                 }
             }
 
-        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
 
     override fun onStart() {

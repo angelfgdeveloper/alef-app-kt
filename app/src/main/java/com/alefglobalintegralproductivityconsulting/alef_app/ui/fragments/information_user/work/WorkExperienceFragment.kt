@@ -51,7 +51,7 @@ class WorkExperienceFragment : Fragment(R.layout.fragment_work_experience) {
                 }
             }
 
-        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
 
 }
