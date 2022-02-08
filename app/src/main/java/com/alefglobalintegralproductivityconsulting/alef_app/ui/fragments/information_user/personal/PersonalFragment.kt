@@ -61,7 +61,7 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
         }
         // TODO: ....
 
-        mInfoUserViewModel.getInfoUser().observe(viewLifecycleOwner, { user ->
+        mInfoUserViewModel.getInfoUser().observe(viewLifecycleOwner) { user ->
             with(mBinding) {
                 etLastName.setText(user.lastName)
                 etMotherLastName.setText(user.motherLastName)
@@ -78,12 +78,12 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
                 etMobile.setText(user.cellphone)
             }
             addSelectData()
-        })
+        }
 
     }
 
     private fun addSelectData() {
-        mInfoUserViewModel.getGenderList().observe(viewLifecycleOwner, { gender ->
+        mInfoUserViewModel.getGenderList().observe(viewLifecycleOwner) { gender ->
             val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_menu_item, gender)
 
             with(mBinding) {
@@ -95,9 +95,9 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
 //                    ).show()
                 }
             }
-        })
+        }
 
-        mInfoUserViewModel.getStateList().observe(viewLifecycleOwner, { state ->
+        mInfoUserViewModel.getStateList().observe(viewLifecycleOwner) { state ->
             val adapterState = ArrayAdapter(requireContext(), R.layout.dropdown_menu_item, state)
 
             with(mBinding) {
@@ -106,7 +106,7 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
                     mState = parent.getItemAtPosition(position).toString()
 
                     if (mState.isNotEmpty()) {
-                        mInfoUserViewModel.getTownList().observe(viewLifecycleOwner, { town ->
+                        mInfoUserViewModel.getTownList().observe(viewLifecycleOwner) { town ->
                             val adapterTown =
                                 ArrayAdapter(requireContext(), R.layout.dropdown_menu_item, town)
 
@@ -116,15 +116,15 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
                                     mTown = parent.getItemAtPosition(position).toString()
                                 }
                             }
-                        })
+                        }
                     }
 
                 }
             }
-        })
+        }
 
         if (atvState.text.toString().isNotEmpty()) {
-            mInfoUserViewModel.getTownList().observe(viewLifecycleOwner, { town ->
+            mInfoUserViewModel.getTownList().observe(viewLifecycleOwner) { town ->
                 val adapterTown = ArrayAdapter(requireContext(), R.layout.dropdown_menu_item, town)
 
                 with(mBinding) {
@@ -133,7 +133,7 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
                         mTown = parent.getItemAtPosition(position).toString()
                     }
                 }
-            })
+            }
         }
 
     }

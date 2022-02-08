@@ -29,13 +29,13 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
         super.onViewCreated(view, savedInstanceState)
         mBinding = FragmentPostgraduateBinding.bind(view)
 
-        mInfoUserViewModel.getInfoUser().observe(viewLifecycleOwner, {
+        mInfoUserViewModel.getInfoUser().observe(viewLifecycleOwner) {
             Log.d("PostgraduateFragment", it.toString())
-        })
+        }
 
-        mInfoUserViewModel.getAcademicUser().observe(viewLifecycleOwner, {
+        mInfoUserViewModel.getAcademicUser().observe(viewLifecycleOwner) {
             Log.d("PostgraduateFragment", it.toString())
-        })
+        }
 
         onBackPress()
         setupTextFields()

@@ -39,7 +39,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
     }
 
     private fun setupVacancies() {
-        mViewModel.fetchVacancies().observe(viewLifecycleOwner, { result ->
+        mViewModel.fetchVacancies().observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Failure -> {
                     mBinding.llLoading.visibility = View.GONE
@@ -68,7 +68,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
                     mBinding.rvVacancies.adapter = mAdapter
                 }
             }
-        })
+        }
     }
 
     override fun onVacantClick(vacant: Vacant, vacantInfoExtra: VacantInfoExtra?) {

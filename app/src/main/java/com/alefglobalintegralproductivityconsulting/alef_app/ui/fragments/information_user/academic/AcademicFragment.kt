@@ -40,7 +40,7 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
         addSelectData()
         setupTextFields()
 
-        mInfoUserViewModel.getAcademicUser().observe(viewLifecycleOwner, { academicUser ->
+        mInfoUserViewModel.getAcademicUser().observe(viewLifecycleOwner) { academicUser ->
             with(mBinding) {
                 atvAcademicLevel.setText(academicUser?.levelAcademic)
                 if (atvAcademicLevel.text.toString().isNotEmpty()) {
@@ -117,11 +117,11 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                 }
 
             }
-        })
+        }
     }
 
     private fun addSelectData() {
-        mInfoUserViewModel.getAcademicLevelList().observe(viewLifecycleOwner, { academicLevel ->
+        mInfoUserViewModel.getAcademicLevelList().observe(viewLifecycleOwner) { academicLevel ->
             val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_menu_item, academicLevel)
 
             with(mBinding) {
@@ -155,13 +155,13 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                     }
                 }
             }
-        })
+        }
 
     }
 
     private fun setAcademicAdvance(isHigher: Boolean) {
 
-        mInfoUserViewModel.getAcademicAdvanceList().observe(viewLifecycleOwner, { academicAdvance ->
+        mInfoUserViewModel.getAcademicAdvanceList().observe(viewLifecycleOwner) { academicAdvance ->
             val academicList = mutableListOf<String>()
 
             if (isHigher) {
@@ -203,11 +203,11 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                 }
             }
 
-        })
+        }
     }
 
     private fun addMonths() {
-        mInfoUserViewModel.getMonthList().observe(viewLifecycleOwner, { month ->
+        mInfoUserViewModel.getMonthList().observe(viewLifecycleOwner) { month ->
             val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_menu_item, month)
 
             with(mBinding) {
@@ -222,7 +222,7 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                 }
             }
 
-        })
+        }
     }
 
     private fun setupTextFields() {

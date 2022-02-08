@@ -35,7 +35,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites), VacantAdapter.O
     }
 
     private fun setupVacanciesFavorite() {
-        mViewModel.fetchVacancies().observe(viewLifecycleOwner, { result ->
+        mViewModel.fetchVacancies().observe(viewLifecycleOwner) { result ->
             when (result) {
                 is Result.Failure -> {
                     mBinding.llLoading.visibility = View.GONE
@@ -61,7 +61,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites), VacantAdapter.O
                     }
 
                     val vacantFavorite: ArrayList<Vacant> = ArrayList()
-                    for(vacant in result.data) {
+                    for (vacant in result.data) {
                         if (vacant.isFavorite) {
                             vacantFavorite.add(vacant)
                         }
@@ -71,7 +71,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites), VacantAdapter.O
                     mBinding.rvFavorites.adapter = mAdapter
                 }
             }
-        })
+        }
     }
 
     override fun onVacantClick(vacant: Vacant, vacantInfoExtra: VacantInfoExtra?) {
