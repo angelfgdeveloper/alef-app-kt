@@ -17,7 +17,6 @@ import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.inform
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.InfoUserViewModel
 import kotlinx.android.synthetic.main.fragment_academic.*
 
-
 class AcademicFragment : Fragment(R.layout.fragment_academic) {
 
     private lateinit var mBinding: FragmentAcademicBinding
@@ -45,6 +44,28 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
         onBackPress()
         addSelectData()
         setupTextFields()
+
+        // TODO: Borrar test -> setText("...");
+        with(mBinding) {
+            atvAcademicLevel.setText("Universidad")
+            etSchool.setText("Instituto Tecnólogico de Durango")
+            atvAcademicAdvance.setText("Grado técnico")
+            atvStartMonth.setText("Junio")
+            etStartYear.setText("2013")
+            atvEndMonth.setText("Junio")
+            etEndYear.setText("2020")
+            rbYesCertificate.isChecked = true
+            rbNoCertificate.isChecked = false
+            rbYesTitleAchieved.isChecked = true
+            rbNoTitleAchieved.isChecked = false
+            rbYesIdentificationCard.isChecked = true
+            rbNoIdentificationCard.isChecked = false
+            llAcademic.visibility = View.VISIBLE
+            llPeriod.visibility = View.VISIBLE
+            llCertificated.visibility = View.VISIBLE
+            fabNext.isEnabled = true
+        }
+        // TODO: ....
 
         mInfoUserViewModel.getAcademicUser().observe(viewLifecycleOwner) { academicUser ->
             with(mBinding) {
@@ -293,11 +314,11 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
 
             rgIdentificationCard.setOnCheckedChangeListener { _, checkedId ->
                 when (checkedId) {
-                    R.id.rbYesIdentificationCard-> {
-                        mIdentificationCard= true
+                    R.id.rbYesIdentificationCard -> {
+                        mIdentificationCard = true
                     }
-                    R.id.rbNoIdentificationCard-> {
-                        mIdentificationCard= false
+                    R.id.rbNoIdentificationCard -> {
+                        mIdentificationCard = false
                     }
                 }
             }
@@ -348,7 +369,9 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                             mTitleAchieved != null &&
                             mIdentificationCard != null
                         ) {
-                            if (mIdentificationCard == true && atvAcademicLevel.text.toString().trim() == "Universidad" ) {
+                            if (mIdentificationCard == true && atvAcademicLevel.text.toString()
+                                    .trim() == "Universidad"
+                            ) {
                                 mInfoUserViewModel.setAcademicUser(
                                     AcademicUser(
                                         levelAcademic = atvAcademicLevel.text.toString().trim(),
@@ -393,7 +416,11 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                             }
 
                         } else {
-                            Toast.makeText(requireContext(), "Por favor, complete los datos restantes", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                requireContext(),
+                                "Por favor, complete los datos restantes",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 } else {
