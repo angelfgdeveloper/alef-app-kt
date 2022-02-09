@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.fragments.information_user.academic.PostgraduateFragment">
 
-
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -30,14 +29,77 @@
                 <!--                    android:text="INFORMACION PERSONAL"-->
                 <!--                    android:textSize="@dimen/text_normal" />-->
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/common_padding_min"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tvHasPosgraduate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="@dimen/common_padding_min"
+                        android:text="@string/user_has_posgraduate"
+                        android:textStyle="bold"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/text_normal" />
+
+                    <RadioGroup
+                        android:id="@+id/rgPosgraduate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/common_padding_min">
+
+                        <RadioButton
+                            android:id="@+id/rbYesPosgraduate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/common_padding_min"
+                            android:layout_weight="@integer/layout_weight_default"
+                            android:text="@string/cb_yes" />
+
+                        <RadioButton
+                            android:id="@+id/rbNoPosgraduate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/common_padding_min"
+                            android:layout_weight="@integer/layout_weight_default"
+                            android:text="@string/cb_no" />
+
+                        <RadioButton
+                            android:id="@+id/rbInProgressPosgraduate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/common_padding_min"
+                            android:layout_weight="@integer/layout_weight_default"
+                            android:text="@string/cb_in_process" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/tilPosgraduate"
+                    style="@style/DropdownMenuStyle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginHorizontal="@dimen/common_padding_min"
                     android:layout_marginTop="@dimen/common_padding_default"
-                    android:text="POSGRADO"
-                    android:textSize="@dimen/text_normal"
-                    android:textStyle="bold" />
+                    android:hint="@string/user_question_posgraduate">
+
+                    <AutoCompleteTextView
+                        android:id="@+id/atvPosgraduate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:imeOptions="actionNext"
+                        android:inputType="none"
+                        android:textSize="@dimen/text_normal" />
+
+                </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>
 

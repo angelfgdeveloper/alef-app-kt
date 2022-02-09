@@ -18,12 +18,20 @@ class InfoUserViewModel : ViewModel() {
     private val mAcademicAdvance = MutableLiveData<List<String>>()
     private val mMonth = MutableLiveData<List<String>>()
 
+    // Posgrado
+    private val mPosgraduateUser = MutableLiveData<PosgraduateUser>()
+    private val mPosgraduateNumber = MutableLiveData<List<Int>>()
+
     fun setInfoUser(infoUser: InfoUser) {
         mInfoUser.value = infoUser
     }
 
     fun setAcademicUser(academicUser: AcademicUser) {
         mAcademicUser.value = academicUser
+    }
+
+    fun setPosgraduateUser(posgraduateUser: PosgraduateUser) {
+        mPosgraduateUser.value = posgraduateUser
     }
 
     fun getInfoUser(): LiveData<InfoUser> = mInfoUser
@@ -90,6 +98,15 @@ class InfoUserViewModel : ViewModel() {
         return mMonth
     }
 
+    fun getNumberPosgraduate(): MutableLiveData<List<Int>> {
+        val number = mutableListOf<Int>()
+        for (i in 1..8) {
+            number.add(i)
+        }
+
+        mPosgraduateNumber.value = number
+        return mPosgraduateNumber
+    }
 }
 
 data class InfoUser(
@@ -123,6 +140,26 @@ data class AcademicUser(
     val certificate: Boolean = false,
     val titleAchieved: Boolean = false,
     val identificationCard: Boolean = false
+)
 
-    // TODO: Posgrado ..
+enum class STATE(val state: Int) {
+    NO(0),
+    YES(1),
+    IN_PROCESS(2),
+}
+
+data class PosgraduateUser(
+    val state: STATE? = null,
+    val total: Int = 0,
+    val totalPosgraduate: ArrayList<Posgraduate> = ArrayList()
+)
+
+data class Posgraduate(
+    val id: Int = -1,
+    val type: String = "",
+    val title: String = "",
+    val startMonth: String = "",
+    val startYear: Int = 0,
+    val endMonth: String = "",
+    val endYear: Int = 0
 )

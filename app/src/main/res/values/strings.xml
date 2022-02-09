@@ -105,4 +105,7 @@
     <string name="text_workDay">Jornada laboral</string>
     <string name="text_mode">Modalidad</string>
     <string name="warn_text_last_academic">Por favor no olvides tener los documentos marcados en \"Si\" a la mano</string>
+    <string name="cb_in_process">En proceso</string>
+    <string name="user_has_posgraduate">¿Tienes posgrado?</string>
+    <string name="user_question_posgraduate">¿Cuántos posgrados tienes?</string>
 </resources>
