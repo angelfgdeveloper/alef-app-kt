@@ -21,6 +21,7 @@ class InfoUserViewModel : ViewModel() {
     // Posgrado
     private val mPosgraduateUser = MutableLiveData<PosgraduateUser>()
     private val mPosgraduateNumber = MutableLiveData<List<Int>>()
+    private val mTypePosgraduate = MutableLiveData<List<String>>()
 
     fun setInfoUser(infoUser: InfoUser) {
         mInfoUser.value = infoUser
@@ -100,12 +101,18 @@ class InfoUserViewModel : ViewModel() {
 
     fun getNumberPosgraduate(): MutableLiveData<List<Int>> {
         val number = mutableListOf<Int>()
-        for (i in 1..8) {
+        for (i in 1..4) {
             number.add(i)
         }
 
         mPosgraduateNumber.value = number
         return mPosgraduateNumber
+    }
+
+    fun getTypePosgraduate(): MutableLiveData<List<String>> {
+        val type = arrayListOf("Maestría", "Especialidad", "Doctorado")
+        mTypePosgraduate.value = type
+        return mTypePosgraduate
     }
 }
 

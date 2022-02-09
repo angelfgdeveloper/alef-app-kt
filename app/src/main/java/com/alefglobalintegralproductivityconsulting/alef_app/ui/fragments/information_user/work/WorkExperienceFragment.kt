@@ -2,6 +2,7 @@ package com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.infor
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -18,6 +19,8 @@ class WorkExperienceFragment : Fragment(R.layout.fragment_work_experience) {
     private val mInfoUserViewModel: InfoUserViewModel by activityViewModels()
     private var listener: StepViewListener? = null
 
+    private var mIsStepView = false
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         if (activity is StepViewListener) listener = activity as StepViewListener?
@@ -27,6 +30,12 @@ class WorkExperienceFragment : Fragment(R.layout.fragment_work_experience) {
         super.onViewCreated(view, savedInstanceState)
         mBinding = FragmentWorkExperienceBinding.bind(view)
 
+        mInfoUserViewModel.getAcademicUser().observe(viewLifecycleOwner) { academicUser ->
+            if (academicUser.identificationCard) {
+                mIsStepView = true
+            }
+        }
+
         onBackPress()
         setupTextFields()
     }
@@ -35,7 +44,11 @@ class WorkExperienceFragment : Fragment(R.layout.fragment_work_experience) {
         with(mBinding) {
 
             fabReturn.setOnClickListener {
-                listener?.onSelectStepView(1, R.id.academicFragment)
+                if (mIsStepView) {
+                    listener?.onSelectStepView(1, R.id.postgraduateFragment)
+                } else {
+                    listener?.onSelectStepView(1, R.id.academicFragment)
+                }
             }
             fabNext.setOnClickListener {
                 Toast.makeText(requireContext(), "En desarrollo", Toast.LENGTH_SHORT).show()
@@ -47,7 +60,11 @@ class WorkExperienceFragment : Fragment(R.layout.fragment_work_experience) {
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    listener?.onSelectStepView(1, R.id.academicFragment)
+                    if (mIsStepView) {
+                        listener?.onSelectStepView(1, R.id.postgraduateFragment)
+                    } else {
+                        listener?.onSelectStepView(1, R.id.academicFragment)
+                    }
                 }
             }
 

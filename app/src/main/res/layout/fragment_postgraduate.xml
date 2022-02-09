@@ -42,9 +42,9 @@
                         android:layout_height="wrap_content"
                         android:paddingHorizontal="@dimen/common_padding_min"
                         android:text="@string/user_has_posgraduate"
-                        android:textStyle="bold"
                         android:textColor="@android:color/black"
-                        android:textSize="@dimen/text_normal" />
+                        android:textSize="@dimen/text_normal"
+                        android:textStyle="bold" />
 
                     <RadioGroup
                         android:id="@+id/rgPosgraduate"
@@ -86,10 +86,10 @@
                     style="@style/DropdownMenuStyle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
                     android:layout_marginHorizontal="@dimen/common_padding_min"
                     android:layout_marginTop="@dimen/common_padding_default"
-                    android:hint="@string/user_question_posgraduate">
+                    android:hint="@string/user_question_posgraduate"
+                    android:visibility="gone">
 
                     <AutoCompleteTextView
                         android:id="@+id/atvPosgraduate"
@@ -100,6 +100,788 @@
                         android:textSize="@dimen/text_normal" />
 
                 </com.google.android.material.textfield.TextInputLayout>
+
+                <LinearLayout
+                    android:id="@+id/llPosgraduates"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/common_padding_min"
+                    android:orientation="vertical"
+                    android:visibility="visible">
+
+                    <LinearLayout
+                        android:id="@+id/llPosgraduate1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/tvTitlePosgraduate1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/common_padding_min"
+                            android:layout_marginTop="@dimen/common_padding_min"
+                            android:text="Posgrado #1"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/text_normal"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/common_padding_min"
+                            android:layout_marginTop="@dimen/common_padding_min"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilType1"
+                                    style="@style/DropdownMenuStyle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/type_posgraduate">
+
+                                    <AutoCompleteTextView
+                                        android:id="@+id/atvType1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="none"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilTitleAchieved1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/user_title_achieved">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etTitleAchieved1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="text|textCapWords"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/common_padding_min"
+                            android:layout_marginTop="@dimen/common_padding_min"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/period_start_title"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/text_normal" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_padding_min"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilStartMonth1"
+                                    style="@style/DropdownMenuStyle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/month_text">
+
+                                    <AutoCompleteTextView
+                                        android:id="@+id/atvStartMonth1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="none"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilStartYear1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/year_text">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etStartYear1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="number"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_padding_default"
+                                android:text="@string/period_end_title"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/text_normal" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_padding_min"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilEndMonth1"
+                                    style="@style/DropdownMenuStyle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/month_text">
+
+                                    <AutoCompleteTextView
+                                        android:id="@+id/atvEndMonth1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="none"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilEndYear1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/year_text">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etEndYear1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="number"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginVertical="@dimen/common_padding_default"
+                            android:background="@android:color/darker_gray" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llPosgraduate2"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/tvTitlePosgraduate2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/common_padding_min"
+                            android:layout_marginTop="@dimen/common_padding_min"
+                            android:text="Posgrado #2"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/text_normal"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/common_padding_min"
+                            android:layout_marginTop="@dimen/common_padding_min"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilType2"
+                                    style="@style/DropdownMenuStyle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/type_posgraduate">
+
+                                    <AutoCompleteTextView
+                                        android:id="@+id/atvType2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="none"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilTitleAchieved2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/user_title_achieved">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etTitleAchieved2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="text|textCapWords"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/common_padding_min"
+                            android:layout_marginTop="@dimen/common_padding_min"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/period_start_title"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/text_normal" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_padding_min"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilStartMonth2"
+                                    style="@style/DropdownMenuStyle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/month_text">
+
+                                    <AutoCompleteTextView
+                                        android:id="@+id/atvStartMonth2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="none"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilStartYear2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/year_text">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etStartYear2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="number"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_padding_default"
+                                android:text="@string/period_end_title"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/text_normal" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_padding_min"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilEndMonth2"
+                                    style="@style/DropdownMenuStyle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/month_text">
+
+                                    <AutoCompleteTextView
+                                        android:id="@+id/atvEndMonth2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="none"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilEndYear2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/year_text">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etEndYear2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="number"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginVertical="@dimen/common_padding_default"
+                            android:background="@android:color/darker_gray" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llPosgraduate3"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/tvTitlePosgraduate3"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/common_padding_min"
+                            android:layout_marginTop="@dimen/common_padding_min"
+                            android:text="Posgrado #3"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/text_normal"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/common_padding_min"
+                            android:layout_marginTop="@dimen/common_padding_min"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilType3"
+                                    style="@style/DropdownMenuStyle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/type_posgraduate">
+
+                                    <AutoCompleteTextView
+                                        android:id="@+id/atvType3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="none"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilTitleAchieved3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/user_title_achieved">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etTitleAchieved3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="text|textCapWords"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/common_padding_min"
+                            android:layout_marginTop="@dimen/common_padding_min"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/period_start_title"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/text_normal" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_padding_min"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilStartMonth3"
+                                    style="@style/DropdownMenuStyle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/month_text">
+
+                                    <AutoCompleteTextView
+                                        android:id="@+id/atvStartMonth3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="none"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilStartYear3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/year_text">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etStartYear3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="number"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_padding_default"
+                                android:text="@string/period_end_title"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/text_normal" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_padding_min"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilEndMonth3"
+                                    style="@style/DropdownMenuStyle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/month_text">
+
+                                    <AutoCompleteTextView
+                                        android:id="@+id/atvEndMonth3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="none"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilEndYear3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/year_text">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etEndYear3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="number"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0.5dp"
+                            android:layout_marginVertical="@dimen/common_padding_default"
+                            android:background="@android:color/darker_gray" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/llPosgraduate4"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone">
+
+                        <TextView
+                            android:id="@+id/tvTitlePosgraduate4"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/common_padding_min"
+                            android:layout_marginTop="@dimen/common_padding_min"
+                            android:text="Posgrado #4"
+                            android:textColor="@android:color/black"
+                            android:textSize="@dimen/text_normal"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/common_padding_min"
+                            android:layout_marginTop="@dimen/common_padding_min"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilType4"
+                                    style="@style/DropdownMenuStyle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/type_posgraduate">
+
+                                    <AutoCompleteTextView
+                                        android:id="@+id/atvType4"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="none"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilTitleAchieved4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/user_title_achieved">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etTitleAchieved4"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="text|textCapWords"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/common_padding_min"
+                            android:layout_marginTop="@dimen/common_padding_min"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="@string/period_start_title"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/text_normal" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_padding_min"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilStartMonth4"
+                                    style="@style/DropdownMenuStyle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/month_text">
+
+                                    <AutoCompleteTextView
+                                        android:id="@+id/atvStartMonth4"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="none"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilStartYear4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/year_text">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etStartYear4"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="number"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_padding_default"
+                                android:text="@string/period_end_title"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/text_normal" />
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_padding_min"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilEndMonth4"
+                                    style="@style/DropdownMenuStyle"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/month_text">
+
+                                    <AutoCompleteTextView
+                                        android:id="@+id/atvEndMonth4"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="none"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilEndYear4"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/year_text">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etEndYear4"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="number"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                        </LinearLayout>
+
+                        <View
+                            android:layout_width="match_parent"
+                            android:layout_height="0dp"
+                            android:layout_marginVertical="@dimen/common_padding_default"
+                            android:background="@android:color/white" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
