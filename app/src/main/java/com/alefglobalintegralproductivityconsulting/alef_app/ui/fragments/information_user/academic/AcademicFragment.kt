@@ -4,7 +4,7 @@ import android.content.Context
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.RadioButton
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
@@ -28,6 +28,10 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
     private var mAcademicAdvance = ""
     private var mStartMonth = ""
     private var mEndMonth = ""
+
+    private var mCertificate: Boolean? = null
+    private var mTitleAchieved: Boolean? = null
+    private var mIdentificationCard: Boolean? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -54,7 +58,6 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                     atvAcademicLevel.setText(academicUser.levelAcademic)
 
                     if (atvAcademicLevel.text.isNotEmpty()) {
-                        llPeriod.visibility = View.VISIBLE
                         if (atvAcademicLevel.text.toString() == "Primaria" ||
                             atvAcademicLevel.text.toString() == "Secundaria"
                         ) {
@@ -73,10 +76,12 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                                 }
                             }
 
+                            llPeriod.visibility = View.VISIBLE
                             atvStartMonth.setText(academicUser?.startMonth)
                             etStartYear.setText(academicUser?.startYear.toString())
                             atvEndMonth.setText(academicUser?.endMonth)
                             etEndYear.setText(academicUser?.endYear.toString())
+                            fabNext.isEnabled = true
 
                             addMonths()
                         } else {
@@ -90,15 +95,43 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                                     when (academicLevel) {
                                         "Bachillerato", "Universidad" -> {
                                             llCertificated.visibility = View.VISIBLE
+
+                                            if (academicUser.certificate) {
+                                                rbYesCertificate.isChecked = true
+                                                rbNoCertificate.isChecked = false
+                                            } else {
+                                                rbYesCertificate.isChecked = false
+                                                rbNoCertificate.isChecked = true
+                                            }
+
+                                            if (academicUser.titleAchieved) {
+                                                rbYesTitleAchieved.isChecked = true
+                                                rbNoTitleAchieved.isChecked = false
+                                            } else {
+                                                rbYesTitleAchieved.isChecked = false
+                                                rbNoTitleAchieved.isChecked = true
+                                            }
+
+                                            if (academicUser.identificationCard) {
+                                                rbYesIdentificationCard.isChecked = true
+                                                rbNoIdentificationCard.isChecked = false
+                                            } else {
+                                                rbYesIdentificationCard.isChecked = false
+                                                rbNoIdentificationCard.isChecked = true
+                                            }
+
                                         }
                                     }
                                 }
                             }
 
+                            llPeriod.visibility = View.VISIBLE
                             atvStartMonth.setText(academicUser?.startMonth)
                             etStartYear.setText(academicUser?.startYear.toString())
                             atvEndMonth.setText(academicUser?.endMonth)
                             etEndYear.setText(academicUser?.endYear.toString())
+
+                            fabNext.isEnabled = true
 
                             addMonths()
                         }
@@ -141,6 +174,14 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
 
                     etSchool.setText("")
                     atvAcademicAdvance.setText("")
+                    rgCertificate.clearCheck()
+                    rgTitleAchieved.clearCheck()
+                    rgIdentificationCard.clearCheck()
+
+                    atvStartMonth.setText("")
+                    etStartYear.setText("")
+                    atvEndMonth.setText("")
+                    etEndYear.setText("")
 
                     if (mAcademicLevel == "Primaria") {
                         setAcademicAdvance(false)
@@ -227,6 +268,40 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
 
     private fun setupTextFields() {
         with(mBinding) {
+
+            rgCertificate.setOnCheckedChangeListener { _, checkedId ->
+                when (checkedId) {
+                    R.id.rbYesCertificate -> {
+                        mCertificate = true
+                    }
+                    R.id.rbNoCertificate -> {
+                        mCertificate = false
+                    }
+                }
+            }
+
+            rgTitleAchieved.setOnCheckedChangeListener { _, checkedId ->
+                when (checkedId) {
+                    R.id.rbYesTitleAchieved -> {
+                        mTitleAchieved = true
+                    }
+                    R.id.rbNoTitleAchieved -> {
+                        mTitleAchieved = false
+                    }
+                }
+            }
+
+            rgIdentificationCard.setOnCheckedChangeListener { _, checkedId ->
+                when (checkedId) {
+                    R.id.rbYesIdentificationCard-> {
+                        mIdentificationCard= true
+                    }
+                    R.id.rbNoIdentificationCard-> {
+                        mIdentificationCard= false
+                    }
+                }
+            }
+
             fabReturn.setOnClickListener {
                 listener?.onSelectStepView(0, R.id.personalFragment)
                 sendDataOptionFragment(false)
@@ -269,31 +344,11 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
 
                 if (atvAcademicAdvance.text.toString() == "Grado técnico") {
                     with(mBinding) {
-
-                        var certificate = false
-                        if (rbYesCertificate.isChecked) {
-                            certificate = true
-                        } else if (rbNoCertificate.isChecked) {
-                            certificate = false
-                        }
-
-                        var titleAchieved = false
-                        if (rbYesTitleAchieved.isChecked) {
-                            titleAchieved = true
-                        } else if (rbNoTitleAchieved.isChecked) {
-                            titleAchieved = false
-                        }
-
-                        var identificationCard = false
-                        if (rbYesIdentificationCard.isChecked) {
-                            identificationCard = true
-                        } else if (rbNoIdentificationCard.isChecked) {
-                            identificationCard = false
-                        }
-
-                        if (certificate || titleAchieved || identificationCard) {
-
-                            if (rbYesIdentificationCard.isChecked) {
+                        if (mCertificate != null &&
+                            mTitleAchieved != null &&
+                            mIdentificationCard != null
+                        ) {
+                            if (mIdentificationCard == true && atvAcademicLevel.text.toString().trim() == "Universidad" ) {
                                 mInfoUserViewModel.setAcademicUser(
                                     AcademicUser(
                                         levelAcademic = atvAcademicLevel.text.toString().trim(),
@@ -307,9 +362,9 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                                         endYear = if (etEndYear.text.toString()
                                                 .isEmpty()
                                         ) 0 else etEndYear.text.toString().toInt(),
-                                        certificate = certificate,
-                                        titleAchieved = titleAchieved,
-                                        identificationCard = true
+                                        certificate = mCertificate!!,
+                                        titleAchieved = mTitleAchieved!!,
+                                        identificationCard = mIdentificationCard!!
                                     )
                                 )
 
@@ -328,15 +383,17 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                                         endYear = if (etEndYear.text.toString()
                                                 .isEmpty()
                                         ) 0 else etEndYear.text.toString().toInt(),
-                                        certificate = certificate,
-                                        titleAchieved = titleAchieved,
-                                        identificationCard = false
+                                        certificate = mCertificate!!,
+                                        titleAchieved = mTitleAchieved!!,
+                                        identificationCard = mIdentificationCard!!
                                     )
                                 )
 
                                 listener?.onSelectStepView(2, R.id.workExperienceFragment)
                             }
 
+                        } else {
+                            Toast.makeText(requireContext(), "Por favor, complete los datos restantes", Toast.LENGTH_SHORT).show()
                         }
                     }
                 } else {
@@ -373,10 +430,17 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                         endMonth = atvEndMonth.text.toString().trim(),
                         endYear = if (etEndYear.text.toString()
                                 .isEmpty()
-                        ) 0 else etEndYear.text.toString().toInt()
+                        ) 0 else etEndYear.text.toString().toInt(),
+                        certificate = mCertificate ?: false,
+                        titleAchieved = mTitleAchieved ?: false,
+                        identificationCard = mIdentificationCard ?: false
                     )
                 )
             } else {
+                rgCertificate.clearCheck()
+                rgTitleAchieved.clearCheck()
+                rgIdentificationCard.clearCheck()
+
                 mInfoUserViewModel.setAcademicUser(
                     AcademicUser(
                         levelAcademic = atvAcademicLevel.text.toString().trim(),
