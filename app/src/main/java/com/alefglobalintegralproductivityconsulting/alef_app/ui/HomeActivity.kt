@@ -18,8 +18,6 @@ import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.alefglobalintegralproductivityconsulting.alef_app.core.AppConstants
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.ActivityHomeBinding
 import com.google.android.material.navigation.NavigationView
-import de.hdodenhof.circleimageview.CircleImageView
-
 
 class HomeActivity : AppCompatActivity() {
 
@@ -59,14 +57,15 @@ class HomeActivity : AppCompatActivity() {
                 R.id.nav_notification,
                 R.id.nav_curriculum,
                 R.id.nav_work_with_us,
-                R.id.nav_settings
+                R.id.nav_settings,
+                R.id.nav_logout
             ), drawerLayout
         )
 
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        mBinding.btnLogout.setOnClickListener { finish() }
+//        mBinding.btnLogout.setOnClickListener { finish() }
 
         navView.itemTextColor =
             ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
@@ -94,6 +93,12 @@ class HomeActivity : AppCompatActivity() {
         menu.findItem(R.id.nav_notification).isVisible = isVisible
         menu.findItem(R.id.nav_curriculum).isVisible = isVisible
         menu.findItem(R.id.nav_settings).isVisible = isVisible
+
+        menu.findItem(R.id.configuration_section).isVisible = isVisible
+        menu.findItem(R.id.nav_logout).setOnMenuItemClickListener {
+            finish()
+            true
+        }
 
         val hView = mBinding.navView.getHeaderView(0)
         if (!isVisible) {

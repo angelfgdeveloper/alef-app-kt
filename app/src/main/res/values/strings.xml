@@ -31,7 +31,7 @@
     <string name="menu_work_with_us">Trabaja con nosotros</string>
     <string name="menu_settings">Ajustes</string>
 
-    <string name="logout">Cerrar sesiòn</string>
+    <string name="logout">Cerrar sesión</string>
     <string name="add_img_avatar">Agregar foto de perfil</string>
 
     <string name="dialog_gallery_camera_title">Abrir Camara o Galeria</string>
@@ -110,4 +110,5 @@
     <string name="user_question_posgraduate">¿Cuántos posgrados tienes?</string>
     <string name="type_posgraduate">Tipo de posgrado</string>
     <string name="menu_login">Iniciar sesión</string>
+    <string name="configuracion_item">Configuración</string>
 </resources>
