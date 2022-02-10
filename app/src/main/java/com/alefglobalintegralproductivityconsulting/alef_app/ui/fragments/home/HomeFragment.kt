@@ -19,11 +19,14 @@ import com.alefglobalintegralproductivityconsulting.alef_app.presentation.home.H
 import com.alefglobalintegralproductivityconsulting.alef_app.presentation.home.HomeViewModelFactory
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.home.adapter.VacantAdapter
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.fragment_home.*
 
 class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantClickListener {
 
     private lateinit var mBinding: FragmentHomeBinding
     private lateinit var mAdapter: VacantAdapter
+
+    private var isLogin: Boolean = false
 
     private val mViewModel by viewModels<HomeViewModel> {
         HomeViewModelFactory(
@@ -35,7 +38,19 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
         super.onViewCreated(view, savedInstanceState)
         mBinding = FragmentHomeBinding.bind(view)
 
+        setupArguments()
         setupVacancies()
+    }
+
+    private fun setupArguments() {
+        arguments?.getBoolean(AppConstants.IS_LOGIN_USER)?.let {
+            isLogin = it
+            if (isLogin) {
+                llTestCompany.visibility = View.VISIBLE
+            } else {
+                llTestCompany.visibility = View.GONE
+            }
+        }
     }
 
     private fun setupVacancies() {

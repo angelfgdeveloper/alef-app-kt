@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:background="@color/purple"
             android:orientation="horizontal"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="0dp"
@@ -55,7 +55,7 @@
                         android:id="@+id/tilSearch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/common_padding_default"
+                        android:layout_marginTop="@dimen/common_padding_min"
                         android:hint="@string/search_job">
 
                         <com.google.android.material.textfield.TextInputEditText

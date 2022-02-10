@@ -8,7 +8,9 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -65,20 +67,16 @@ class HomeActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-//        mBinding.btnLogout.setOnClickListener { finish() }
-
         navView.itemTextColor =
             ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
         navView.itemIconTintList =
             ColorStateList.valueOf(ContextCompat.getColor(this, android.R.color.black))
 
-    }
+        val bundle = bundleOf(AppConstants.IS_LOGIN_USER to isLogin)
+        Navigation.findNavController(this, R.id.nav_host_fragment_content_home)
+            .navigate(R.id.nav_home, bundle)
 
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        menuInflater.inflate(R.menu.home, menu)
-//        return true
-//    }
+    }
 
     private fun hideItem(isVisible: Boolean) {
         val menu: Menu = mBinding.navView.menu
