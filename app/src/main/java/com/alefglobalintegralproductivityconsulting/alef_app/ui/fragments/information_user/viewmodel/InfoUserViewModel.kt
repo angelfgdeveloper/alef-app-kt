@@ -39,6 +39,8 @@ class InfoUserViewModel : ViewModel() {
 
     fun getAcademicUser(): LiveData<AcademicUser> = mAcademicUser
 
+    fun getPosgraduateUser(): LiveData<PosgraduateUser> = mPosgraduateUser
+
     fun getGenderList(): LiveData<List<String>> {
         val genderList = arrayListOf("Masculino", "Femenino", "Otro")
         mGender.value = genderList
