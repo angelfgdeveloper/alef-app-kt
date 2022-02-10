@@ -109,4 +109,5 @@
     <string name="user_has_posgraduate">¿Tienes posgrado?</string>
     <string name="user_question_posgraduate">¿Cuántos posgrados tienes?</string>
     <string name="type_posgraduate">Tipo de posgrado</string>
+    <string name="menu_login">Iniciar sesión</string>
 </resources>

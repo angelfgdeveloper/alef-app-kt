@@ -7,6 +7,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.alefglobalintegralproductivityconsulting.alef_app.core.AppConstants
 import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.Validators
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.ActivityLoginBinding
 
@@ -76,7 +77,7 @@ class LoginActivity : AppCompatActivity() {
 
     private fun goToHome(isLoginUser: Boolean) {
         val intent = Intent(this@LoginActivity, HomeActivity::class.java)
-//        intent.putExtra(AppConstants.IS_LOGIN_USER, isLoginUser)
+        intent.putExtra(AppConstants.IS_LOGIN_USER, isLoginUser)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
 //        finish()
