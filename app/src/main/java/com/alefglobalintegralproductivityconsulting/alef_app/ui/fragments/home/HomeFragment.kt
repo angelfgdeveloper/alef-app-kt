@@ -1,5 +1,6 @@
 package com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -17,6 +18,7 @@ import com.alefglobalintegralproductivityconsulting.alef_app.databinding.Fragmen
 import com.alefglobalintegralproductivityconsulting.alef_app.domain.home.HomeRepoImpl
 import com.alefglobalintegralproductivityconsulting.alef_app.presentation.home.HomeViewModel
 import com.alefglobalintegralproductivityconsulting.alef_app.presentation.home.HomeViewModelFactory
+import com.alefglobalintegralproductivityconsulting.alef_app.ui.SearchActivity
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.home.adapter.VacantAdapter
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.fragment_home.*
@@ -40,6 +42,21 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
 
         setupArguments()
         setupVacancies()
+        setupTextField()
+    }
+
+    private fun setupTextField() {
+        with(mBinding) {
+            btnSearch.setOnClickListener {
+                val search = etSearch.text.toString().trim()
+                val location = etLocation.text.toString().trim()
+
+                val i = Intent(requireContext(), SearchActivity::class.java)
+                i.putExtra(AppConstants.SEARCH_GENERAL, search)
+                i.putExtra(AppConstants.SEARCH_LOCATION, location)
+                startActivity(i)
+            }
+        }
     }
 
     private fun setupArguments() {
