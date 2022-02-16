@@ -59,6 +59,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:imeOptions="actionSearch"
+                            android:singleLine="true"
+                            android:minLines="@integer/line"
                             android:padding="@dimen/common_padding_min"
                             app:searchIcon="@drawable/ic_search" />
 
@@ -149,7 +151,7 @@
                     android:layout_height="match_parent"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:visibility="visible">
+                    android:visibility="gone">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/rvVacancies"

@@ -14,9 +14,10 @@ import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.Timestam
 import com.alefglobalintegralproductivityconsulting.alef_app.data.model.Vacant
 import com.alefglobalintegralproductivityconsulting.alef_app.data.model.VacantInfoExtra
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.ItemVacantBinding
+import java.util.ArrayList
 
 class VacantAdapter(
-    private val vacantList: List<Vacant>,
+    private var vacantList: List<Vacant>,
     private val itemClickListener: OnVacantClickListener
 ) : RecyclerView.Adapter<BaseViewHolder<*>>() {
 
@@ -47,6 +48,11 @@ class VacantAdapter(
     }
 
     override fun getItemCount(): Int = vacantList.size
+
+    fun setFilter(newWords: ArrayList<Vacant>) {
+        this.vacantList = newWords
+        notifyDataSetChanged()
+    }
 
     private inner class VacantViewHolder(
         val binding: ItemVacantBinding,
