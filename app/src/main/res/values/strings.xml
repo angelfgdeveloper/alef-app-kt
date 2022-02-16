@@ -34,7 +34,7 @@
     <string name="logout">Cerrar sesión</string>
     <string name="add_img_avatar">Agregar foto de perfil</string>
 
-    <string name="dialog_gallery_camera_title">Abrir Camara o Galeria</string>
+    <string name="dialog_gallery_camera_title">Seleccione alguna opción</string>
     <string name="dialog_delete_cancel">Cancelar</string>
     <string name="dialog_gallery">Galeria</string>
     <string name="dialog_camera">Camara</string>

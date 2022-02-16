@@ -92,6 +92,7 @@
                         app:queryHint="@string/search_location"
                         app:searchHintIcon="@null"
                         app:iconifiedByDefault="false"
+                        android:paddingStart="-2dp"
                         app:searchIcon="@drawable/ic_location_on" />
 
                     <Button

@@ -3,6 +3,8 @@ package com.alefglobalintegralproductivityconsulting.alef_app.ui
 import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -19,9 +21,6 @@ import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionRequest
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
-
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
 import java.io.File
 
 
@@ -89,14 +88,17 @@ class AvatarActivity : AppCompatActivity() {
     }
 
     private fun selectDialogGalleryOrCamera() {
+
+        val items = resources.getStringArray(R.array.array_options_item)
+
         MaterialAlertDialogBuilder(this)
             .setTitle(R.string.dialog_gallery_camera_title)
-            .setNeutralButton(R.string.dialog_delete_cancel, null)
-            .setPositiveButton(R.string.dialog_gallery) { _, _ ->
-                requestGalleryPermission()
-            }
-            .setNegativeButton(R.string.dialog_camera) { _, _ ->
-                requestCameraPermission()
+            .setItems(items) { _, i ->
+                when (i) {
+                    0 -> requestCameraPermission()
+                    1 -> requestGalleryPermission()
+                    2 -> null
+                }
             }
             .show()
     }
