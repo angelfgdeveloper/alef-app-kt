@@ -1,10 +1,18 @@
 package com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.home
 
+import android.annotation.SuppressLint
+import android.app.SearchManager
 import android.content.Intent
+import android.database.Cursor
+import android.database.MatrixCursor
 import android.os.Bundle
+import android.provider.BaseColumns
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.core.os.bundleOf
+import androidx.cursoradapter.widget.CursorAdapter
+import androidx.cursoradapter.widget.SimpleCursorAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -43,13 +51,101 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
         setupArguments()
         setupVacancies()
         setupTextField()
+        setupSearch()
+    }
+
+    private fun setupSearch() {
+        with(mBinding) {
+            val from = arrayOf(SearchManager.SUGGEST_COLUMN_TEXT_1)
+            val to = intArrayOf(R.id.tvItemSuggestion)
+            val cursorAdapter = SimpleCursorAdapter(
+                context,
+                R.layout.item_suggestions,
+                null,
+                from,
+                to,
+                CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER
+            )
+            val suggestions = listOf(
+                "Aguascalientes",
+                "Baja California",
+                "Baja California Sur",
+                "Campeche",
+                "Coahuila",
+                "Colima",
+                "Chiapas",
+                "Chihuahua",
+                "Durango",
+                "Distrito Federal",
+                "Guanajuato",
+                "Guerrero",
+                "Hidalgo",
+                "Jalisco",
+                "México",
+                "Michoacán",
+                "Morelos",
+                "Nayarit",
+                "Nuevo León",
+                "Oaxaca",
+                "Puebla",
+                "Querétaro",
+                "Quintana Roo",
+                "San Luis Potosí",
+                "Sinaloa",
+                "Sonora",
+                "Tabasco",
+                "Tamaulipas",
+                "Tlaxcala",
+                "Veracruz",
+                "Yucatán",
+                "Zacatecas"
+            )
+
+            svLocation.suggestionsAdapter = cursorAdapter
+            svLocation.onActionViewExpanded()
+
+            svLocation.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return false
+                }
+
+                override fun onQueryTextChange(query: String?): Boolean {
+                    val cursor =
+                        MatrixCursor(arrayOf(BaseColumns._ID, SearchManager.SUGGEST_COLUMN_TEXT_1))
+                    query?.let {
+                        suggestions.forEachIndexed { index, suggestion ->
+                            if (suggestion.contains(query, true))
+                                cursor.addRow(arrayOf(index, suggestion))
+                        }
+                    }
+
+                    cursorAdapter.changeCursor(cursor)
+                    return true
+                }
+            })
+
+            svLocation.setOnSuggestionListener(object : SearchView.OnSuggestionListener {
+                override fun onSuggestionSelect(position: Int): Boolean {
+                    return false
+                }
+
+                @SuppressLint("Range")
+                override fun onSuggestionClick(position: Int): Boolean {
+                    val cursor = svLocation.suggestionsAdapter.getItem(position) as Cursor
+                    val selection =
+                        cursor.getString(cursor.getColumnIndex(SearchManager.SUGGEST_COLUMN_TEXT_1))
+                    svLocation.setQuery(selection, false)
+                    return true
+                }
+            })
+        }
     }
 
     private fun setupTextField() {
         with(mBinding) {
             btnSearch.setOnClickListener {
                 val search = etSearch.text.toString().trim()
-                val location = etLocation.text.toString().trim()
+                val location = svLocation.query.toString().trim()
 
                 val i = Intent(requireContext(), SearchActivity::class.java)
                 i.putExtra(AppConstants.SEARCH_GENERAL, search)

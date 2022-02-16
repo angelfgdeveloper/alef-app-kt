@@ -47,9 +47,9 @@
                         android:layout_marginVertical="@dimen/common_padding_min"
                         android:layout_weight="@integer/layout_weight_default"
                         android:background="@drawable/bg_search"
-                        android:hint="Buscar.."
                         app:boxBackgroundMode="none"
                         app:endIconMode="clear_text"
+                        app:endIconDrawable="@drawable/ic_clear"
                         app:endIconTint="@color/grey_light"
                         app:hintEnabled="false"
                         app:startIconDrawable="@drawable/ic_search">

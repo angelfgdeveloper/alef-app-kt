@@ -6,7 +6,7 @@
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/red</item>
+        <item name="colorSecondary">@color/purple</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
@@ -34,7 +34,7 @@
         <item name="colorPrimaryVariant">@color/purple_700</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/red</item>
+        <item name="colorSecondary">@color/purple</item>
         <item name="colorSecondaryVariant">@color/teal_700</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
@@ -62,8 +62,7 @@
         <item name="checkedIconVisible">true</item>
     </style>
 
-    <style name="SwitchMaterialStyle" parent="Widget.MaterialComponents.CompoundButton.Switch">
-    </style>
+    <style name="SwitchMaterialStyle" parent="Widget.MaterialComponents.CompoundButton.Switch"/>
 
     <style name="FloatingActionButtonStyle" parent="Widget.MaterialComponents.FloatingActionButton">
         <item name="tint">@android:color/white</item>
@@ -82,6 +81,10 @@
 
         <item name="iconTint">@android:color/darker_gray</item>
         <item name="strokeColor">@android:color/darker_gray</item>
+    </style>
+
+    <style name="SearchViewStyle" parent="Widget.AppCompat.SearchView">
+        <item name="android:textSize">@dimen/text_normal</item>
     </style>
 
 </resources>

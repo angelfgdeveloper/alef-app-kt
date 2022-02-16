@@ -55,37 +55,44 @@
                         android:id="@+id/tilSearch"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginVertical="@dimen/common_padding_min"
                         android:layout_marginTop="@dimen/common_padding_min"
-                        android:hint="@string/search_job">
+                        android:background="@drawable/bg_search"
+                        app:boxBackgroundMode="none"
+                        app:endIconDrawable="@drawable/ic_clear"
+                        app:endIconMode="clear_text"
+                        app:hintEnabled="false"
+                        app:startIconDrawable="@drawable/ic_search">
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etSearch"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:hint="@string/search_job"
                             android:imeOptions="actionNext"
                             android:inputType="text"
+                            android:minLines="@integer/line"
+                            android:padding="@dimen/common_padding_min"
                             android:singleLine="true"
                             android:textSize="@dimen/text_normal" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/tilLocation"
+                    <androidx.appcompat.widget.SearchView
+                        android:id="@+id/svLocation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/common_padding_default"
-                        android:hint="@string/search_location">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etLocation"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:imeOptions="actionDone"
-                            android:inputType="text"
-                            android:singleLine="true"
-                            android:textSize="@dimen/text_normal" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
+                        android:theme="@style/SearchViewStyle"
+                        android:layout_marginTop="@dimen/common_padding_min"
+                        android:imeOptions="actionDone"
+                        android:background="@drawable/bg_search"
+                        android:inputType="text"
+                        android:singleLine="true"
+                        app:closeIcon="@drawable/ic_clear"
+                        app:queryHint="@string/search_location"
+                        app:searchHintIcon="@null"
+                        app:iconifiedByDefault="false"
+                        app:searchIcon="@drawable/ic_location_on" />
 
                     <Button
                         android:id="@+id/btnSearch"

@@ -32,7 +32,7 @@
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/fragment_alert.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/fragment_curriculum.xml" value="0.43478260869565216" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/fragment_favorites.xml" value="0.22083333333333333" />
-        <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/fragment_home.xml" value="0.1" />
+        <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/fragment_home.xml" value="0.2" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/fragment_notification.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/fragment_personal.xml" value="0.2" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/fragment_postgraduate.xml" value="0.22" />
@@ -48,12 +48,14 @@
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/item_notification.xml" value="0.2" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/item_posgraduate.xml" value="0.22" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/item_postulation.xml" value="0.25" />
+        <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/item_suggestions.xml" value="0.22" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/item_vacant.xml" value="0.14" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/item_workday.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/layout/nav_header_home.xml" value="0.2" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/menu/activity_main_drawer.xml" value="0.25" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/menu/home.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/menu/search_menu.xml" value="0.18" />
+        <entry key="..\:/Users/PC1/AndroidStudioProjects/Alefappk/app/src/main/res/xml/searchable.xml" value="0.22" />
       </map>
     </option>
   </component>
