@@ -38,12 +38,293 @@
             android:background="@color/white_grey"
             android:orientation="vertical">
 
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilZone"
+                style="@style/DropdownMenuStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/common_padding_min"
+                android:layout_marginTop="@dimen/common_padding_default"
+                android:hint="@string/filter_zone">
+
+                <AutoCompleteTextView
+                    android:id="@+id/atvZone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:imeOptions="actionNext"
+                    android:inputType="none"
+                    android:textSize="@dimen/text_normal" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                android:text="Filtrar por"
-                android:textSize="@dimen/text_title" />
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/common_padding_min"
+                android:layout_marginTop="@dimen/common_padding_default"
+                android:text="@string/filter_mode"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_title"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginHorizontal="@dimen/common_padding_min"
+                android:layout_marginTop="@dimen/common_padding_min"
+                android:background="@android:color/darker_gray" />
+
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/common_padding_min"
+                android:text="Trabajo remoto" />
+
+            <CheckBox
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/common_padding_min"
+                android:text="Trabajo presencial" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/common_padding_min"
+                android:layout_marginTop="@dimen/common_padding_default"
+                android:text="@string/filter_engagement"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_title"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginHorizontal="@dimen/common_padding_min"
+                android:layout_marginTop="@dimen/common_padding_min"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/common_padding_min"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@integer/layout_weight_default"
+                    android:orientation="vertical">
+
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/common_padding_min"
+                        android:text="Medio tiempo" />
+
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/common_padding_min"
+                        android:text="Tiempo completo" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@integer/layout_weight_default"
+                    android:orientation="vertical">
+
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/common_padding_min"
+                        android:text="Temporal" />
+
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/common_padding_min"
+                        android:text="Indeterminado" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/common_padding_min"
+                android:layout_marginTop="@dimen/common_padding_default"
+                android:text="@string/filter_schedule"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_title"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginHorizontal="@dimen/common_padding_min"
+                android:layout_marginTop="@dimen/common_padding_min"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/common_padding_min"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@integer/layout_weight_default"
+                    android:orientation="vertical">
+
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/common_padding_min"
+                        android:text="Matutino" />
+
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/common_padding_min"
+                        android:text="Vespertino" />
+
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/common_padding_min"
+                        android:text="Nocturno" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@integer/layout_weight_default"
+                    android:orientation="vertical">
+
+                    <CheckBox
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/common_padding_min"
+                        android:text="Mixto" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/common_padding_min"
+                android:layout_marginTop="@dimen/common_padding_default"
+                android:text="@string/filter_salary"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_title"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0.5dp"
+                android:layout_marginHorizontal="@dimen/common_padding_min"
+                android:layout_marginTop="@dimen/common_padding_min"
+                android:background="@android:color/darker_gray" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/common_padding_min"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="@integer/layout_weight_default"
+                    android:orientation="vertical">
+
+                    <RadioGroup
+                        android:id="@+id/rgFilter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:checkedButton="@+id/radio_button_1">
+
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Hasta $5,000 MXN" />
+
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="$5,000 a $10,000 MXN" />
+
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="$10,000 a $15,000 MXN" />
+
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="$15,000 a $25,000 MXN" />
+
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="$25,000 a $30,000 MXN" />
+
+                        <RadioButton
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="Màs de $30,000 MXN" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="(155)"
+                        android:textColor="@color/grey_light"
+                        android:textSize="@dimen/text_normal" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/common_padding_min"
+                android:layout_marginVertical="@dimen/common_padding_min"
+                android:orientation="horizontal">
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/common_padding_min"
+                    android:layout_weight="@integer/layout_weight_default"
+                    android:text="Limpiar" />
+
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/common_padding_min"
+                    android:layout_weight="@integer/layout_weight_default"
+                    android:text="Aplicar" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
