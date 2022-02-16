@@ -2,14 +2,17 @@ package com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.home
 
 import android.annotation.SuppressLint
 import android.app.SearchManager
+import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.database.MatrixCursor
 import android.os.Bundle
 import android.provider.BaseColumns
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.os.bundleOf
 import androidx.cursoradapter.widget.CursorAdapter
 import androidx.cursoradapter.widget.SimpleCursorAdapter
@@ -47,6 +50,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mBinding = FragmentHomeBinding.bind(view)
+        hideKeyboard()
 
         setupArguments()
         setupVacancies()
@@ -103,9 +107,12 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
 
             svLocation.suggestionsAdapter = cursorAdapter
             svLocation.onActionViewExpanded()
+            svLocation.isFocusable = false
+            svLocation.clearFocus()
 
             svLocation.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
+                    hideKeyboard()
                     return false
                 }
 
@@ -126,6 +133,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
 
             svLocation.setOnSuggestionListener(object : SearchView.OnSuggestionListener {
                 override fun onSuggestionSelect(position: Int): Boolean {
+                    hideKeyboard()
                     return false
                 }
 
@@ -209,5 +217,10 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
             AppConstants.VACANT_INFO_EXTRA to jsonVacantInfoExtra
         )
         findNavController().navigate(R.id.action_nav_home_to_vacantDetailsFragment, bundle)
+    }
+
+    private fun hideKeyboard() {
+        val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+        imm?.hideSoftInputFromWindow(mBinding.root.windowToken, 0)
     }
 }
