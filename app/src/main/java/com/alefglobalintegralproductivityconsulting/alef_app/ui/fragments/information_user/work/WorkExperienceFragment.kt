@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
@@ -48,38 +49,23 @@ class WorkExperienceFragment : Fragment(R.layout.fragment_work_experience) {
             mInfoUserViewModel.getMonthList().observe(viewLifecycleOwner) { months ->
                 val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_menu_item, months)
 
-                // 1
-                atvStartMonth1.setAdapter(adapter)
-                atvStartMonth1.setOnItemClickListener { parent, _, position, id ->
+                val autoCompleteTextViewMonthsList = arrayListOf(
+                    atvStartMonth1, atvEndMonth1, atvStartMonth2, atvEndMonth2, atvStartMonth3,
+                    atvEndMonth3
+                )
 
-                }
+                addAllMonths(autoCompleteTextViewMonthsList, adapter)
+            }
+        }
+    }
 
-                atvEndMonth1.setAdapter(adapter)
-                atvEndMonth1.setOnItemClickListener { parent, _, position, id ->
-
-                }
-
-                // 2
-                atvStartMonth2.setAdapter(adapter)
-                atvStartMonth2.setOnItemClickListener { parent, _, position, id ->
-
-                }
-
-                atvEndMonth2.setAdapter(adapter)
-                atvEndMonth2.setOnItemClickListener { parent, _, position, id ->
-
-                }
-
-                // 3
-                atvStartMonth3.setAdapter(adapter)
-                atvStartMonth3.setOnItemClickListener { parent, _, position, id ->
-
-                }
-
-                atvEndMonth3.setAdapter(adapter)
-                atvEndMonth3.setOnItemClickListener { parent, _, position, id ->
-
-                }
+    private fun addAllMonths(
+        atvMonths: ArrayList<AutoCompleteTextView>, adapter: ArrayAdapter<String>
+    ) {
+        for (atvMonth in atvMonths) {
+            with(atvMonth) {
+                setAdapter(adapter)
+                setOnItemClickListener { parent, _, position, id -> }
             }
         }
     }

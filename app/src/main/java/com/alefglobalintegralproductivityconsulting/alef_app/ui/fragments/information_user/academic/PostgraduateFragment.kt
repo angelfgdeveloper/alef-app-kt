@@ -255,79 +255,27 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
     }
 
     private fun setData() {
-        mInfoUserViewModel.getTypePosgraduate().observe(viewLifecycleOwner) { types ->
-            val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_menu_item, types)
+        with(mBinding) {
+            mInfoUserViewModel.getTypePosgraduate().observe(viewLifecycleOwner) { types ->
+                val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_menu_item, types)
 
-            with(mBinding) {
-                atvType1.setAdapter(adapter)
-                atvType1.setOnItemClickListener { parent, _, position, id ->
+                val autoCompleteTextViewypeList = arrayListOf(
+                    atvType1, atvType2, atvType3, atvType4
+                )
 
-                }
-
-                atvType2.setAdapter(adapter)
-                atvType2.setOnItemClickListener { parent, _, position, id ->
-
-                }
-
-                atvType3.setAdapter(adapter)
-                atvType3.setOnItemClickListener { parent, _, position, id ->
-
-                }
-
-                atvType4.setAdapter(adapter)
-                atvType4.setOnItemClickListener { parent, _, position, id ->
-
-                }
-            }
-        }
-
-        mInfoUserViewModel.getMonthList().observe(viewLifecycleOwner) { months ->
-            val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_menu_item, months)
-
-            // 1
-            atvStartMonth1.setAdapter(adapter)
-            atvStartMonth1.setOnItemClickListener { parent, _, position, id ->
-
+                addAllTypes(autoCompleteTextViewypeList, adapter)
             }
 
-            atvEndMonth1.setAdapter(adapter)
-            atvEndMonth1.setOnItemClickListener { parent, _, position, id ->
+            mInfoUserViewModel.getMonthList().observe(viewLifecycleOwner) { months ->
+                val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_menu_item, months)
 
+                val autoCompleteTextViewMonthsList = arrayListOf(
+                    atvStartMonth1, atvEndMonth1, atvStartMonth2, atvEndMonth2, atvStartMonth3,
+                    atvEndMonth3, atvStartMonth4, atvEndMonth4
+                )
+
+                addAllMonths(autoCompleteTextViewMonthsList, adapter)
             }
-
-            // 2
-            atvStartMonth2.setAdapter(adapter)
-            atvStartMonth2.setOnItemClickListener { parent, _, position, id ->
-
-            }
-
-            atvEndMonth2.setAdapter(adapter)
-            atvEndMonth2.setOnItemClickListener { parent, _, position, id ->
-
-            }
-
-            // 3
-            atvStartMonth3.setAdapter(adapter)
-            atvStartMonth3.setOnItemClickListener { parent, _, position, id ->
-
-            }
-
-            atvEndMonth3.setAdapter(adapter)
-            atvEndMonth3.setOnItemClickListener { parent, _, position, id ->
-
-            }
-
-            // 4
-            atvStartMonth4.setAdapter(adapter)
-            atvStartMonth4.setOnItemClickListener { parent, _, position, id ->
-
-            }
-
-            atvEndMonth4.setAdapter(adapter)
-            atvEndMonth4.setOnItemClickListener { parent, _, position, id ->
-
-            }
-
         }
     }
 
@@ -342,6 +290,28 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
             llPosgraduate2.visibility = View.GONE
             llPosgraduate3.visibility = View.GONE
             llPosgraduate4.visibility = View.GONE
+        }
+    }
+
+    private fun addAllMonths(
+        atvMonths: ArrayList<AutoCompleteTextView>, adapter: ArrayAdapter<String>
+    ) {
+        for (atvMonth in atvMonths) {
+            with(atvMonth) {
+                setAdapter(adapter)
+                setOnItemClickListener { parent, _, position, id -> }
+            }
+        }
+    }
+
+    private fun addAllTypes(
+        atvTypes: ArrayList<AutoCompleteTextView>, adapter: ArrayAdapter<String>
+    ) {
+        for (atvType in atvTypes) {
+            with(atvType) {
+                setAdapter(adapter)
+                setOnItemClickListener { parent, _, position, id -> }
+            }
         }
     }
 
