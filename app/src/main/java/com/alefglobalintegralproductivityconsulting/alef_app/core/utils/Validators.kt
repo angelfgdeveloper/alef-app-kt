@@ -6,6 +6,8 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.text.TextUtils
 import android.util.Patterns
+import android.widget.ArrayAdapter
+import android.widget.AutoCompleteTextView
 import androidx.activity.OnBackPressedCallback
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.FragmentActivity
@@ -57,6 +59,17 @@ class Validators {
 
             fab.isEnabled = isValid
             return isValid
+        }
+
+        fun addAllMonths(
+            atvMonths: ArrayList<AutoCompleteTextView>, adapter: ArrayAdapter<String>
+        ) {
+            for (atvMonth in atvMonths) {
+                with(atvMonth) {
+                    setAdapter(adapter)
+                    setOnItemClickListener { parent, _, position, id -> }
+                }
+            }
         }
 
         fun onBackPress(

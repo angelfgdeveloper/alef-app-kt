@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.alefglobalintegralproductivityconsulting.alef_app.core.StepViewListener
+import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.Validators.Companion.addAllMonths
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.FragmentWorkExperienceBinding
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.InfoUserViewModel
 import com.google.android.material.textfield.TextInputEditText
@@ -55,17 +56,6 @@ class WorkExperienceFragment : Fragment(R.layout.fragment_work_experience) {
                 )
 
                 addAllMonths(autoCompleteTextViewMonthsList, adapter)
-            }
-        }
-    }
-
-    private fun addAllMonths(
-        atvMonths: ArrayList<AutoCompleteTextView>, adapter: ArrayAdapter<String>
-    ) {
-        for (atvMonth in atvMonths) {
-            with(atvMonth) {
-                setAdapter(adapter)
-                setOnItemClickListener { parent, _, position, id -> }
             }
         }
     }

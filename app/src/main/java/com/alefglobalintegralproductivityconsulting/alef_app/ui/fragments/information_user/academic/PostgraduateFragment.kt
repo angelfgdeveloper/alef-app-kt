@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.alefglobalintegralproductivityconsulting.alef_app.core.StepViewListener
+import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.Validators.Companion.addAllMonths
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.FragmentPostgraduateBinding
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.InfoUserViewModel
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.Posgraduate
@@ -71,6 +72,7 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
                             atvEndMonth1.setText(posgraduateUser.totalPosgraduate[0].endMonth)
                             etEndYear1.setText(posgraduateUser.totalPosgraduate[0].endYear.toString())
                         }
+                        setData()
                     }
                     STATE.IN_PROCESS -> {
                         rbInProgressPosgraduate.isChecked = true
@@ -80,6 +82,8 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
                         etStartYear1.setText(posgraduateUser.totalPosgraduate[0].startYear.toString())
                         atvEndMonth1.setText(posgraduateUser.totalPosgraduate[0].endMonth)
                         etEndYear1.setText(posgraduateUser.totalPosgraduate[0].endYear.toString())
+
+                        setData()
                     }
                 }
             }
@@ -290,17 +294,6 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
             llPosgraduate2.visibility = View.GONE
             llPosgraduate3.visibility = View.GONE
             llPosgraduate4.visibility = View.GONE
-        }
-    }
-
-    private fun addAllMonths(
-        atvMonths: ArrayList<AutoCompleteTextView>, adapter: ArrayAdapter<String>
-    ) {
-        for (atvMonth in atvMonths) {
-            with(atvMonth) {
-                setAdapter(adapter)
-                setOnItemClickListener { parent, _, position, id -> }
-            }
         }
     }
 
