@@ -10,7 +10,6 @@ class InfoUserViewModel : ViewModel() {
     private val mInfoUser = MutableLiveData<InfoUser>()
     private val mGender = MutableLiveData<List<String>>()
     private val mState = MutableLiveData<List<String>>()
-    private val mTown = MutableLiveData<List<String>>()
 
     // Datos Academicos
     private val mAcademicUser = MutableLiveData<AcademicUser>()
@@ -48,25 +47,42 @@ class InfoUserViewModel : ViewModel() {
     }
 
     fun getStateList(): LiveData<List<String>> {
-        val stateList = arrayListOf("Durango")
+        val stateList = arrayListOf(
+            "Aguascalientes",
+            "Baja California",
+            "Baja California Sur",
+            "Campeche",
+            "Coahuila",
+            "Colima",
+            "Chiapas",
+            "Chihuahua",
+            "Durango",
+            "Distrito Federal",
+            "Guanajuato",
+            "Guerrero",
+            "Hidalgo",
+            "Jalisco",
+            "México",
+            "Michoacán",
+            "Morelos",
+            "Nayarit",
+            "Nuevo León",
+            "Oaxaca",
+            "Puebla",
+            "Querétaro",
+            "Quintana Roo",
+            "San Luis Potosí",
+            "Sinaloa",
+            "Sonora",
+            "Tabasco",
+            "Tamaulipas",
+            "Tlaxcala",
+            "Veracruz",
+            "Yucatán",
+            "Zacatecas"
+        )
         mState.value = stateList
         return mState
-    }
-
-    fun getTownList(): MutableLiveData<List<String>> {
-        val townList =
-            arrayListOf(
-                "Canatlán",
-                "Canelas",
-                "Coneto de Comonfort",
-                "Cuencamé",
-                "Durango",
-                "General Simón Bolívar",
-                "Gómez Palacio"
-            )
-
-        mTown.value = townList
-        return mTown
     }
 
     fun getAcademicLevelList(): MutableLiveData<List<String>> {

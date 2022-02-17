@@ -165,26 +165,25 @@
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/tilTown"
-                        style="@style/DropdownMenuStyle"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/common_padding_min"
                         android:layout_marginTop="@dimen/common_padding_default"
                         android:layout_weight="@integer/layout_weight_default"
+                        android:enabled="false"
                         android:hint="@string/user_town">
 
-                        <AutoCompleteTextView
-                            android:id="@+id/atvTwon"
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/etTwon"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:imeOptions="actionNext"
-                            android:inputType="none"
+                            android:inputType="text|textCapWords"
                             android:textSize="@dimen/text_normal" />
 
                     </com.google.android.material.textfield.TextInputLayout>
 
                 </LinearLayout>
-
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilSuburb"

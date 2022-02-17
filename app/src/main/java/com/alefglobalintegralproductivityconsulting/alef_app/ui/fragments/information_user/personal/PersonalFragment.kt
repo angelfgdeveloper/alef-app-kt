@@ -51,7 +51,7 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
             etDateOfBirth.setText("10/12/1994")
             atvGender.setText("Otro")
             atvState.setText("Durango")
-            atvTwon.setText("Durango")
+            etTwon.setText("Durango")
             etSuburb.setText("Blvd. Felipe")
             etStreet.setText("Calle 123")
             etNumberHome.setText("1542")
@@ -69,7 +69,7 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
                 etDateOfBirth.setText(user.dateOfBirth)
                 atvGender.setText(user.gender)
                 atvState.setText(user.state)
-                atvTwon.setText(user.town)
+                etTwon.setText(user.town)
                 etSuburb.setText(user.suburb)
                 etStreet.setText(user.street)
                 etNumberHome.setText(user.numberHome.toString())
@@ -106,34 +106,14 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
                     mState = parent.getItemAtPosition(position).toString()
 
                     if (mState.isNotEmpty()) {
-                        mInfoUserViewModel.getTownList().observe(viewLifecycleOwner) { town ->
-                            val adapterTown =
-                                ArrayAdapter(requireContext(), R.layout.dropdown_menu_item, town)
-
-                            with(mBinding) {
-                                atvTwon.setAdapter(adapterTown)
-                                atvTwon.setOnItemClickListener { parent, _, position, _ ->
-                                    mTown = parent.getItemAtPosition(position).toString()
-                                }
-                            }
-                        }
+                        tilTown.isEnabled = true
                     }
-
                 }
             }
         }
 
         if (atvState.text.toString().isNotEmpty()) {
-            mInfoUserViewModel.getTownList().observe(viewLifecycleOwner) { town ->
-                val adapterTown = ArrayAdapter(requireContext(), R.layout.dropdown_menu_item, town)
-
-                with(mBinding) {
-                    atvTwon.setAdapter(adapterTown)
-                    atvTwon.setOnItemClickListener { parent, _, position, _ ->
-                        mTown = parent.getItemAtPosition(position).toString()
-                    }
-                }
-            }
+            tilTown.isEnabled = true
         }
 
     }
@@ -193,7 +173,7 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
                     dateOfBirth = etDateOfBirth.text.toString().trim(),
                     gender = atvGender.text.toString().trim(),
                     state = atvState.text.toString().trim(),
-                    town = atvTwon.text.toString().trim(),
+                    town = etTwon.text.toString().trim(),
                     suburb = etSuburb.text.toString().trim(),
                     street = etStreet.text.toString().trim(),
                     numberHome = etNumberHome.text.toString().toInt(),
