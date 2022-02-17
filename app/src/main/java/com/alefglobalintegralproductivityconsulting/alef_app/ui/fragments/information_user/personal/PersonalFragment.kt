@@ -28,7 +28,6 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
 
     private var mGender = ""
     private var mState = ""
-    private var mTown = ""
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

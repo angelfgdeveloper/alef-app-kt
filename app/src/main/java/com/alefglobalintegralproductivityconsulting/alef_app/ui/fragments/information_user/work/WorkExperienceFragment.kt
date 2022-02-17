@@ -2,8 +2,9 @@ package com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.infor
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
+import android.view.MotionEvent
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
@@ -12,6 +13,7 @@ import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.alefglobalintegralproductivityconsulting.alef_app.core.StepViewListener
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.FragmentWorkExperienceBinding
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.InfoUserViewModel
+import com.google.android.material.textfield.TextInputEditText
 
 class WorkExperienceFragment : Fragment(R.layout.fragment_work_experience) {
 
@@ -38,10 +40,71 @@ class WorkExperienceFragment : Fragment(R.layout.fragment_work_experience) {
 
         onBackPress()
         setupTextFields()
+        addMonths()
+    }
+
+    private fun addMonths() {
+        with(mBinding) {
+            mInfoUserViewModel.getMonthList().observe(viewLifecycleOwner) { months ->
+                val adapter = ArrayAdapter(requireContext(), R.layout.dropdown_menu_item, months)
+
+                // 1
+                atvStartMonth1.setAdapter(adapter)
+                atvStartMonth1.setOnItemClickListener { parent, _, position, id ->
+
+                }
+
+                atvEndMonth1.setAdapter(adapter)
+                atvEndMonth1.setOnItemClickListener { parent, _, position, id ->
+
+                }
+
+                // 2
+                atvStartMonth2.setAdapter(adapter)
+                atvStartMonth2.setOnItemClickListener { parent, _, position, id ->
+
+                }
+
+                atvEndMonth2.setAdapter(adapter)
+                atvEndMonth2.setOnItemClickListener { parent, _, position, id ->
+
+                }
+
+                // 3
+                atvStartMonth3.setAdapter(adapter)
+                atvStartMonth3.setOnItemClickListener { parent, _, position, id ->
+
+                }
+
+                atvEndMonth3.setAdapter(adapter)
+                atvEndMonth3.setOnItemClickListener { parent, _, position, id ->
+
+                }
+            }
+        }
     }
 
     private fun setupTextFields() {
         with(mBinding) {
+
+            rgWorkExperience.setOnCheckedChangeListener { _, checkedId ->
+                when (checkedId) {
+                    R.id.rbYesWorkExperience -> {
+                        fabNext.visibility = View.VISIBLE
+                        fabNext.isEnabled = false
+                        llWorkExperiences.visibility = View.VISIBLE
+                    }
+                    R.id.rbNoWorkExperience -> {
+                        fabNext.visibility = View.VISIBLE
+                        fabNext.isEnabled = true
+                        llWorkExperiences.visibility = View.GONE
+                    }
+                }
+            }
+
+            val editTextDescriptionList =
+                arrayListOf(etDescription1, etDescription2, etDescription3)
+            enableScrollEditText(editTextDescriptionList)
 
             fabReturn.setOnClickListener {
                 if (mIsStepView) {
@@ -50,13 +113,35 @@ class WorkExperienceFragment : Fragment(R.layout.fragment_work_experience) {
                     listener?.onSelectStepView(1, R.id.academicFragment)
                 }
             }
+
             fabNext.setOnClickListener {
                 Toast.makeText(requireContext(), "En desarrollo", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
-    fun onBackPress() {
+    private fun enableScrollEditText(descriptions: ArrayList<TextInputEditText>) {
+        for (etDescription in descriptions) {
+            with(etDescription) {
+                setOnTouchListener(object : View.OnTouchListener {
+                    override fun onTouch(v: View?, event: MotionEvent?): Boolean {
+                        if (hasFocus()) {
+                            v?.parent?.requestDisallowInterceptTouchEvent(true)
+                            when (event?.action?.and(MotionEvent.ACTION_MASK)) {
+                                MotionEvent.ACTION_SCROLL -> {
+                                    v?.parent?.requestDisallowInterceptTouchEvent(false)
+                                    return true
+                                }
+                            }
+                        }
+                        return false
+                    }
+                })
+            }
+        }
+    }
+
+    private fun onBackPress() {
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {

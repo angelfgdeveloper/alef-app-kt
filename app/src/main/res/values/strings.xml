@@ -117,4 +117,8 @@
     <string name="filter_engagement">Contratación</string>
     <string name="filter_schedule">Jornada laboral</string>
     <string name="filter_salary">Sueldo</string>
+    <string name="user_has_work_experience">¿Tienes experiencia laboral?</string>
+    <string name="work_text_company">Nombre de la empresa</string>
+    <string name="work_text_job">Puesto</string>
+    <string name="work_text_workstation">Area o departamento</string>
 </resources>

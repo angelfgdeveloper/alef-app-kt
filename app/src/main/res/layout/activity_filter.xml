@@ -311,6 +311,7 @@
                 android:orientation="horizontal">
 
                 <Button
+                    android:id="@+id/btnClean"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/common_padding_min"
@@ -318,6 +319,7 @@
                     android:text="Limpiar" />
 
                 <Button
+                    android:id="@+id/btnApply"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="@dimen/common_padding_min"

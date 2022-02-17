@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ui.fragments.information_user.work.WorkExperienceFragment">
 
     <ScrollView
@@ -29,15 +29,767 @@
                 <!--                    android:text="INFORMACION PERSONAL"-->
                 <!--                    android:textSize="@dimen/text_normal" />-->
 
-                <TextView
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/common_padding_min"
-                    android:layout_marginTop="@dimen/common_padding_default"
-                    android:text="Experiencia laboral"
-                    android:textSize="@dimen/text_normal"
-                    android:textStyle="bold" />
+                    android:layout_marginTop="@dimen/common_padding_min"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
+                    <TextView
+                        android:id="@+id/tvHasWorkExperience"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingHorizontal="@dimen/common_padding_min"
+                        android:text="@string/user_has_work_experience"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/text_normal"
+                        android:textStyle="bold" />
+
+                    <RadioGroup
+                        android:id="@+id/rgWorkExperience"
+                        android:layout_width="wrap_content"
+                        android:layout_height="35dp"
+                        android:orientation="horizontal"
+                        android:paddingHorizontal="@dimen/common_padding_min">
+
+                        <RadioButton
+                            android:id="@+id/rbYesWorkExperience"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/common_padding_min"
+                            android:layout_weight="@integer/layout_weight_default"
+                            android:text="@string/cb_yes" />
+
+                        <RadioButton
+                            android:id="@+id/rbNoWorkExperience"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/common_padding_min"
+                            android:layout_weight="@integer/layout_weight_default"
+                            android:text="@string/cb_no" />
+
+                    </RadioGroup>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llWorkExperiences"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/common_padding_min"
+                        android:fontFamily="@font/roboto_light"
+                        android:text="Por favor muestra tus últimos 3 trabajos más relevantes sobre el perfil que buscas."
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/text_normal" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/common_padding_min"
+                        android:layout_marginTop="@dimen/common_padding_min"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvTitleWorkExperience1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_padding_min"
+                                android:text="Experiencia #1 *"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/text_normal"
+                                android:textStyle="bold" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/tilCompany1"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_padding_min"
+                                android:hint="@string/work_text_company">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etCompany1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="text|textCapWords"
+                                    android:textSize="@dimen/text_normal" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_padding_min"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilJob1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/work_text_job">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etJob1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="text|textCapWords"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilArea1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/work_text_workstation">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etArea1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="text|textCapWords"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_padding_min"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/period_start_title"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="@dimen/text_normal" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/common_padding_min"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/tilStartMonth1"
+                                        style="@style/DropdownMenuStyle"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="@dimen/common_padding_min"
+                                        android:layout_weight="@integer/layout_weight_default"
+                                        android:hint="@string/month_text">
+
+                                        <AutoCompleteTextView
+                                            android:id="@+id/atvStartMonth1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:imeOptions="actionNext"
+                                            android:inputType="none"
+                                            android:textSize="@dimen/text_normal" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/tilStartYear1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/common_padding_min"
+                                        android:layout_weight="@integer/layout_weight_default"
+                                        android:hint="@string/year_text">
+
+                                        <com.google.android.material.textfield.TextInputEditText
+                                            android:id="@+id/etStartYear1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:imeOptions="actionNext"
+                                            android:inputType="number"
+                                            android:textSize="@dimen/text_normal" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/common_padding_default"
+                                    android:text="@string/period_end_title"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="@dimen/text_normal" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/common_padding_min"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/tilEndMonth1"
+                                        style="@style/DropdownMenuStyle"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="@dimen/common_padding_min"
+                                        android:layout_weight="@integer/layout_weight_default"
+                                        android:hint="@string/month_text">
+
+                                        <AutoCompleteTextView
+                                            android:id="@+id/atvEndMonth1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:imeOptions="actionNext"
+                                            android:inputType="none"
+                                            android:textSize="@dimen/text_normal" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/tilEndYear1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/common_padding_min"
+                                        android:layout_weight="@integer/layout_weight_default"
+                                        android:hint="@string/year_text">
+
+                                        <com.google.android.material.textfield.TextInputEditText
+                                            android:id="@+id/etEndYear1"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:imeOptions="actionNext"
+                                            android:inputType="number"
+                                            android:textSize="@dimen/text_normal" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                </LinearLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilDescription1"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/common_padding_min"
+                                    android:hint="Breve descripción"
+                                    app:counterEnabled="true"
+                                    app:counterMaxLength="@integer/description_max_length"
+                                    app:helperText="Actividades realizadas en el trabajo">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etDescription1"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="textMultiLine"
+                                        android:lines="@integer/lines"
+                                        android:maxLength="@integer/description_max_length"
+                                        android:maxLines="@integer/lines"
+                                        android:minLines="@integer/min_lines"
+                                        android:overScrollMode="always"
+                                        android:scrollbarStyle="insideInset"
+                                        android:scrollbars="vertical"
+                                        android:singleLine="false"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginVertical="@dimen/common_padding_default"
+                                android:background="@android:color/darker_gray" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/common_padding_min"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvTitleWorkExperience2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_padding_min"
+                                android:text="Experiencia #2"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/text_normal"
+                                android:textStyle="bold" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/tilCompany2"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_padding_min"
+                                android:hint="@string/work_text_company">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etCompany2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="text|textCapWords"
+                                    android:textSize="@dimen/text_normal" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_padding_min"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilJob2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/work_text_job">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etJob2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="text|textCapWords"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilArea2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/work_text_workstation">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etArea2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="text|textCapWords"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_padding_min"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/period_start_title"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="@dimen/text_normal" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/common_padding_min"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/tilStartMonth2"
+                                        style="@style/DropdownMenuStyle"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="@dimen/common_padding_min"
+                                        android:layout_weight="@integer/layout_weight_default"
+                                        android:hint="@string/month_text">
+
+                                        <AutoCompleteTextView
+                                            android:id="@+id/atvStartMonth2"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:imeOptions="actionNext"
+                                            android:inputType="none"
+                                            android:textSize="@dimen/text_normal" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/tilStartYear2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/common_padding_min"
+                                        android:layout_weight="@integer/layout_weight_default"
+                                        android:hint="@string/year_text">
+
+                                        <com.google.android.material.textfield.TextInputEditText
+                                            android:id="@+id/etStartYear2"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:imeOptions="actionNext"
+                                            android:inputType="number"
+                                            android:textSize="@dimen/text_normal" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/common_padding_default"
+                                    android:text="@string/period_end_title"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="@dimen/text_normal" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/common_padding_min"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/tilEndMonth2"
+                                        style="@style/DropdownMenuStyle"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="@dimen/common_padding_min"
+                                        android:layout_weight="@integer/layout_weight_default"
+                                        android:hint="@string/month_text">
+
+                                        <AutoCompleteTextView
+                                            android:id="@+id/atvEndMonth2"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:imeOptions="actionNext"
+                                            android:inputType="none"
+                                            android:textSize="@dimen/text_normal" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/tilEndYear2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/common_padding_min"
+                                        android:layout_weight="@integer/layout_weight_default"
+                                        android:hint="@string/year_text">
+
+                                        <com.google.android.material.textfield.TextInputEditText
+                                            android:id="@+id/etEndYear2"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:imeOptions="actionNext"
+                                            android:inputType="number"
+                                            android:textSize="@dimen/text_normal" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                </LinearLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilDescription2"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/common_padding_min"
+                                    android:hint="Breve descripción"
+                                    app:counterEnabled="true"
+                                    app:counterMaxLength="@integer/description_max_length"
+                                    app:helperText="Actividades realizadas en el trabajo">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etDescription2"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="textMultiLine"
+                                        android:lines="@integer/lines"
+                                        android:maxLength="@integer/description_max_length"
+                                        android:maxLines="@integer/lines"
+                                        android:minLines="@integer/min_lines"
+                                        android:overScrollMode="always"
+                                        android:scrollbarStyle="insideInset"
+                                        android:scrollbars="vertical"
+                                        android:singleLine="false"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0.5dp"
+                                android:layout_marginVertical="@dimen/common_padding_default"
+                                android:background="@android:color/darker_gray" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/common_padding_min"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/tvTitleWorkExperience3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_padding_min"
+                                android:text="Experiencia #3"
+                                android:textColor="@android:color/black"
+                                android:textSize="@dimen/text_normal"
+                                android:textStyle="bold" />
+
+                            <com.google.android.material.textfield.TextInputLayout
+                                android:id="@+id/tilCompany3"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_padding_min"
+                                android:hint="@string/work_text_company">
+
+                                <com.google.android.material.textfield.TextInputEditText
+                                    android:id="@+id/etCompany3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:imeOptions="actionNext"
+                                    android:inputType="text|textCapWords"
+                                    android:textSize="@dimen/text_normal" />
+
+                            </com.google.android.material.textfield.TextInputLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_padding_min"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilJob3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/work_text_job">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etJob3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="text|textCapWords"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilArea3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="@dimen/common_padding_min"
+                                    android:layout_weight="@integer/layout_weight_default"
+                                    android:hint="@string/work_text_workstation">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etArea3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="text|textCapWords"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="@dimen/common_padding_min"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/period_start_title"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="@dimen/text_normal" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/common_padding_min"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/tilStartMonth3"
+                                        style="@style/DropdownMenuStyle"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="@dimen/common_padding_min"
+                                        android:layout_weight="@integer/layout_weight_default"
+                                        android:hint="@string/month_text">
+
+                                        <AutoCompleteTextView
+                                            android:id="@+id/atvStartMonth3"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:imeOptions="actionNext"
+                                            android:inputType="none"
+                                            android:textSize="@dimen/text_normal" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/tilStartYear3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/common_padding_min"
+                                        android:layout_weight="@integer/layout_weight_default"
+                                        android:hint="@string/year_text">
+
+                                        <com.google.android.material.textfield.TextInputEditText
+                                            android:id="@+id/etStartYear3"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:imeOptions="actionNext"
+                                            android:inputType="number"
+                                            android:textSize="@dimen/text_normal" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                </LinearLayout>
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/common_padding_default"
+                                    android:text="@string/period_end_title"
+                                    android:textColor="@android:color/black"
+                                    android:textSize="@dimen/text_normal" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/common_padding_min"
+                                    android:orientation="horizontal">
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/tilEndMonth3"
+                                        style="@style/DropdownMenuStyle"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginEnd="@dimen/common_padding_min"
+                                        android:layout_weight="@integer/layout_weight_default"
+                                        android:hint="@string/month_text">
+
+                                        <AutoCompleteTextView
+                                            android:id="@+id/atvEndMonth3"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:imeOptions="actionNext"
+                                            android:inputType="none"
+                                            android:textSize="@dimen/text_normal" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                    <com.google.android.material.textfield.TextInputLayout
+                                        android:id="@+id/tilEndYear3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginStart="@dimen/common_padding_min"
+                                        android:layout_weight="@integer/layout_weight_default"
+                                        android:hint="@string/year_text">
+
+                                        <com.google.android.material.textfield.TextInputEditText
+                                            android:id="@+id/etEndYear3"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:imeOptions="actionNext"
+                                            android:inputType="number"
+                                            android:textSize="@dimen/text_normal" />
+
+                                    </com.google.android.material.textfield.TextInputLayout>
+
+                                </LinearLayout>
+
+                                <com.google.android.material.textfield.TextInputLayout
+                                    android:id="@+id/tilDescription3"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="@dimen/common_padding_min"
+                                    android:hint="Breve descripción"
+                                    app:counterEnabled="true"
+                                    app:counterMaxLength="@integer/description_max_length"
+                                    app:helperText="Actividades realizadas en el trabajo">
+
+                                    <com.google.android.material.textfield.TextInputEditText
+                                        android:id="@+id/etDescription3"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:imeOptions="actionNext"
+                                        android:inputType="textMultiLine"
+                                        android:lines="@integer/lines"
+                                        android:maxLength="@integer/description_max_length"
+                                        android:maxLines="@integer/lines"
+                                        android:minLines="@integer/min_lines"
+                                        android:overScrollMode="always"
+                                        android:scrollbarStyle="insideInset"
+                                        android:scrollbars="vertical"
+                                        android:singleLine="false"
+                                        android:textSize="@dimen/text_normal" />
+
+                                </com.google.android.material.textfield.TextInputLayout>
+
+                            </LinearLayout>
+
+                            <View
+                                android:layout_width="match_parent"
+                                android:layout_height="0dp"
+                                android:layout_marginVertical="@dimen/common_padding_default"
+                                android:background="@android:color/transparent" />
+
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
 
             </LinearLayout>
 
@@ -70,6 +822,7 @@
                     android:clickable="true"
                     android:enabled="false"
                     android:focusable="true"
+                    android:visibility="gone"
                     app:srcCompat="@drawable/ic_arrow_forward" />
 
             </LinearLayout>

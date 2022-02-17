@@ -5,6 +5,7 @@
     <integer name="steps_number">3</integer>
 
     <integer name="counter_max_length">100</integer>
+    <integer name="description_max_length">500</integer>
     <integer name="line">1</integer>
     <integer name="lines">3</integer>
     <integer name="max_lines">3</integer>
