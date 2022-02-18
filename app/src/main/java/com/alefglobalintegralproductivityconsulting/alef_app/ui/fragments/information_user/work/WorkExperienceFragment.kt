@@ -1,19 +1,22 @@
 package com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.work
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.View
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.alefglobalintegralproductivityconsulting.alef_app.R
+import com.alefglobalintegralproductivityconsulting.alef_app.core.AppConstants
 import com.alefglobalintegralproductivityconsulting.alef_app.core.StepViewListener
+import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.SharedPreferencesManager
 import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.Validators.Companion.addAllMonths
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.FragmentWorkExperienceBinding
+import com.alefglobalintegralproductivityconsulting.alef_app.ui.HomeActivity
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.InfoUserViewModel
 import com.google.android.material.textfield.TextInputEditText
 
@@ -92,6 +95,11 @@ class WorkExperienceFragment : Fragment(R.layout.fragment_work_experience) {
 
             fabNext.setOnClickListener {
                 Toast.makeText(requireContext(), "En desarrollo", Toast.LENGTH_SHORT).show()
+                SharedPreferencesManager.removeAllData(AppConstants.USER_ID_GOOGLE)
+                val intent = Intent(requireContext(), HomeActivity::class.java)
+                intent.putExtra(AppConstants.IS_LOGIN_USER, true)
+                startActivity(intent)
+                activity?.finishAffinity()
             }
         }
     }

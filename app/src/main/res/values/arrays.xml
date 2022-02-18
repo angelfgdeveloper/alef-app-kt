@@ -3,6 +3,7 @@
     <string-array name="array_options_item">
         <item>@string/dialog_camera</item>
         <item>@string/dialog_gallery</item>
+        <item>@string/dialog_google_picture</item>
         <item>@string/dialog_delete_cancel</item>
     </string-array>
 </resources>

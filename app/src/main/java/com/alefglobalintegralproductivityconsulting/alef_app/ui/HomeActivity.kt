@@ -1,5 +1,6 @@
 package com.alefglobalintegralproductivityconsulting.alef_app.ui
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.Menu
@@ -18,13 +19,18 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.alefglobalintegralproductivityconsulting.alef_app.core.AppConstants
+import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.SharedPreferencesManager
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.ActivityHomeBinding
+import com.alefglobalintegralproductivityconsulting.alef_app.services.GoogleVerify
+import com.bumptech.glide.Glide
+import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.material.navigation.NavigationView
 
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var mBinding: ActivityHomeBinding
+    private var mGoogleSignInClient: GoogleSignInClient? = null
 
     private var isLogin: Boolean = false
 
@@ -42,6 +48,7 @@ class HomeActivity : AppCompatActivity() {
             hideItem(false)
         } else {
             hideItem(true)
+            mGoogleSignInClient = GoogleVerify.signInGoogle(this)
         }
 
         setSupportActionBar(mBinding.appBarHome.toolbar)
@@ -75,13 +82,14 @@ class HomeActivity : AppCompatActivity() {
         val bundle = bundleOf(AppConstants.IS_LOGIN_USER to isLogin)
         Navigation.findNavController(this, R.id.nav_host_fragment_content_home)
             .navigate(R.id.nav_home, bundle)
-
     }
 
     private fun hideItem(isVisible: Boolean) {
         val menu: Menu = mBinding.navView.menu
         menu.findItem(R.id.nav_login).isVisible = !isVisible
         menu.findItem(R.id.nav_login).setOnMenuItemClickListener {
+            val i = Intent(this, LoginActivity::class.java)
+            startActivity(i)
             finish()
             true
         }
@@ -94,7 +102,14 @@ class HomeActivity : AppCompatActivity() {
 
         menu.findItem(R.id.configuration_section).isVisible = isVisible
         menu.findItem(R.id.nav_logout).setOnMenuItemClickListener {
-            finish()
+            if (mGoogleSignInClient == null) {
+                finish()
+            } else {
+                signOut()
+            }
+            SharedPreferencesManager.removeAllData(AppConstants.USER_TOKEN)
+            SharedPreferencesManager.removeAllData(AppConstants.USER_ID_GOOGLE)
+            SharedPreferencesManager.removeAllData(AppConstants.USER_PICTURE_PROFILE)
             true
         }
 
@@ -110,9 +125,25 @@ class HomeActivity : AppCompatActivity() {
             ivWarning.visibility = View.INVISIBLE
             tvFullName.text = "Ingresa a tu cuenta"
             tvSpecialist.text = "Para tener más detalles y una mejor experiencia"
+        } else {
+            val civAvatar = hView.findViewById<ImageView>(R.id.civAvatar)
+
+            val pictureGoogle =
+                SharedPreferencesManager.getStringValue(AppConstants.USER_PICTURE_PROFILE)
+            if (pictureGoogle != "") {
+                Glide.with(this).load(pictureGoogle).centerCrop().into(civAvatar)
+            }
         }
 
         mBinding.btnLogout.visibility = if (isVisible) View.VISIBLE else View.GONE
+    }
+
+    private fun signOut() {
+        mGoogleSignInClient?.signOut()?.addOnCompleteListener(this) {
+            val i = Intent(this, SplashScreenActivity::class.java)
+            startActivity(i)
+            finish()
+        }
     }
 
     override fun onSupportNavigateUp(): Boolean {

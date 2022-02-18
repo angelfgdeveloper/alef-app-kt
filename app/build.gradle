@@ -3,6 +3,7 @@ plugins {
     id 'kotlin-android'
     id 'kotlin-android-extensions'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -75,6 +76,10 @@ dependencies {
 
     // Step View
     implementation 'com.shuhart.stepview:stepview:1.5.1'
+
+    // Google
+//    implementation platform('com.google.firebase:firebase-bom:29.1.0')
+    implementation 'com.google.android.gms:play-services-auth:20.1.0'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

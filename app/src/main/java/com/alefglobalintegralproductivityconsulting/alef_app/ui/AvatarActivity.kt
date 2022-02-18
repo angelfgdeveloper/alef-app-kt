@@ -14,7 +14,10 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.alefglobalintegralproductivityconsulting.alef_app.R
+import com.alefglobalintegralproductivityconsulting.alef_app.core.AppConstants
+import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.SharedPreferencesManager
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.ActivityAvatarBinding
+import com.bumptech.glide.Glide
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.MultiplePermissionsReport
@@ -97,10 +100,22 @@ class AvatarActivity : AppCompatActivity() {
                 when (i) {
                     0 -> requestCameraPermission()
                     1 -> requestGalleryPermission()
-                    2 -> null
+                    2 -> usePictureGoogle()
+                    3 -> null
                 }
             }
             .show()
+    }
+
+    private fun usePictureGoogle() {
+        val pictureGoogle =
+            SharedPreferencesManager.getStringValue(AppConstants.USER_PICTURE_PROFILE)
+        if (pictureGoogle != "") {
+            Glide.with(this).load(pictureGoogle).centerCrop().into(mBinding.civAvatar)
+        } else {
+            Toast.makeText(this, "Ocurrio un error, seleccione otra opción ;S", Toast.LENGTH_SHORT)
+                .show()
+        }
     }
 
     private fun requestGalleryPermission() {

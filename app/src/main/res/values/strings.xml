@@ -38,6 +38,7 @@
     <string name="dialog_delete_cancel">Cancelar</string>
     <string name="dialog_gallery">Galeria</string>
     <string name="dialog_camera">Camara</string>
+    <string name="dialog_google_picture">Usar mi imágen de Google</string>
     <string name="dialog_permissions_title">Requerimos permisos</string>
     <string name="dialog_permissions_message">Requerimos permisos para el uso de la camara o la galeria</string>
     <string name="dialog_confirm">Ir a los ajustes</string>
