@@ -358,3 +358,18 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, callback)
     }
 }
+
+// [\w\._]{5,30}\+?[\w]{0,10}@[\w\.\-]{3,}\.\w{2,5}$
+// angel.luis3@yahoo.edu.com.mx
+
+// \d{0}[12]\d{0}?[09]\d{0}[0-9]\d{0}[0-9]
+// 1879
+// 1998
+// 2030
+// 2010
+// 1996
+// 0265
+// 2406
+// 2302
+// 3578987
+// 6548

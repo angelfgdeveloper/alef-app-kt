@@ -5,11 +5,17 @@ import android.content.Context
 
 class MyApp : Application() {
     companion object {
-        lateinit var instance: MyApp
-            private set
+        private var instance: MyApp? = null
+
+        private fun getInstance(): MyApp {
+            if (instance == null) {
+                instance = MyApp()
+            }
+            return instance as MyApp
+        }
 
         fun getContext(): Context {
-            return instance
+            return getInstance()
         }
     }
 
