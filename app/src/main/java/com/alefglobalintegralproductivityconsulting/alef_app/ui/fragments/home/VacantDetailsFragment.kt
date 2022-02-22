@@ -1,12 +1,16 @@
 package com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.home
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.alefglobalintegralproductivityconsulting.alef_app.core.AppConstants
+import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.OnCloseBackPress
 import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.Timestamp
 import com.alefglobalintegralproductivityconsulting.alef_app.data.model.DAYS
 import com.alefglobalintegralproductivityconsulting.alef_app.data.model.Vacant
@@ -20,14 +24,23 @@ import kotlinx.android.synthetic.main.item_workday.view.*
 class VacantDetailsFragment : Fragment(R.layout.fragment_vacant_details) {
 
     private lateinit var mBinding: FragmentVacantDetailsBinding
+    private var listener: OnCloseBackPress? = null
 
     private var mVacant: Vacant? = null
     private var mVacantInfoExtra: VacantInfoExtra? = null
+    private var isActivity: Boolean? = null
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (activity is OnCloseBackPress) listener = activity as OnCloseBackPress?
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mBinding = FragmentVacantDetailsBinding.bind(view)
 
+        setupActionBar()
+        onBackPress()
         init()
         setupData()
     }
@@ -36,9 +49,22 @@ class VacantDetailsFragment : Fragment(R.layout.fragment_vacant_details) {
         val gson = Gson()
         val jsonVacant = arguments?.getString(AppConstants.DETAILS_VACANT)
         val jsonVacantInfoExtra = arguments?.getString(AppConstants.VACANT_INFO_EXTRA)
+        isActivity = arguments?.getBoolean(AppConstants.IS_ACTIVITY)
 
         mVacant = gson.fromJson(jsonVacant, Vacant::class.java)
         mVacantInfoExtra = gson.fromJson(jsonVacantInfoExtra, VacantInfoExtra::class.java)
+    }
+
+    private fun setupActionBar() {
+        (activity as AppCompatActivity?)!!.setSupportActionBar(mBinding.toolbar)
+
+        mBinding.toolbar.setNavigationOnClickListener {
+            if (isActivity == true) {
+                listener?.onCloseActivity(true)
+            } else {
+                listener?.onCloseActivity(false)
+            }
+        }
     }
 
     private fun setupData() {
@@ -183,6 +209,21 @@ class VacantDetailsFragment : Fragment(R.layout.fragment_vacant_details) {
         )
         intent.type = "text/plain"
         startActivity(Intent.createChooser(intent, "Compartir por:"))
+    }
+
+    private fun onBackPress() {
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    if (isActivity == true) {
+                        listener?.onCloseActivity(true)
+                    } else {
+                        listener?.onCloseActivity(false)
+                    }
+                }
+            }
+
+        requireActivity().onBackPressedDispatcher.addCallback(requireActivity(), callback)
     }
 
 }

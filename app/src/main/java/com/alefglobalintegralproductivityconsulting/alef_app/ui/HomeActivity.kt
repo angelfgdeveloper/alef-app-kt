@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.navigation.NavController
+import androidx.navigation.NavDestination
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -19,6 +21,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.alefglobalintegralproductivityconsulting.alef_app.core.AppConstants
+import com.alefglobalintegralproductivityconsulting.alef_app.core.OnVacantClickListener
+import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.OnCloseBackPress
 import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.SharedPreferencesManager
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.ActivityHomeBinding
 import com.alefglobalintegralproductivityconsulting.alef_app.services.GoogleVerify
@@ -26,11 +30,15 @@ import com.bumptech.glide.Glide
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.material.navigation.NavigationView
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), OnVacantClickListener, OnCloseBackPress {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var mBinding: ActivityHomeBinding
     private var mGoogleSignInClient: GoogleSignInClient? = null
+
+    private var isActivity: Boolean? = null
+    private var vacant: String? = null
+    private var vacantInfoExtra: String? = null
 
     private var isLogin: Boolean = false
 
@@ -42,6 +50,8 @@ class HomeActivity : AppCompatActivity() {
         val args = intent.extras
         if (args != null) {
             isLogin = args.getBoolean(AppConstants.IS_LOGIN_USER)
+            vacant = args.getString(AppConstants.JSON_VACANT)
+            vacantInfoExtra = args.getString(AppConstants.JSON_DETAILS_VACANT)
         }
 
         if (!isLogin) {
@@ -56,6 +66,16 @@ class HomeActivity : AppCompatActivity() {
         val drawerLayout: DrawerLayout = mBinding.drawerLayout
         val navView: NavigationView = mBinding.navView
         val navController = findNavController(R.id.nav_host_fragment_content_home)
+
+        navController.addOnDestinationChangedListener { nc: NavController, nd: NavDestination, args: Bundle? ->
+            if (nd.id == R.id.vacantDetailsFragment) {
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                supportActionBar?.hide()
+            } else {
+                supportActionBar?.show()
+                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+            }
+        }
 
         appBarConfiguration = AppBarConfiguration(
             setOf(
@@ -79,18 +99,21 @@ class HomeActivity : AppCompatActivity() {
         navView.itemIconTintList =
             ColorStateList.valueOf(ContextCompat.getColor(this, android.R.color.black))
 
-        val bundle = bundleOf(AppConstants.IS_LOGIN_USER to isLogin)
-        Navigation.findNavController(this, R.id.nav_host_fragment_content_home)
-            .navigate(R.id.nav_home, bundle)
+        if (!vacant.isNullOrEmpty() && !vacantInfoExtra.isNullOrEmpty()) {
+            onVacantDetails(vacant!!, vacantInfoExtra, true)
+        } else {
+            val bundle = bundleOf(AppConstants.IS_LOGIN_USER to isLogin)
+            Navigation.findNavController(this, R.id.nav_host_fragment_content_home)
+                .navigate(R.id.nav_home, bundle)
+        }
+
     }
 
     private fun hideItem(isVisible: Boolean) {
         val menu: Menu = mBinding.navView.menu
         menu.findItem(R.id.nav_login).isVisible = !isVisible
         menu.findItem(R.id.nav_login).setOnMenuItemClickListener {
-            val i = Intent(this, LoginActivity::class.java)
-            startActivity(i)
-            finish()
+            gotToLogin()
             true
         }
 
@@ -150,4 +173,46 @@ class HomeActivity : AppCompatActivity() {
         val navController = findNavController(R.id.nav_host_fragment_content_home)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
+    private fun gotToLogin() {
+        val i = Intent(this, LoginActivity::class.java)
+        startActivity(i)
+        finish()
+    }
+
+    override fun onVacantDetails(
+        jsonVacant: String,
+        jsonVacantInfoExtra: String?,
+        isActivity: Boolean
+    ) {
+        val bundle = bundleOf(
+            AppConstants.DETAILS_VACANT to jsonVacant,
+            AppConstants.VACANT_INFO_EXTRA to jsonVacantInfoExtra,
+            AppConstants.IS_ACTIVITY to isActivity
+        )
+
+        Navigation.findNavController(this, R.id.nav_host_fragment_content_home)
+            .navigate(R.id.action_nav_home_to_vacantDetailsFragment, bundle)
+    }
+
+    override fun onCloseActivity(isActivityClose: Boolean) {
+        isActivity = isActivityClose
+        if (isActivityClose) {
+            finish()
+        } else {
+            val bundle = bundleOf(AppConstants.IS_LOGIN_USER to isLogin)
+            Navigation.findNavController(this, R.id.nav_host_fragment_content_home)
+                .navigate(R.id.nav_home, bundle)
+        }
+    }
+
+//    override fun onBackPressed() {
+//        if (isActivity == true) {
+//            finish()
+//        } else {
+//            val bundle = bundleOf(AppConstants.IS_LOGIN_USER to isLogin)
+//            Navigation.findNavController(this, R.id.nav_host_fragment_content_home)
+//                .navigate(R.id.nav_home, bundle)
+//        }
+//    }
 }

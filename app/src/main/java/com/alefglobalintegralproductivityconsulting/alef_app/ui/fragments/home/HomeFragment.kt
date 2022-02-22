@@ -11,8 +11,8 @@ import android.provider.BaseColumns
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.SearchView
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.core.os.bundleOf
 import androidx.cursoradapter.widget.CursorAdapter
 import androidx.cursoradapter.widget.SimpleCursorAdapter
@@ -21,7 +21,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.alefglobalintegralproductivityconsulting.alef_app.core.AppConstants
+import com.alefglobalintegralproductivityconsulting.alef_app.core.OnVacantClickListener
 import com.alefglobalintegralproductivityconsulting.alef_app.core.Result
+import com.alefglobalintegralproductivityconsulting.alef_app.core.StepViewListener
 import com.alefglobalintegralproductivityconsulting.alef_app.data.model.Vacant
 import com.alefglobalintegralproductivityconsulting.alef_app.data.model.VacantInfoExtra
 import com.alefglobalintegralproductivityconsulting.alef_app.data.remote.home.RemoteHomeDataSource
@@ -37,6 +39,8 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantClickListener {
 
     private lateinit var mBinding: FragmentHomeBinding
+    private var listener: OnVacantClickListener? = null
+
     private lateinit var mAdapter: VacantAdapter
 
     private var isLogin: Boolean = false
@@ -47,11 +51,17 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
         )
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (activity is OnVacantClickListener) listener = activity as OnVacantClickListener?
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mBinding = FragmentHomeBinding.bind(view)
         hideKeyboard()
 
+//        onBackPress()
         setupArguments()
         setupVacancies()
         setupTextField()
@@ -211,16 +221,30 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
         val gson = Gson()
         val jsonVacant = gson.toJson(vacant)
         val jsonVacantInfoExtra = gson.toJson(vacantInfoExtra)
+//
+//        val bundle = bundleOf(
+//            AppConstants.DETAILS_VACANT to jsonVacant,
+//            AppConstants.VACANT_INFO_EXTRA to jsonVacantInfoExtra
+//        )
+//        findNavController().navigate(R.id.action_nav_home_to_vacantDetailsFragment, bundle)
 
-        val bundle = bundleOf(
-            AppConstants.DETAILS_VACANT to jsonVacant,
-            AppConstants.VACANT_INFO_EXTRA to jsonVacantInfoExtra
-        )
-        findNavController().navigate(R.id.action_nav_home_to_vacantDetailsFragment, bundle)
+        listener?.onVacantDetails(jsonVacant, jsonVacantInfoExtra, false)
     }
 
     private fun hideKeyboard() {
-        val imm = requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
+        val imm =
+            requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager?
         imm?.hideSoftInputFromWindow(mBinding.root.windowToken, 0)
+    }
+
+    private fun onBackPress() {
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    activity?.finish()
+                }
+            }
+
+        requireActivity().onBackPressedDispatcher.addCallback(requireActivity(), callback)
     }
 }

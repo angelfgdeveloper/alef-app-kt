@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
@@ -23,6 +24,7 @@ import com.alefglobalintegralproductivityconsulting.alef_app.domain.home.HomeRep
 import com.alefglobalintegralproductivityconsulting.alef_app.presentation.home.HomeViewModel
 import com.alefglobalintegralproductivityconsulting.alef_app.presentation.home.HomeViewModelFactory
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.home.adapter.VacantAdapter
+import com.google.gson.Gson
 
 class SearchActivity : AppCompatActivity(), VacantAdapter.OnVacantClickListener {
 
@@ -157,7 +159,14 @@ class SearchActivity : AppCompatActivity(), VacantAdapter.OnVacantClickListener 
     }
 
     override fun onVacantClick(vacant: Vacant, vacantInfoExtra: VacantInfoExtra?) {
+        val gson = Gson()
+        val jsonVacant = gson.toJson(vacant)
+        val jsonVacantInfoExtra = gson.toJson(vacantInfoExtra)
 
+        val i = Intent(SearchActivity@this, HomeActivity::class.java)
+        i.putExtra(AppConstants.JSON_VACANT, jsonVacant)
+        i.putExtra(AppConstants.JSON_DETAILS_VACANT, jsonVacantInfoExtra)
+        startActivity(i)
     }
 
     private fun hideKeyboard() {

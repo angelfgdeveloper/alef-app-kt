@@ -50,7 +50,7 @@ class Validators {
             var isValid = true
 
             for (textField in textFields) {
-                if (textField.editText?.text.toString().trim().isEmpty()) {
+                if (textField.editText?.text.toString().trim().isEmpty() && textField.editText?.text.toString().trim() == "") {
                     textField.error = context.getString(R.string.helper_required)
                     textField.editText?.requestFocus()
                     isValid = false

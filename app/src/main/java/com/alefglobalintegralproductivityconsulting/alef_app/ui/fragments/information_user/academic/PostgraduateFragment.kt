@@ -2,17 +2,18 @@ package com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.infor
 
 import android.content.Context
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.LinearLayout
 import androidx.activity.OnBackPressedCallback
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.alefglobalintegralproductivityconsulting.alef_app.core.StepViewListener
 import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.Validators.Companion.addAllMonths
+import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.Validators.Companion.validateFields
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.FragmentPostgraduateBinding
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.InfoUserViewModel
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.Posgraduate
@@ -20,6 +21,7 @@ import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.inform
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.information_user.viewmodel.STATE
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.android.synthetic.main.activity_avatar.*
 import kotlinx.android.synthetic.main.fragment_postgraduate.*
 
 class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
@@ -40,10 +42,6 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
         super.onViewCreated(view, savedInstanceState)
         mBinding = FragmentPostgraduateBinding.bind(view)
 
-        mInfoUserViewModel.getInfoUser().observe(viewLifecycleOwner) {
-            Log.d("PostgraduateFragment", it.toString())
-        }
-
         mInfoUserViewModel.getPosgraduateUser().observe(viewLifecycleOwner) { posgraduateUser ->
             with(mBinding) {
                 when (posgraduateUser.state) {
@@ -62,15 +60,42 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
                         rbYesPosgraduate.isChecked = true
 
                         if (posgraduateUser.total > 0) {
-                            llPosgraduate1.visibility = View.VISIBLE
-                            atvPosgraduate.setText(posgraduateUser.total.toString())
 
-                            atvType1.setText(posgraduateUser.totalPosgraduate[0].type)
-                            etTitleAchieved1.setText(posgraduateUser.totalPosgraduate[0].title)
-                            atvStartMonth1.setText(posgraduateUser.totalPosgraduate[0].startMonth)
-                            etStartYear1.setText(posgraduateUser.totalPosgraduate[0].startYear.toString())
-                            atvEndMonth1.setText(posgraduateUser.totalPosgraduate[0].endMonth)
-                            etEndYear1.setText(posgraduateUser.totalPosgraduate[0].endYear.toString())
+                            for (pg in 1..posgraduateUser.total) {
+                                addDataAllTextInputEditText(
+                                    "etTitleAchieved$pg",
+                                    posgraduateUser.totalPosgraduate[pg - 1].title
+                                )
+
+                                addDataAllTextInputEditText(
+                                    "etStartYear$pg",
+                                    posgraduateUser.totalPosgraduate[pg - 1].startYear.toString()
+                                )
+
+                                addDataAllTextInputEditText(
+                                    "etEndYear$pg",
+                                    posgraduateUser.totalPosgraduate[pg - 1].endYear.toString()
+                                )
+
+                                visibilityLinearLayout("llPosgraduate$pg", View.VISIBLE)
+
+                                atvPosgraduate.setText(posgraduateUser.total.toString())
+
+                                addDataAllAutocompleteTextView(
+                                    "atvType$pg",
+                                    posgraduateUser.totalPosgraduate[pg - 1].type
+                                )
+
+                                addDataAllAutocompleteTextView(
+                                    "atvStartMonth$pg",
+                                    posgraduateUser.totalPosgraduate[pg - 1].startMonth
+                                )
+
+                                addDataAllAutocompleteTextView(
+                                    "atvEndMonth$pg",
+                                    posgraduateUser.totalPosgraduate[pg - 1].endMonth
+                                )
+                            }
                         }
                         setData()
                     }
@@ -119,6 +144,25 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
                             autoCompleteTextViewList = autoCompleteTextViewList,
                             isHidePosgraduates = true
                         )
+
+                        val fields = arrayListOf(
+                            tilEndYear1,
+                            tilEndMonth1,
+                            tilStartYear1,
+                            tilStartMonth1,
+                            tilTitleAchieved1,
+                            tilType1,
+                        )
+
+                        fields.forEach { textInputLayout ->
+                            textInputLayout.editText?.addTextChangedListener {
+                                validateFields(
+                                    textInputLayout,
+                                    fab = fabNext,
+                                    context = requireContext()
+                                )
+                            }
+                        }
                     }
                 }
             }
@@ -130,7 +174,7 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
                 sendDataOptionFragment(false)
             }
             fabNext.setOnClickListener {
-                listener?.onSelectStepView(2, R.id.workExperienceFragment)
+                sendDataOptionFragment(true)
             }
         }
     }
@@ -208,6 +252,66 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
         if (resourceID != 0) {
             val tiet = mBinding.root.findViewById(resourceID) as TextInputEditText?
             tiet?.setText("")
+        }
+    }
+
+    private fun addDataAllTextInputEditText(resourceName: String, dataPosgraduate: String) {
+        val resourceID = resources.getIdentifier(
+            resourceName, "id",
+            requireActivity().packageName
+        )
+        if (resourceID != 0) {
+            val tiet = mBinding.root.findViewById(resourceID) as TextInputEditText?
+            tiet?.setText("")
+            tiet?.setText(dataPosgraduate)
+        }
+    }
+
+    private fun setterTextInputEditText(resourceName: String): String {
+        val resourceID = resources.getIdentifier(
+            resourceName, "id",
+            requireActivity().packageName
+        )
+        if (resourceID != 0) {
+            val tiet = mBinding.root.findViewById(resourceID) as TextInputEditText?
+            return tiet?.text.toString().trim()
+        }
+
+        return ""
+    }
+
+    private fun addDataAllAutocompleteTextView(resourceName: String, dataPosgraduate: String) {
+        val resourceID = resources.getIdentifier(
+            resourceName, "id",
+            requireActivity().packageName
+        )
+        if (resourceID != 0) {
+            val atvTypes = mBinding.root.findViewById(resourceID) as AutoCompleteTextView?
+            atvTypes?.setText(dataPosgraduate)
+        }
+    }
+
+    private fun setterAutocompleteTextView(resourceName: String): String {
+        val resourceID = resources.getIdentifier(
+            resourceName, "id",
+            requireActivity().packageName
+        )
+        if (resourceID != 0) {
+            val atvTypes = mBinding.root.findViewById(resourceID) as AutoCompleteTextView?
+            return atvTypes?.text.toString().trim()
+        }
+
+        return ""
+    }
+
+    private fun visibilityLinearLayout(resourceName: String, visibility: Int) {
+        val resourceID = resources.getIdentifier(
+            resourceName, "id",
+            requireActivity().packageName
+        )
+        if (resourceID != 0) {
+            val ll = mBinding.root.findViewById(resourceID) as LinearLayout?
+            ll?.visibility = visibility
         }
     }
 
@@ -310,12 +414,343 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
 
     private fun sendDataOptionFragment(isSave: Boolean) {
         if (isSave) {
+            when (mState) {
+                STATE.YES.state -> {
+                    with(mBinding) {
+                        val total = atvPosgraduate.text.toString().toInt()
+                        if (total > 0) {
+                            when(total) {
+                                1 -> {
+                                    if (validateFields(
+                                            tilEndYear1,
+                                            tilEndMonth1,
+                                            tilStartYear1,
+                                            tilStartMonth1,
+                                            tilTitleAchieved1,
+                                            tilType1,
+                                            fab = fabNext,
+                                            context = requireContext()
+                                        )
+                                    ) {
+                                        if (atvType1.text.toString().trim().isNotEmpty() &&
+                                            etTitleAchieved1.text.toString().trim().isNotEmpty() &&
+                                            atvStartMonth1.text.toString().trim().isNotEmpty() &&
+                                            etStartYear1.text.toString().trim().isNotEmpty() &&
+                                            atvEndMonth1.text.toString().trim().isNotEmpty() &&
+                                            etEndYear1.text.toString().trim().isNotEmpty()
+                                        ) {
+
+                                            val posgraduate: ArrayList<Posgraduate> = ArrayList()
+                                            posgraduate.add(
+                                                Posgraduate(
+                                                    type = atvType1.text.toString().trim(),
+                                                    title = etTitleAchieved1.text.toString().trim(),
+                                                    startMonth = atvStartMonth1.text.toString()
+                                                        .trim(),
+                                                    startYear = if (etStartYear1.text.toString()
+                                                            .isEmpty()
+                                                    ) 0
+                                                    else etStartYear1.text.toString().toInt(),
+                                                    endMonth = atvEndMonth1.text.toString().trim(),
+                                                    endYear = if (etEndYear1.text.toString()
+                                                            .isEmpty()
+                                                    ) 0
+                                                    else etEndYear1.text.toString().toInt()
+                                                )
+                                            )
+
+                                            mInfoUserViewModel.setPosgraduateUser(
+                                                PosgraduateUser(
+                                                    state = STATE.IN_PROCESS,
+                                                    total = posgraduate.size,
+                                                    totalPosgraduate = posgraduate
+                                                )
+                                            )
+
+                                            listener?.onSelectStepView(2, R.id.workExperienceFragment)
+                                        }
+                                    }
+
+                                }
+                                2 -> {
+                                    if (validateFields(
+                                            tilEndYear2,
+                                            tilEndMonth2,
+                                            tilStartYear2,
+                                            tilStartMonth2,
+                                            tilTitleAchieved2,
+                                            tilType2,
+                                            tilEndYear1,
+                                            tilEndMonth1,
+                                            tilStartYear1,
+                                            tilStartMonth1,
+                                            tilTitleAchieved1,
+                                            tilType1,
+                                            fab = fabNext,
+                                            context = requireContext()
+                                        )
+                                    ) {
+                                        if (atvType1.text.toString().trim().isNotEmpty() &&
+                                            etTitleAchieved1.text.toString().trim().isNotEmpty() &&
+                                            atvStartMonth1.text.toString().trim().isNotEmpty() &&
+                                            etStartYear1.text.toString().trim().isNotEmpty() &&
+                                            atvEndMonth1.text.toString().trim().isNotEmpty() &&
+                                            etEndYear1.text.toString().trim().isNotEmpty() &&
+                                            atvType2.text.toString().trim().isNotEmpty() &&
+                                            etTitleAchieved2.text.toString().trim().isNotEmpty() &&
+                                            atvStartMonth2.text.toString().trim().isNotEmpty() &&
+                                            etStartYear2.text.toString().trim().isNotEmpty() &&
+                                            atvEndMonth2.text.toString().trim().isNotEmpty() &&
+                                            etEndYear2.text.toString().trim().isNotEmpty()
+                                        ) {
+
+                                            val posgraduate: ArrayList<Posgraduate> = ArrayList()
+                                            posgraduate.add(
+                                                Posgraduate(
+                                                    type = atvType1.text.toString().trim(),
+                                                    title = etTitleAchieved1.text.toString().trim(),
+                                                    startMonth = atvStartMonth1.text.toString().trim(),
+                                                    startYear = if (etStartYear1.text.toString().isEmpty()) 0
+                                                    else etStartYear1.text.toString().toInt(),
+                                                    endMonth = atvEndMonth1.text.toString().trim(),
+                                                    endYear = if (etEndYear1.text.toString().isEmpty()) 0
+                                                    else etEndYear1.text.toString().toInt()
+                                                )
+                                            )
+
+                                            posgraduate.add(
+                                                Posgraduate(
+                                                    type = atvType2.text.toString().trim(),
+                                                    title = etTitleAchieved2.text.toString().trim(),
+                                                    startMonth = atvStartMonth2.text.toString().trim(),
+                                                    startYear = if (etStartYear2.text.toString().isEmpty()) 0
+                                                    else etStartYear2.text.toString().toInt(),
+                                                    endMonth = atvEndMonth2.text.toString().trim(),
+                                                    endYear = if (etEndYear2.text.toString().isEmpty()) 0
+                                                    else etEndYear2.text.toString().toInt()
+                                                )
+                                            )
+
+                                            mInfoUserViewModel.setPosgraduateUser(
+                                                PosgraduateUser(
+                                                    state = STATE.IN_PROCESS,
+                                                    total = posgraduate.size,
+                                                    totalPosgraduate = posgraduate
+                                                )
+                                            )
+
+                                            listener?.onSelectStepView(2, R.id.workExperienceFragment)
+                                        }
+                                    }
+                                }
+                                3 -> {
+                                    if (validateFields(
+                                            tilEndYear3,
+                                            tilEndMonth3,
+                                            tilStartYear3,
+                                            tilStartMonth3,
+                                            tilTitleAchieved3,
+                                            tilType3,
+                                            tilEndYear2,
+                                            tilEndMonth2,
+                                            tilStartYear2,
+                                            tilStartMonth2,
+                                            tilTitleAchieved2,
+                                            tilType2,
+                                            tilEndYear1,
+                                            tilEndMonth1,
+                                            tilStartYear1,
+                                            tilStartMonth1,
+                                            tilTitleAchieved1,
+                                            tilType1,
+                                            fab = fabNext,
+                                            context = requireContext()
+                                        )
+                                    ) {
+                                        if (atvType1.text.toString().trim().isNotEmpty() &&
+                                            etTitleAchieved1.text.toString().trim().isNotEmpty() &&
+                                            atvStartMonth1.text.toString().trim().isNotEmpty() &&
+                                            etStartYear1.text.toString().trim().isNotEmpty() &&
+                                            atvEndMonth1.text.toString().trim().isNotEmpty() &&
+                                            etEndYear1.text.toString().trim().isNotEmpty() &&
+                                            atvType2.text.toString().trim().isNotEmpty() &&
+                                            etTitleAchieved2.text.toString().trim().isNotEmpty() &&
+                                            atvStartMonth2.text.toString().trim().isNotEmpty() &&
+                                            etStartYear2.text.toString().trim().isNotEmpty() &&
+                                            atvEndMonth2.text.toString().trim().isNotEmpty() &&
+                                            etEndYear2.text.toString().trim().isNotEmpty() &&
+                                            atvType3.text.toString().trim().isNotEmpty() &&
+                                            etTitleAchieved3.text.toString().trim().isNotEmpty() &&
+                                            atvStartMonth3.text.toString().trim().isNotEmpty() &&
+                                            etStartYear3.text.toString().trim().isNotEmpty() &&
+                                            atvEndMonth3.text.toString().trim().isNotEmpty() &&
+                                            etEndYear3.text.toString().trim().isNotEmpty()
+                                        ) {
+
+                                            val posgraduate: ArrayList<Posgraduate> = ArrayList()
+                                            posgraduate.add(
+                                                Posgraduate(
+                                                    type = atvType1.text.toString().trim(),
+                                                    title = etTitleAchieved1.text.toString().trim(),
+                                                    startMonth = atvStartMonth1.text.toString().trim(),
+                                                    startYear = if (etStartYear1.text.toString().isEmpty()) 0
+                                                    else etStartYear1.text.toString().toInt(),
+                                                    endMonth = atvEndMonth1.text.toString().trim(),
+                                                    endYear = if (etEndYear1.text.toString().isEmpty()) 0
+                                                    else etEndYear1.text.toString().toInt()
+                                                )
+                                            )
+
+                                            posgraduate.add(
+                                                Posgraduate(
+                                                    type = atvType2.text.toString().trim(),
+                                                    title = etTitleAchieved2.text.toString().trim(),
+                                                    startMonth = atvStartMonth2.text.toString().trim(),
+                                                    startYear = if (etStartYear2.text.toString().isEmpty()) 0
+                                                    else etStartYear2.text.toString().toInt(),
+                                                    endMonth = atvEndMonth2.text.toString().trim(),
+                                                    endYear = if (etEndYear2.text.toString().isEmpty()) 0
+                                                    else etEndYear2.text.toString().toInt()
+                                                )
+                                            )
+
+                                            posgraduate.add(
+                                                Posgraduate(
+                                                    type = atvType3.text.toString().trim(),
+                                                    title = etTitleAchieved3.text.toString().trim(),
+                                                    startMonth = atvStartMonth3.text.toString().trim(),
+                                                    startYear = if (etStartYear3.text.toString().isEmpty()) 0
+                                                    else etStartYear3.text.toString().toInt(),
+                                                    endMonth = atvEndMonth3.text.toString().trim(),
+                                                    endYear = if (etEndYear3.text.toString().isEmpty()) 0
+                                                    else etEndYear3.text.toString().toInt()
+                                                )
+                                            )
+
+                                            mInfoUserViewModel.setPosgraduateUser(
+                                                PosgraduateUser(
+                                                    state = STATE.IN_PROCESS,
+                                                    total = posgraduate.size,
+                                                    totalPosgraduate = posgraduate
+                                                )
+                                            )
+
+                                            listener?.onSelectStepView(2, R.id.workExperienceFragment)
+                                        }
+                                    }
+                                }
+                                4 -> {}
+                            }
+                        }
+                    }
+                }
+                STATE.NO.state -> {
+                    mInfoUserViewModel.setPosgraduateUser(
+                        PosgraduateUser(
+                            state = STATE.NO
+                        )
+                    )
+
+                    listener?.onSelectStepView(2, R.id.workExperienceFragment)
+                }
+                STATE.IN_PROCESS.state -> {
+                    with(mBinding) {
+                        if (validateFields(
+                                tilEndYear1,
+                                tilEndMonth1,
+                                tilStartYear1,
+                                tilStartMonth1,
+                                tilTitleAchieved1,
+                                tilType1,
+                                fab = fabNext,
+                                context = requireContext()
+                            )
+                        ) {
+
+                            if (atvType1.text.toString().trim().isNotEmpty() &&
+                                etTitleAchieved1.text.toString().trim().isNotEmpty() &&
+                                atvStartMonth1.text.toString().trim().isNotEmpty() &&
+                                etStartYear1.text.toString().trim().isNotEmpty() &&
+                                atvEndMonth1.text.toString().trim().isNotEmpty() &&
+                                etEndYear1.text.toString().trim().isNotEmpty()
+                            ) {
+
+                                val posgraduate: ArrayList<Posgraduate> = ArrayList()
+                                posgraduate.add(
+                                    Posgraduate(
+                                        type = atvType1.text.toString().trim(),
+                                        title = etTitleAchieved1.text.toString().trim(),
+                                        startMonth = atvStartMonth1.text.toString().trim(),
+                                        startYear = if (etStartYear1.text.toString().isEmpty()) 0
+                                        else etStartYear1.text.toString().toInt(),
+                                        endMonth = atvEndMonth1.text.toString().trim(),
+                                        endYear = if (etEndYear1.text.toString().isEmpty()) 0
+                                        else etEndYear1.text.toString().toInt()
+                                    )
+                                )
+
+                                mInfoUserViewModel.setPosgraduateUser(
+                                    PosgraduateUser(
+                                        state = STATE.IN_PROCESS,
+                                        total = posgraduate.size,
+                                        totalPosgraduate = posgraduate
+                                    )
+                                )
+
+                                listener?.onSelectStepView(2, R.id.workExperienceFragment)
+                            }
+
+                        }
+
+                    }
+                }
+            }
 
         } else {
             when (mState) {
                 STATE.YES.state -> {
                     val totalPosgraduate: ArrayList<Posgraduate> = ArrayList()
-                    totalPosgraduate.add(
+
+                    val total = if (atvPosgraduate.text.toString().isEmpty()) 0 else atvPosgraduate.text.toString().toInt()
+
+                    if (total > 0) {
+                        for (et in 1..total) {
+                            setterAutocompleteTextView("atvEndMonth$et")
+
+                            totalPosgraduate.add(
+                                Posgraduate(
+                                    type = setterAutocompleteTextView("atvType$et"),
+                                    title = setterTextInputEditText("etTitleAchieved$et"),
+                                    startMonth = setterAutocompleteTextView("atvStartMonth$et"),
+                                    startYear = if (setterTextInputEditText("etStartYear$et").isEmpty()) 0
+                                    else setterTextInputEditText("etStartYear$et").toInt(),
+                                    endMonth = setterAutocompleteTextView("atvEndMonth$et"),
+                                    endYear = if (setterTextInputEditText("etEndYear$et").isEmpty()) 0
+                                    else setterTextInputEditText("etEndYear$et").toInt(),
+                                )
+                            )
+                        }
+                    }
+
+                    mInfoUserViewModel.setPosgraduateUser(
+                        PosgraduateUser(
+                            state = STATE.YES,
+                            total = if (atvPosgraduate.text.toString().isEmpty()) 0
+                            else atvPosgraduate.text.toString().toInt(),
+                            totalPosgraduate = totalPosgraduate
+                        )
+                    )
+                }
+                STATE.NO.state -> {
+                    mInfoUserViewModel.setPosgraduateUser(
+                        PosgraduateUser(
+                            state = STATE.NO
+                        )
+                    )
+                }
+                STATE.IN_PROCESS.state -> {
+                    val posgraduate: ArrayList<Posgraduate> = ArrayList()
+                    posgraduate.add(
                         Posgraduate(
                             type = atvType1.text.toString().trim(),
                             title = etTitleAchieved1.text.toString().trim(),
@@ -330,17 +765,11 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
 
                     mInfoUserViewModel.setPosgraduateUser(
                         PosgraduateUser(
-                            state = STATE.YES,
-                            total = totalPosgraduate.size,
-                            totalPosgraduate = totalPosgraduate
+                            state = STATE.IN_PROCESS,
+                            total = posgraduate.size,
+                            totalPosgraduate = posgraduate
                         )
                     )
-                }
-                STATE.NO.state -> {
-
-                }
-                STATE.IN_PROCESS.state -> {
-
                 }
             }
 
@@ -352,6 +781,7 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
                     listener?.onSelectStepView(1, R.id.academicFragment)
+                    sendDataOptionFragment(false)
                 }
             }
 
