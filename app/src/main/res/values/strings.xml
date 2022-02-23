@@ -122,4 +122,6 @@
     <string name="work_text_company">Nombre de la empresa</string>
     <string name="work_text_job">Puesto</string>
     <string name="work_text_workstation">Area o departamento</string>
+    <string name="drawer_open">Abrir menù</string>
+    <string name="drawer_close">Cerrar menù</string>
 </resources>

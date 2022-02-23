@@ -7,9 +7,12 @@ import android.view.Menu
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -32,20 +35,30 @@ import com.google.android.material.navigation.NavigationView
 
 class HomeActivity : AppCompatActivity(), OnVacantClickListener, OnCloseBackPress {
 
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var mBinding: ActivityHomeBinding
+    private lateinit var appBarConfiguration: AppBarConfiguration
+    private lateinit var mToolbar: Toolbar
+    private lateinit var mNavController: NavController
+    private lateinit var mDrawerLayout: DrawerLayout
+    private lateinit var mNavigationView: NavigationView
+
     private var mGoogleSignInClient: GoogleSignInClient? = null
 
     private var isActivity: Boolean? = null
     private var vacant: String? = null
     private var vacantInfoExtra: String? = null
-
     private var isLogin: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         mBinding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(mBinding.root)
+
+        mToolbar = mBinding.appBarHome.toolbar
+        mDrawerLayout = mBinding.drawerLayout
+        mNavigationView = mBinding.navView
+        mNavController = findNavController(R.id.nav_host_fragment_content_home)
+        setSupportActionBar(mToolbar)
 
         val args = intent.extras
         if (args != null) {
@@ -61,43 +74,35 @@ class HomeActivity : AppCompatActivity(), OnVacantClickListener, OnCloseBackPres
             mGoogleSignInClient = GoogleVerify.signInGoogle(this)
         }
 
-        setSupportActionBar(mBinding.appBarHome.toolbar)
-
-        val drawerLayout: DrawerLayout = mBinding.drawerLayout
-        val navView: NavigationView = mBinding.navView
-        val navController = findNavController(R.id.nav_host_fragment_content_home)
-
-        navController.addOnDestinationChangedListener { nc: NavController, nd: NavDestination, args: Bundle? ->
-            if (nd.id == R.id.vacantDetailsFragment) {
-                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-                supportActionBar?.hide()
-            } else {
-                supportActionBar?.show()
-                drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
-            }
-        }
-
         appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.nav_home,
-                R.id.nav_login,
-                R.id.nav_postulation,
-                R.id.nav_favorites,
-                R.id.nav_notification,
-                R.id.nav_curriculum,
-                R.id.nav_work_with_us,
-                R.id.nav_settings,
-                R.id.nav_logout
-            ), drawerLayout
+                R.id.nav_home, R.id.nav_login, R.id.nav_postulation, R.id.nav_favorites,
+                R.id.nav_notification, R.id.nav_curriculum, R.id.nav_work_with_us,
+                R.id.nav_settings, R.id.nav_logout
+            ), mDrawerLayout
         )
 
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        setupActionBarWithNavController(mNavController, appBarConfiguration)
+        mNavigationView.setupWithNavController(mNavController)
 
-        navView.itemTextColor =
+        mNavigationView.itemTextColor =
             ColorStateList.valueOf(ContextCompat.getColor(this, R.color.black))
-        navView.itemIconTintList =
+        mNavigationView.itemIconTintList =
             ColorStateList.valueOf(ContextCompat.getColor(this, android.R.color.black))
+
+        addDrawerMenu(mDrawerLayout)
+
+        mNavController.addOnDestinationChangedListener { nc: NavController, nd: NavDestination, args: Bundle? ->
+            if (nd.id == R.id.vacantDetailsFragment) {
+                mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+                mToolbar.visibility = View.GONE
+            } else {
+                mDrawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
+                mToolbar.visibility = View.VISIBLE
+                mToolbar.title = nd.label
+                mToolbar.setNavigationIcon(R.drawable.ic_drawer_menu)
+            }
+        }
 
         if (!vacant.isNullOrEmpty() && !vacantInfoExtra.isNullOrEmpty()) {
             onVacantDetails(vacant!!, vacantInfoExtra, true)
@@ -109,8 +114,23 @@ class HomeActivity : AppCompatActivity(), OnVacantClickListener, OnCloseBackPres
 
     }
 
+    private fun addDrawerMenu(drawerLayout: DrawerLayout) {
+        val drawerToggle = ActionBarDrawerToggle(
+            this, drawerLayout, mBinding.appBarHome.toolbar,
+            R.string.drawer_open, R.string.drawer_close
+        )
+
+        drawerToggle.isDrawerIndicatorEnabled = false
+
+        drawerToggle.setToolbarNavigationClickListener {
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
+
+        drawerToggle.setHomeAsUpIndicator(R.drawable.ic_drawer_menu)
+    }
+
     private fun hideItem(isVisible: Boolean) {
-        val menu: Menu = mBinding.navView.menu
+        val menu: Menu = mNavigationView.menu
         menu.findItem(R.id.nav_login).isVisible = !isVisible
         menu.findItem(R.id.nav_login).setOnMenuItemClickListener {
             gotToLogin()
@@ -136,7 +156,7 @@ class HomeActivity : AppCompatActivity(), OnVacantClickListener, OnCloseBackPres
             true
         }
 
-        val hView = mBinding.navView.getHeaderView(0)
+        val hView = mNavigationView.getHeaderView(0)
         if (!isVisible) {
             val ivWarning = hView.findViewById<ImageView>(R.id.ivWarning)
             val civAvatar = hView.findViewById<ImageView>(R.id.civAvatar)
@@ -169,21 +189,18 @@ class HomeActivity : AppCompatActivity(), OnVacantClickListener, OnCloseBackPres
         }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val navController = findNavController(R.id.nav_host_fragment_content_home)
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-    }
-
     private fun gotToLogin() {
         val i = Intent(this, LoginActivity::class.java)
         startActivity(i)
         finish()
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        return mNavController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
+    }
+
     override fun onVacantDetails(
-        jsonVacant: String,
-        jsonVacantInfoExtra: String?,
-        isActivity: Boolean
+        jsonVacant: String, jsonVacantInfoExtra: String?, isActivity: Boolean
     ) {
         val bundle = bundleOf(
             AppConstants.DETAILS_VACANT to jsonVacant,
@@ -205,14 +222,4 @@ class HomeActivity : AppCompatActivity(), OnVacantClickListener, OnCloseBackPres
                 .navigate(R.id.nav_home, bundle)
         }
     }
-
-//    override fun onBackPressed() {
-//        if (isActivity == true) {
-//            finish()
-//        } else {
-//            val bundle = bundleOf(AppConstants.IS_LOGIN_USER to isLogin)
-//            Navigation.findNavController(this, R.id.nav_host_fragment_content_home)
-//                .navigate(R.id.nav_home, bundle)
-//        }
-//    }
 }
