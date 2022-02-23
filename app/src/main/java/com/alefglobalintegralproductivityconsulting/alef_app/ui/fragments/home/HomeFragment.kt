@@ -13,17 +13,14 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.widget.SearchView
-import androidx.core.os.bundleOf
 import androidx.cursoradapter.widget.CursorAdapter
 import androidx.cursoradapter.widget.SimpleCursorAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.alefglobalintegralproductivityconsulting.alef_app.core.AppConstants
 import com.alefglobalintegralproductivityconsulting.alef_app.core.OnVacantClickListener
 import com.alefglobalintegralproductivityconsulting.alef_app.core.Result
-import com.alefglobalintegralproductivityconsulting.alef_app.core.StepViewListener
 import com.alefglobalintegralproductivityconsulting.alef_app.data.model.Vacant
 import com.alefglobalintegralproductivityconsulting.alef_app.data.model.VacantInfoExtra
 import com.alefglobalintegralproductivityconsulting.alef_app.data.remote.home.RemoteHomeDataSource
@@ -31,6 +28,7 @@ import com.alefglobalintegralproductivityconsulting.alef_app.databinding.Fragmen
 import com.alefglobalintegralproductivityconsulting.alef_app.domain.home.HomeRepoImpl
 import com.alefglobalintegralproductivityconsulting.alef_app.presentation.home.HomeViewModel
 import com.alefglobalintegralproductivityconsulting.alef_app.presentation.home.HomeViewModelFactory
+import com.alefglobalintegralproductivityconsulting.alef_app.ui.LoginActivity
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.SearchActivity
 import com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.home.adapter.VacantAdapter
 import com.google.gson.Gson
@@ -61,7 +59,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
         mBinding = FragmentHomeBinding.bind(view)
         hideKeyboard()
 
-//        onBackPress()
+        onBackPress()
         setupArguments()
         setupVacancies()
         setupTextField()
@@ -81,37 +79,11 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
                 CursorAdapter.FLAG_REGISTER_CONTENT_OBSERVER
             )
             val suggestions = listOf(
-                "Aguascalientes",
-                "Baja California",
-                "Baja California Sur",
-                "Campeche",
-                "Coahuila",
-                "Colima",
-                "Chiapas",
-                "Chihuahua",
-                "Durango",
-                "Distrito Federal",
-                "Guanajuato",
-                "Guerrero",
-                "Hidalgo",
-                "Jalisco",
-                "México",
-                "Michoacán",
-                "Morelos",
-                "Nayarit",
-                "Nuevo León",
-                "Oaxaca",
-                "Puebla",
-                "Querétaro",
-                "Quintana Roo",
-                "San Luis Potosí",
-                "Sinaloa",
-                "Sonora",
-                "Tabasco",
-                "Tamaulipas",
-                "Tlaxcala",
-                "Veracruz",
-                "Yucatán",
+                "Aguascalientes", "Baja California", "Baja California Sur", "Campeche", "Coahuila",
+                "Colima", "Chiapas", "Chihuahua", "Durango", "Distrito Federal", "Guanajuato",
+                "Guerrero", "Hidalgo", "Jalisco", "México", "Michoacán", "Morelos", "Nayarit",
+                "Nuevo León", "Oaxaca", "Puebla", "Querétaro", "Quintana Roo", "San Luis Potosí",
+                "Sinaloa", "Sonora", "Tabasco", "Tamaulipas", "Tlaxcala", "Veracruz", "Yucatán",
                 "Zacatecas"
             )
 
@@ -241,7 +213,13 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    activity?.finish()
+                    if (isLogin) {
+                        activity?.finish()
+                    } else {
+                        val i = Intent(requireContext(), LoginActivity::class.java)
+                        startActivity(i)
+                        activity?.finish()
+                    }
                 }
             }
 

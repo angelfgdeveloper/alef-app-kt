@@ -5,14 +5,14 @@ class AppConstants {
         const val IS_CLOSED_PREVIEW_TIME: String = "IS_CLOSED_PREVIEW_TIME"
         const val IS_LOGIN_USER: String = "IS_LOGIN_USER"
         const val USER_TOKEN: String = "USER_TOKEN"
-
         const val DETAILS_VACANT: String = "DETAILS_VACANT"
+
         const val VACANT_INFO_EXTRA: String = "VACANT_INFO_EXTRA"
-
         const val JSON_VACANT: String = "JSON_VACANT"
-        const val JSON_DETAILS_VACANT: String = "JSON_DETAILS_VACANT"
 
+        const val JSON_DETAILS_VACANT: String = "JSON_DETAILS_VACANT"
         const val IS_ACTIVITY: String = "IS_ACTIVITY"
+        const val ID_NAV_FRAGMENT: String = "ID_NAV_FRAGMENT"
 
         const val SEARCH_GENERAL: String = "SEARCH_GENERAL"
 

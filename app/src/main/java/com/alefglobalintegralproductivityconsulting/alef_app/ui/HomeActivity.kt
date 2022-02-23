@@ -44,7 +44,6 @@ class HomeActivity : AppCompatActivity(), OnVacantClickListener, OnCloseBackPres
 
     private var mGoogleSignInClient: GoogleSignInClient? = null
 
-    private var isActivity: Boolean? = null
     private var vacant: String? = null
     private var vacantInfoExtra: String? = null
     private var isLogin: Boolean = false
@@ -200,26 +199,27 @@ class HomeActivity : AppCompatActivity(), OnVacantClickListener, OnCloseBackPres
     }
 
     override fun onVacantDetails(
-        jsonVacant: String, jsonVacantInfoExtra: String?, isActivity: Boolean
+        jsonVacant: String, jsonVacantInfoExtra: String?, isActivity: Boolean,
+        idFragment: Int?
     ) {
         val bundle = bundleOf(
             AppConstants.DETAILS_VACANT to jsonVacant,
             AppConstants.VACANT_INFO_EXTRA to jsonVacantInfoExtra,
-            AppConstants.IS_ACTIVITY to isActivity
+            AppConstants.IS_ACTIVITY to isActivity,
+            AppConstants.ID_NAV_FRAGMENT to idFragment
         )
 
         Navigation.findNavController(this, R.id.nav_host_fragment_content_home)
-            .navigate(R.id.action_nav_home_to_vacantDetailsFragment, bundle)
+            .navigate(R.id.vacantDetailsFragment, bundle)
     }
 
-    override fun onCloseActivity(isActivityClose: Boolean) {
-        isActivity = isActivityClose
+    override fun onCloseActivity(isActivityClose: Boolean, idFragment: Int?) {
         if (isActivityClose) {
             finish()
         } else {
             val bundle = bundleOf(AppConstants.IS_LOGIN_USER to isLogin)
             Navigation.findNavController(this, R.id.nav_host_fragment_content_home)
-                .navigate(R.id.nav_home, bundle)
+                .navigate(idFragment!!, bundle)
         }
     }
 }

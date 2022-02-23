@@ -3,6 +3,7 @@ package com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.home
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
@@ -20,7 +21,6 @@ import com.google.gson.Gson
 import kotlinx.android.synthetic.main.item_availability.view.*
 import kotlinx.android.synthetic.main.item_workday.view.*
 
-
 class VacantDetailsFragment : Fragment(R.layout.fragment_vacant_details) {
 
     private lateinit var mBinding: FragmentVacantDetailsBinding
@@ -28,7 +28,8 @@ class VacantDetailsFragment : Fragment(R.layout.fragment_vacant_details) {
 
     private var mVacant: Vacant? = null
     private var mVacantInfoExtra: VacantInfoExtra? = null
-    private var isActivity: Boolean? = null
+    private var mIsActivity: Boolean? = null
+    private var mIdFragment: Int? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -49,7 +50,8 @@ class VacantDetailsFragment : Fragment(R.layout.fragment_vacant_details) {
         val gson = Gson()
         val jsonVacant = arguments?.getString(AppConstants.DETAILS_VACANT)
         val jsonVacantInfoExtra = arguments?.getString(AppConstants.VACANT_INFO_EXTRA)
-        isActivity = arguments?.getBoolean(AppConstants.IS_ACTIVITY)
+        mIsActivity = arguments?.getBoolean(AppConstants.IS_ACTIVITY)
+        mIdFragment = arguments?.getInt(AppConstants.ID_NAV_FRAGMENT)
 
         mVacant = gson.fromJson(jsonVacant, Vacant::class.java)
         mVacantInfoExtra = gson.fromJson(jsonVacantInfoExtra, VacantInfoExtra::class.java)
@@ -59,10 +61,10 @@ class VacantDetailsFragment : Fragment(R.layout.fragment_vacant_details) {
         (activity as AppCompatActivity?)!!.setSupportActionBar(mBinding.toolbar)
 
         mBinding.toolbar.setNavigationOnClickListener {
-            if (isActivity == true) {
+            if (mIsActivity == true) {
                 listener?.onCloseActivity(true)
             } else {
-                listener?.onCloseActivity(false)
+                listener?.onCloseActivity(false, mIdFragment)
             }
         }
     }
@@ -215,10 +217,10 @@ class VacantDetailsFragment : Fragment(R.layout.fragment_vacant_details) {
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    if (isActivity == true) {
+                    if (mIsActivity == true) {
                         listener?.onCloseActivity(true)
                     } else {
-                        listener?.onCloseActivity(false)
+                        listener?.onCloseActivity(false, mIdFragment)
                     }
                 }
             }
