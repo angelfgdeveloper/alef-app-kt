@@ -22,6 +22,9 @@ class InfoUserViewModel : ViewModel() {
     private val mPosgraduateNumber = MutableLiveData<List<Int>>()
     private val mTypePosgraduate = MutableLiveData<List<String>>()
 
+    // Work
+    private val mWork = MutableLiveData<Work>()
+
     fun setInfoUser(infoUser: InfoUser) {
         mInfoUser.value = infoUser
     }
@@ -34,11 +37,17 @@ class InfoUserViewModel : ViewModel() {
         mPosgraduateUser.value = posgraduateUser
     }
 
+    fun setWork(work: Work) {
+        mWork.value = work
+    }
+
     fun getInfoUser(): LiveData<InfoUser> = mInfoUser
 
     fun getAcademicUser(): LiveData<AcademicUser> = mAcademicUser
 
     fun getPosgraduateUser(): LiveData<PosgraduateUser> = mPosgraduateUser
+
+    fun getWork(): LiveData<Work> = mWork
 
     fun getGenderList(): LiveData<List<String>> {
         val genderList = arrayListOf("Masculino", "Femenino", "Otro")
@@ -187,4 +196,21 @@ data class Posgraduate(
     val startYear: Int = 0,
     val endMonth: String = "",
     val endYear: Int = 0
+)
+
+data class Work(
+    val state: STATE? = null,
+    val totalWorkExperience: ArrayList<WorkExperience> = ArrayList()
+)
+
+data class WorkExperience(
+    val id: Int = -1,
+    val company: String = "",
+    val job: String = "",
+    val area: String = "",
+    val startMonth: String = "",
+    val startYear: Int = 0,
+    val endMonth: String = "",
+    val endYear: Int = 0,
+    val description: String = ""
 )
