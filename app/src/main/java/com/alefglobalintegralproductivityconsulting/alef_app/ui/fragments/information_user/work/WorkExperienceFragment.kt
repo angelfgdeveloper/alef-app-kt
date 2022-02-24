@@ -227,7 +227,11 @@ class WorkExperienceFragment : Fragment(R.layout.fragment_work_experience) {
                 }
             }
         } else {
-            Toast.makeText(requireContext(), "Ir al Home", Toast.LENGTH_SHORT).show()
+            SharedPreferencesManager.removeAllData(AppConstants.USER_ID_GOOGLE)
+            val intent = Intent(requireContext(), HomeActivity::class.java)
+            intent.putExtra(AppConstants.IS_LOGIN_USER, true)
+            startActivity(intent)
+            activity?.finishAffinity()
         }
     }
 
