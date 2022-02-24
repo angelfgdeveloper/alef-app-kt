@@ -54,7 +54,7 @@
     <fragment
         android:id="@+id/vacantDetailsFragment"
         android:name="com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.home.VacantDetailsFragment"
-        android:label="Detalles de vacante"
+        android:label="@string/menu_details_vacant"
         tools:layout="@layout/fragment_vacant_details" />
 
 </navigation>

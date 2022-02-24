@@ -1,13 +1,16 @@
 package com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.postulation
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.alefglobalintegralproductivityconsulting.alef_app.core.Result
+import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.OnCloseBackPress
 import com.alefglobalintegralproductivityconsulting.alef_app.data.model.Postulation
 import com.alefglobalintegralproductivityconsulting.alef_app.data.remote.postulation.RemotePostulationDataSource
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.FragmentPostulationBinding
@@ -21,6 +24,7 @@ class PostulationFragment : Fragment(R.layout.fragment_postulation),
 
     private lateinit var mBinding: FragmentPostulationBinding
     private lateinit var mAdapter: PostulationAdapter
+    private var mOnCloseListener: OnCloseBackPress? = null
 
     private val mViewModel by viewModels<PostulationViewModel> {
         PostulationViewModelFactory(
@@ -28,10 +32,16 @@ class PostulationFragment : Fragment(R.layout.fragment_postulation),
         )
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (activity is OnCloseBackPress) mOnCloseListener = activity as OnCloseBackPress?
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mBinding = FragmentPostulationBinding.bind(view)
 
+        onBackPress()
         setupPostulations()
     }
 
@@ -71,6 +81,17 @@ class PostulationFragment : Fragment(R.layout.fragment_postulation),
 
     override fun onPostulationClick(postulation: Postulation) {
         Log.d("PostulationFragment", postulation.toString())
+    }
+
+    private fun onBackPress() {
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    mOnCloseListener?.onCloseActivity(false)
+                }
+            }
+
+        requireActivity().onBackPressedDispatcher.addCallback(requireActivity(), callback)
     }
 
 }

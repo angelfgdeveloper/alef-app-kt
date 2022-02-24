@@ -28,8 +28,9 @@
     <string name="menu_favorites">Favoritos</string>
     <string name="menu_notification">Notificaciones</string>
     <string name="menu_curriculum">Mi curriculum</string>
-    <string name="menu_work_with_us">Trabaja con nosotros</string>
+    <string name="menu_work_with_us">Freelancer</string>
     <string name="menu_settings">Ajustes</string>
+    <string name="menu_details_vacant">Detalles de vacante</string>
 
     <string name="logout">Cerrar sesión</string>
     <string name="add_img_avatar">Agregar foto de perfil</string>

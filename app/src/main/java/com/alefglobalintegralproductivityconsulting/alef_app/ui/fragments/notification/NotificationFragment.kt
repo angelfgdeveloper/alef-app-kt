@@ -1,13 +1,16 @@
 package com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.notification
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.alefglobalintegralproductivityconsulting.alef_app.R
 import com.alefglobalintegralproductivityconsulting.alef_app.core.Result
+import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.OnCloseBackPress
 import com.alefglobalintegralproductivityconsulting.alef_app.data.model.Notification
 import com.alefglobalintegralproductivityconsulting.alef_app.data.remote.notification.RemoteNotificationDataSource
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.FragmentNotificationBinding
@@ -22,6 +25,7 @@ class NotificationFragment : Fragment(R.layout.fragment_notification),
 
     private lateinit var mBinding: FragmentNotificationBinding
     private lateinit var mAdapter: NotificationAdapter
+    private var mOnCloseListener: OnCloseBackPress? = null
 
     private val mViewModel by viewModels<NotificationViewModel> {
         NotificationViewModelFactory(
@@ -29,10 +33,16 @@ class NotificationFragment : Fragment(R.layout.fragment_notification),
         )
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        if (activity is OnCloseBackPress) mOnCloseListener = activity as OnCloseBackPress?
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mBinding = FragmentNotificationBinding.bind(view)
 
+        onBackPress()
         setupNotifications()
         setupMarkViewAllNotifications()
     }
@@ -116,5 +126,16 @@ class NotificationFragment : Fragment(R.layout.fragment_notification),
 
     override fun onNotificationClick(notification: Notification) {
         Log.d("NotificationFragment", notification.toString())
+    }
+
+    private fun onBackPress() {
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    mOnCloseListener?.onCloseActivity(false)
+                }
+            }
+
+        requireActivity().onBackPressedDispatcher.addCallback(requireActivity(), callback)
     }
 }
