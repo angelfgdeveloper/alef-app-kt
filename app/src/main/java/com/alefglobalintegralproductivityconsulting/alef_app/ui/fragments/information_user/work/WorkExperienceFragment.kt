@@ -89,6 +89,7 @@ class WorkExperienceFragment : Fragment(R.layout.fragment_work_experience) {
                         fabNext.visibility = View.VISIBLE
                         fabNext.isEnabled = true
                         llWorkExperiences.visibility = View.GONE
+                        mIsActive = false
                     }
                 }
             }

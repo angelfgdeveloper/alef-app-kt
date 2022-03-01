@@ -47,9 +47,9 @@
     <string name="helper_required">Requerido</string>
     <string name="helper_optional">Opcional</string>
 
-    <string name="info_personal">Información Personal</string>
-    <string name="info_academic">Información Academica</string>
-    <string name="info_work_experience">Información Laboral</string>
+    <string name="info_personal">Personal</string>
+    <string name="info_academic">Academica</string>
+    <string name="info_work_experience">Laboral</string>
     <string name="info_references">Referencias</string>
 
     <string name="user_last_name">Apellido paterno</string>

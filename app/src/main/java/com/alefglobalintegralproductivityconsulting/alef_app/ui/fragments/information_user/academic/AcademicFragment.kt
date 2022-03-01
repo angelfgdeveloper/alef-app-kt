@@ -47,9 +47,9 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
 
         // TODO: Borrar test -> setText("...");
         with(mBinding) {
-            atvAcademicLevel.setText("Universidad")
+            atvAcademicLevel.setText("Primaria")
             etSchool.setText("Instituto Tecnólogico de Durango")
-            atvAcademicAdvance.setText("Grado técnico")
+            atvAcademicAdvance.setText("Terminado")
             atvStartMonth.setText("Junio")
             etStartYear.setText("2013")
             atvEndMonth.setText("Junio")
@@ -163,6 +163,9 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                         atvEndMonth.setText("")
                         etEndYear.setText("")
                         llCertificated.visibility = View.GONE
+                        rgCertificate.clearCheck()
+                        rgTitleAchieved.clearCheck()
+                        rgIdentificationCard.clearCheck()
                     }
 
                 } else {
@@ -176,6 +179,27 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                     atvEndMonth.setText("")
                     etEndYear.setText("")
                     llCertificated.visibility = View.GONE
+                    rgCertificate.clearCheck()
+                    rgTitleAchieved.clearCheck()
+                    rgIdentificationCard.clearCheck()
+                }
+            }
+        }
+
+        val academicLevel = mBinding.atvAcademicLevel.text.toString().trim()
+        val academicAdvance = mBinding.atvAcademicAdvance.text.toString().trim()
+
+        if (academicLevel.isNotEmpty()) {
+            addMonths()
+
+            if (academicAdvance.isNotEmpty()) {
+                when (academicLevel) {
+                    "Primaria", "Secundaria" -> {
+                        setAcademicAdvance(false)
+                    }
+                    "Bachillerato", "Universidad" -> {
+                        setAcademicAdvance(true)
+                    }
                 }
             }
         }
