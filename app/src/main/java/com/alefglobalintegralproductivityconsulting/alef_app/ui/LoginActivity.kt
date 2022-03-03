@@ -9,12 +9,20 @@ import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.alefglobalintegralproductivityconsulting.alef_app.core.AppConstants
+import com.alefglobalintegralproductivityconsulting.alef_app.core.Result
 import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.SharedPreferencesManager
 import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.Validators
+import com.alefglobalintegralproductivityconsulting.alef_app.data.model.RequestAuth
+import com.alefglobalintegralproductivityconsulting.alef_app.data.remote.auth.AuthDataSource
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.ActivityLoginBinding
+import com.alefglobalintegralproductivityconsulting.alef_app.domain.auth.AuthRepoImpl
+import com.alefglobalintegralproductivityconsulting.alef_app.presentation.auth.AuthViewModel
+import com.alefglobalintegralproductivityconsulting.alef_app.presentation.auth.AuthViewModelFactory
 import com.alefglobalintegralproductivityconsulting.alef_app.services.GoogleVerify
+import com.alefglobalintegralproductivityconsulting.alef_app.services.auth.RetrofitClientAuth
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -25,6 +33,14 @@ class LoginActivity : AppCompatActivity() {
 
     private lateinit var mBinding: ActivityLoginBinding
     private lateinit var mGoogleSignInClient: GoogleSignInClient
+
+    private val mViewModel by viewModels<AuthViewModel> {
+        AuthViewModelFactory(
+            AuthRepoImpl(
+                AuthDataSource(RetrofitClientAuth.webServiceAuth)
+            )
+        )
+    }
 
     private var resultLauncherGoogleSignIn =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
@@ -125,7 +141,7 @@ class LoginActivity : AppCompatActivity() {
 
         if (email.isNotEmpty() && password.isNotEmpty()) {
             if (Validators.isValidEmail(email) && Validators.isValidPassword(password)) {
-                goToHome(true)
+                authUser(email, password)
             } else {
                 Toast.makeText(
                     this@LoginActivity,
@@ -142,7 +158,28 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    private fun goToHome(isLoginUser: Boolean) {
+    private fun authUser(email: String, password: String) {
+        val requestLogin = RequestAuth(email, password)
+        mViewModel.signIn(requestLogin).observe(this) { result ->
+            when (result) {
+                is Result.Failure -> {
+                    Log.d("Auth", result.toString())
+                }
+                is Result.Loading -> {
+                    Log.d("Auth", result.toString())
+                }
+                is Result.Success -> {
+                    val accessToken = result.data.body()?.accessToken.toString()
+
+                    if (accessToken.isNotEmpty()) {
+                        goToHome(true, accessToken)
+                    }
+                }
+            }
+        }
+    }
+
+    private fun goToHome(isLoginUser: Boolean, accessToken: String = "") {
         val intent = Intent(this@LoginActivity, HomeActivity::class.java)
         intent.putExtra(AppConstants.IS_LOGIN_USER, isLoginUser)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
@@ -150,10 +187,10 @@ class LoginActivity : AppCompatActivity() {
         finish()
 
         if (isLoginUser) {
-            val userToken =
-                "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkFuZ2VsIiwiaWF0IjoxNTE2MjM5MDIyfQ.5sqP7aP7XI_UOCQLvRQuWTDCusnyq-WVsBex8rrX_ic"
-            SharedPreferencesManager.setStringValue(AppConstants.USER_TOKEN, userToken)
-            finish()
+            if (accessToken.isNotEmpty()) {
+                SharedPreferencesManager.setStringValue(AppConstants.USER_TOKEN, accessToken)
+                finish()
+            }
         }
     }
 

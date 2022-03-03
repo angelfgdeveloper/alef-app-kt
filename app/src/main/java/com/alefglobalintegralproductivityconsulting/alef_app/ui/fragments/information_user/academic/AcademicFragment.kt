@@ -54,15 +54,15 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
             etStartYear.setText("2013")
             atvEndMonth.setText("Junio")
             etEndYear.setText("2020")
-            rbYesCertificate.isChecked = true
-            rbNoCertificate.isChecked = false
-            rbYesTitleAchieved.isChecked = true
-            rbNoTitleAchieved.isChecked = false
-            rbYesIdentificationCard.isChecked = true
-            rbNoIdentificationCard.isChecked = false
+//            rbYesCertificate.isChecked = true
+//            rbNoCertificate.isChecked = false
+//            rbYesTitleAchieved.isChecked = true
+//            rbNoTitleAchieved.isChecked = false
+//            rbYesIdentificationCard.isChecked = true
+//            rbNoIdentificationCard.isChecked = false
             llAcademic.visibility = View.VISIBLE
             llPeriod.visibility = View.VISIBLE
-            llCertificated.visibility = View.VISIBLE
+//            llCertificated.visibility = View.VISIBLE
             fabNext.isEnabled = true
         }
         // TODO: ....
