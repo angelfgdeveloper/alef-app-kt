@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
@@ -15,7 +16,8 @@ import com.alefglobalintegralproductivityconsulting.alef_app.core.AppConstants
 import com.alefglobalintegralproductivityconsulting.alef_app.core.Result
 import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.SharedPreferencesManager
 import com.alefglobalintegralproductivityconsulting.alef_app.core.utils.Validators
-import com.alefglobalintegralproductivityconsulting.alef_app.data.model.RequestAuth
+import com.alefglobalintegralproductivityconsulting.alef_app.data.model.auth.RequestAuth
+import com.alefglobalintegralproductivityconsulting.alef_app.data.model.auth.RequestGoogle
 import com.alefglobalintegralproductivityconsulting.alef_app.data.remote.auth.AuthDataSource
 import com.alefglobalintegralproductivityconsulting.alef_app.databinding.ActivityLoginBinding
 import com.alefglobalintegralproductivityconsulting.alef_app.domain.auth.AuthRepoImpl
@@ -78,25 +80,59 @@ class LoginActivity : AppCompatActivity() {
         try {
             val account = completedTask.getResult(ApiException::class.java)
             val googleId = account?.id ?: ""
-
             val googleFirstName = account?.givenName ?: ""
-            Log.i("Google First Name", googleFirstName)
             val googleLastName = account?.familyName ?: ""
-            Log.i("Google Last Name", googleLastName)
             val googleEmail = account?.email ?: ""
-            Log.i("Google Email", googleEmail)
-
             val googleProfilePicURL = account?.photoUrl.toString()
             val googleIdToken = account?.idToken ?: ""
 
-            SharedPreferencesManager.setStringValue(AppConstants.USER_TOKEN, googleIdToken)
-            SharedPreferencesManager.setStringValue(AppConstants.USER_ID_GOOGLE, googleId)
-            SharedPreferencesManager.setStringValue(
-                AppConstants.USER_PICTURE_PROFILE,
-                googleProfilePicURL
-            )
+            if (!googleIdToken.isNullOrEmpty()) {
+                val authGoogle = RequestGoogle(googleIdToken)
+                mViewModel.authGoogle(authGoogle).observe(this) { result ->
+                    when (result) {
+                        is Result.Failure -> {
+                            Log.d("Google", result.toString())
+                            mBinding.progressBar.visibility = View.GONE
+                        }
+                        is Result.Loading -> {
+                            Log.d("Google", result.toString())
+                            mBinding.progressBar.visibility = View.VISIBLE
+                        }
+                        is Result.Success -> {
+                            val accessToken = result.data.body()?.accessToken.toString()
+                            val uid = result.data.body()?.user?.uid.toString()
 
-            goToInfoUser()
+                            if (accessToken.isNotEmpty() && accessToken != "null") {
+                                SharedPreferencesManager.setStringValue(
+                                    AppConstants.USER_TOKEN,
+                                    accessToken
+                                )
+
+                                if (uid.isNotEmpty() && uid != "null") {
+                                    SharedPreferencesManager.setStringValue(
+                                        AppConstants.USER_ID_GOOGLE,
+                                        uid
+                                    )
+                                    SharedPreferencesManager.setStringValue(
+                                        AppConstants.USER_PICTURE_PROFILE,
+                                        googleProfilePicURL
+                                    )
+
+                                    goToInfoUser()
+                                }
+                            } else {
+                                mBinding.progressBar.visibility = View.GONE
+                                Toast.makeText(
+                                    this,
+                                    "Usuario o contraseña incorrecta",
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+
+                        }
+                    }
+                }
+            }
 
         } catch (e: ApiException) {
             Log.w("Error", "Google sign in failed", e)
@@ -163,16 +199,22 @@ class LoginActivity : AppCompatActivity() {
         mViewModel.signIn(requestLogin).observe(this) { result ->
             when (result) {
                 is Result.Failure -> {
+                    mBinding.progressBar.visibility = View.GONE
                     Log.d("Auth", result.toString())
                 }
                 is Result.Loading -> {
                     Log.d("Auth", result.toString())
+                    mBinding.progressBar.visibility = View.VISIBLE
                 }
                 is Result.Success -> {
                     val accessToken = result.data.body()?.accessToken.toString()
 
-                    if (accessToken.isNotEmpty()) {
+                    if (accessToken.isNotEmpty() && accessToken != "null") {
                         goToHome(true, accessToken)
+                    } else {
+                        mBinding.progressBar.visibility = View.GONE
+                        Toast.makeText(this, "Usuario o contraseña incorrecta", Toast.LENGTH_SHORT)
+                            .show()
                     }
                 }
             }

@@ -1,9 +1,11 @@
 package com.alefglobalintegralproductivityconsulting.alef_app.domain.auth
 
-import com.alefglobalintegralproductivityconsulting.alef_app.data.model.Auth
-import com.alefglobalintegralproductivityconsulting.alef_app.data.model.RequestAuth
+import com.alefglobalintegralproductivityconsulting.alef_app.data.model.auth.Auth
+import com.alefglobalintegralproductivityconsulting.alef_app.data.model.auth.RequestAuth
+import com.alefglobalintegralproductivityconsulting.alef_app.data.model.auth.RequestGoogle
 import retrofit2.Response
 
 interface AuthRepo {
     suspend fun signIn(requestAuth: RequestAuth): Response<Auth>
+    suspend fun authGoogle(requestGoogle: RequestGoogle): Response<Auth>
 }

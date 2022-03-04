@@ -2,7 +2,7 @@ package com.alefglobalintegralproductivityconsulting.alef_app.core
 
 class AppConstants {
     companion object {
-        const val API_URL = "http://192.168.137.1:3977/api/v1/"
+        const val API_URL = "http://192.168.1.15:3977/api/v1/"
 
         const val IS_CLOSED_PREVIEW_TIME: String = "IS_CLOSED_PREVIEW_TIME"
         const val IS_LOGIN_USER: String = "IS_LOGIN_USER"
