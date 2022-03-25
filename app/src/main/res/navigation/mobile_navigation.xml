@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.home.HomeFragment"
+        android:name="com.companyglobal.alef_app.ui.fragments.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -17,43 +17,43 @@
 
     <fragment
         android:id="@+id/nav_postulation"
-        android:name="com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.postulation.PostulationFragment"
+        android:name="com.companyglobal.alef_app.ui.fragments.postulation.PostulationFragment"
         android:label="@string/menu_postulation"
         tools:layout="@layout/fragment_postulation" />
 
     <fragment
         android:id="@+id/nav_favorites"
-        android:name="com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.favorites.FavoritesFragment"
+        android:name="com.companyglobal.alef_app.ui.fragments.favorites.FavoritesFragment"
         android:label="@string/menu_favorites"
         tools:layout="@layout/fragment_favorites" />
 
     <fragment
         android:id="@+id/nav_notification"
-        android:name="com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.notification.NotificationFragment"
+        android:name="com.companyglobal.alef_app.ui.fragments.notification.NotificationFragment"
         android:label="@string/menu_notification"
         tools:layout="@layout/fragment_notification" />
 
     <fragment
         android:id="@+id/nav_curriculum"
-        android:name="com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.curriculum.CurriculumFragment"
+        android:name="com.companyglobal.alef_app.ui.fragments.curriculum.CurriculumFragment"
         android:label="@string/menu_curriculum"
         tools:layout="@layout/fragment_curriculum" />
 
     <fragment
         android:id="@+id/nav_work_with_us"
-        android:name="com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.workus.WorkUsFragment"
+        android:name="com.companyglobal.alef_app.ui.fragments.workus.WorkUsFragment"
         android:label="@string/menu_work_with_us"
         tools:layout="@layout/fragment_work_us" />
 
     <fragment
         android:id="@+id/nav_settings"
-        android:name="com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.settings.SettingsFragment"
+        android:name="com.companyglobal.alef_app.ui.fragments.settings.SettingsFragment"
         android:label="@string/menu_settings"
         tools:layout="@layout/fragment_settings" />
 
     <fragment
         android:id="@+id/vacantDetailsFragment"
-        android:name="com.alefglobalintegralproductivityconsulting.alef_app.ui.fragments.home.VacantDetailsFragment"
+        android:name="com.companyglobal.alef_app.ui.fragments.home.VacantDetailsFragment"
         android:label="@string/menu_details_vacant"
         tools:layout="@layout/fragment_vacant_details" />
 

@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "39455255105",
-    "project_id": "alef-app-341622",
-    "storage_bucket": "alef-app-341622.appspot.com"
+    "project_number": "682106528357",
+    "project_id": "company-global",
+    "storage_bucket": "company-global.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:39455255105:android:81d4e84deb67e6b427f4c0",
+        "mobilesdk_app_id": "1:682106528357:android:228cfc75d3a7b28abd5c8c",
         "android_client_info": {
-          "package_name": "com.alefglobalintegralproductivityconsulting.alef_app"
+          "package_name": "com.companyglobal.alef_app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "39455255105-i51r6jq39ile1n7m9jb2j00f7lafrnks.apps.googleusercontent.com",
+          "client_id": "682106528357-kj36o8qhhnikcmfnc57mh2s06eumeslc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.alefglobalintegralproductivityconsulting.alef_app",
-            "certificate_hash": "a3fec7f71ab9f46da84b8b13d01f93ea39efbd93"
+            "package_name": "com.companyglobal.alef_app",
+            "certificate_hash": "94d892852d2e169723d030dbe29e9461d1f54945"
           }
         },
         {
-          "client_id": "39455255105-agu55okmn8ieovl8jtpc3hv1ljluoics.apps.googleusercontent.com",
+          "client_id": "682106528357-dbl0dhtmrhtbp96ldi5gbiensvv8aoel.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCpICJRs48tSvmO3f0eSrS58tOl5rSoXn4"
+          "current_key": "AIzaSyDWdFce81QX1fppAVbTq8y8t-4j-aEIk7c"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "39455255105-agu55okmn8ieovl8jtpc3hv1ljluoics.apps.googleusercontent.com",
+              "client_id": "682106528357-dbl0dhtmrhtbp96ldi5gbiensvv8aoel.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
