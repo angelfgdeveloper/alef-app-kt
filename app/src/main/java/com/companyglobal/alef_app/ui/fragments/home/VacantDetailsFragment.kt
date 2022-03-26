@@ -74,16 +74,16 @@ class VacantDetailsFragment : Fragment(R.layout.fragment_vacant_details) {
             tvCompany.text = mVacant?.company?.name
             tvLocation.text = "${mVacant!!.location[0].state} ${mVacant!!.location[0].town}"
 
-            tvMode.text = mVacantInfoExtra?.mode
+            tvMode.text = mVacant?.mode
 
-            if (mVacantInfoExtra?.companyPaid!!) {
+            if (mVacant?.companyPaid!!) {
                 ivStateCompany.visibility = View.VISIBLE
             } else {
                 ivStateCompany.visibility = View.GONE
             }
 
-            if (!mVacantInfoExtra?.workDay.isNullOrEmpty()) {
-                val workDayMap = mVacantInfoExtra?.workDay
+            if (!mVacant?.workDay.isNullOrEmpty()) {
+                val workDayMap = mVacant?.workDay
 
                 if (workDayMap != null) {
                     for ((day, hour) in workDayMap) {
@@ -93,32 +93,7 @@ class VacantDetailsFragment : Fragment(R.layout.fragment_vacant_details) {
                             false
                         )
 
-                        var auxDay = ""
-                        when (day) {
-                            DAYS.MONDAY.num -> {
-                                auxDay = DAYS.MONDAY.day
-                            }
-                            DAYS.TUESDAY.num -> {
-                                auxDay = DAYS.TUESDAY.day
-                            }
-                            DAYS.WEDNESDAY.num -> {
-                                auxDay = DAYS.WEDNESDAY.day
-                            }
-                            DAYS.THURSDAY.num -> {
-                                auxDay = DAYS.THURSDAY.day
-                            }
-                            DAYS.FRIDAY.num -> {
-                                auxDay = DAYS.FRIDAY.day
-                            }
-                            DAYS.SATURDAY.num -> {
-                                auxDay = DAYS.SATURDAY.day
-                            }
-                            DAYS.SUNDAY.num -> {
-                                auxDay = DAYS.SUNDAY.day
-                            }
-                        }
-
-                        workDays.tvDay.text = auxDay
+                        workDays.tvDay.text = day
                         workDays.tvHour.text = hour
 
                         llWorkDay.addView(workDays)
@@ -171,11 +146,11 @@ class VacantDetailsFragment : Fragment(R.layout.fragment_vacant_details) {
                 llSalary.visibility = View.VISIBLE
 
                 if (mVacant?.firstSalary != -1 && mVacant?.secondSalary != -1) {
-                    tvSalary.text = "$${mVacant?.firstSalary} - $${mVacant?.secondSalary} MXN"
+                    tvSalary.text = "$${mVacant?.firstSalary} - $${mVacant?.secondSalary} ${mVacant?.typeCurrency}"
                 } else if (mVacant?.firstSalary != -1) {
-                    tvSalary.text = "$${mVacant?.firstSalary} MXN"
+                    tvSalary.text = "$${mVacant?.firstSalary} ${mVacant?.typeCurrency}"
                 } else if (mVacant?.secondSalary != -1) {
-                    tvSalary.text = "$${mVacant?.secondSalary} MXN"
+                    tvSalary.text = "$${mVacant?.secondSalary} ${mVacant?.typeCurrency}"
                 }
 
                 tvPayments.text = mVacant?.paymentMethod

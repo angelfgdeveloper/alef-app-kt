@@ -158,14 +158,12 @@ class SearchActivity : AppCompatActivity(), VacantAdapter.OnVacantClickListener 
         mAdapter.setFilter(newVacants)
     }
 
-    override fun onVacantClick(vacant: Vacant, vacantInfoExtra: VacantInfoExtra?) {
+    override fun onVacantClick(vacant: Vacant) {
         val gson = Gson()
         val jsonVacant = gson.toJson(vacant)
-        val jsonVacantInfoExtra = gson.toJson(vacantInfoExtra)
 
         val i = Intent(SearchActivity@this, HomeActivity::class.java)
         i.putExtra(AppConstants.JSON_VACANT, jsonVacant)
-        i.putExtra(AppConstants.JSON_DETAILS_VACANT, jsonVacantInfoExtra)
         startActivity(i)
     }
 

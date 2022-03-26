@@ -192,10 +192,9 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
         }
     }
 
-    override fun onVacantClick(vacant: Vacant, vacantInfoExtra: VacantInfoExtra?) {
+    override fun onVacantClick(vacant: Vacant) {
         val gson = Gson()
         val jsonVacant = gson.toJson(vacant)
-        val jsonVacantInfoExtra = gson.toJson(vacantInfoExtra)
 //
 //        val bundle = bundleOf(
 //            AppConstants.DETAILS_VACANT to jsonVacant,
@@ -203,7 +202,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
 //        )
 //        findNavController().navigate(R.id.action_nav_home_to_vacantDetailsFragment, bundle)
 
-        listener?.onVacantDetails(jsonVacant, jsonVacantInfoExtra, false)
+        listener?.onVacantDetails(jsonVacant, false)
     }
 
     private fun hideKeyboard() {

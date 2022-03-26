@@ -103,8 +103,8 @@ class HomeActivity : AppCompatActivity(), OnVacantClickListener, OnCloseBackPres
             }
         }
 
-        if (!vacant.isNullOrEmpty() && !vacantInfoExtra.isNullOrEmpty()) {
-            onVacantDetails(vacant!!, vacantInfoExtra, true)
+        if (!vacant.isNullOrEmpty()) {
+            onVacantDetails(vacant!!, true)
         } else {
             val bundle = bundleOf(AppConstants.IS_LOGIN_USER to isLogin)
             Navigation.findNavController(this, R.id.nav_host_fragment_content_home)
@@ -199,12 +199,11 @@ class HomeActivity : AppCompatActivity(), OnVacantClickListener, OnCloseBackPres
     }
 
     override fun onVacantDetails(
-        jsonVacant: String, jsonVacantInfoExtra: String?, isActivity: Boolean,
+        jsonVacant: String, isActivity: Boolean,
         idFragment: Int?
     ) {
         val bundle = bundleOf(
             AppConstants.DETAILS_VACANT to jsonVacant,
-            AppConstants.VACANT_INFO_EXTRA to jsonVacantInfoExtra,
             AppConstants.IS_ACTIVITY to isActivity,
             AppConstants.ID_NAV_FRAGMENT to idFragment
         )

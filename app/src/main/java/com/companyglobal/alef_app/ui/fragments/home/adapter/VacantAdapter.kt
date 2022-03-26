@@ -23,7 +23,7 @@ class VacantAdapter(
 ) : RecyclerView.Adapter<BaseViewHolder<*>>() {
 
     interface OnVacantClickListener {
-        fun onVacantClick(vacant: Vacant, vacantInfoExtra: VacantInfoExtra?)
+        fun onVacantClick(vacant: Vacant)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BaseViewHolder<*> {
@@ -36,7 +36,7 @@ class VacantAdapter(
             val position =
                 holder.bindingAdapterPosition.takeIf { it != DiffUtil.DiffResult.NO_POSITION }
                     ?: return@setOnClickListener
-            itemClickListener.onVacantClick(vacantList[position], vacantList[position].vacantInfoExtra)
+            itemClickListener.onVacantClick(vacantList[position])
         }
 
         return holder

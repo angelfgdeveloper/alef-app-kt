@@ -92,13 +92,11 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites),
         }
     }
 
-    override fun onVacantClick(vacant: Vacant, vacantInfoExtra: VacantInfoExtra?) {
+    override fun onVacantClick(vacant: Vacant) {
         val gson = Gson()
         val jsonVacant = gson.toJson(vacant)
-        val jsonVacantInfoExtra = gson.toJson(vacantInfoExtra)
         mOnVacantListener?.onVacantDetails(
             jsonVacant,
-            jsonVacantInfoExtra,
             false,
             R.id.nav_favorites
         )
