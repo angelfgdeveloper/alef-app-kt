@@ -18,6 +18,7 @@ import com.companyglobal.alef_app.databinding.FragmentFavoritesBinding
 import com.companyglobal.alef_app.domain.home.HomeRepoImpl
 import com.companyglobal.alef_app.presentation.home.HomeViewModel
 import com.companyglobal.alef_app.presentation.home.HomeViewModelFactory
+import com.companyglobal.alef_app.services.auth.RetrofitClientAuth
 import com.companyglobal.alef_app.ui.fragments.home.adapter.VacantAdapter
 import com.google.gson.Gson
 
@@ -32,7 +33,7 @@ class FavoritesFragment : Fragment(R.layout.fragment_favorites),
 
     private val mViewModel by viewModels<HomeViewModel> {
         HomeViewModelFactory(
-            HomeRepoImpl(RemoteHomeDataSource())
+            HomeRepoImpl(RemoteHomeDataSource(RetrofitClientAuth.webServiceAuth))
         )
     }
 

@@ -1,6 +1,7 @@
 package com.companyglobal.alef_app.services.auth
 
 import com.companyglobal.alef_app.core.AppConstants
+import com.companyglobal.alef_app.data.model.Vacant
 import com.companyglobal.alef_app.data.model.auth.Auth
 import com.companyglobal.alef_app.data.model.auth.RequestAuth
 import com.companyglobal.alef_app.data.model.auth.RequestGoogle
@@ -8,6 +9,7 @@ import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.POST
 
@@ -19,6 +21,9 @@ interface WebServiceAuth {
 
     @POST("google")
     suspend fun authGoogle(@Body requestGoogle: RequestGoogle): Response<Auth>
+
+    @GET("all-vacant")
+    suspend fun getVacancies(): ArrayList<Vacant>
 }
 
 object RetrofitClientAuth {

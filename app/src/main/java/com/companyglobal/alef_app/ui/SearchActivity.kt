@@ -22,6 +22,7 @@ import com.companyglobal.alef_app.databinding.ActivitySearchBinding
 import com.companyglobal.alef_app.domain.home.HomeRepoImpl
 import com.companyglobal.alef_app.presentation.home.HomeViewModel
 import com.companyglobal.alef_app.presentation.home.HomeViewModelFactory
+import com.companyglobal.alef_app.services.auth.RetrofitClientAuth
 import com.companyglobal.alef_app.ui.fragments.home.adapter.VacantAdapter
 import com.google.gson.Gson
 
@@ -32,7 +33,7 @@ class SearchActivity : AppCompatActivity(), VacantAdapter.OnVacantClickListener 
 
     private val mViewModel by viewModels<HomeViewModel> {
         HomeViewModelFactory(
-            HomeRepoImpl(RemoteHomeDataSource())
+            HomeRepoImpl(RemoteHomeDataSource(RetrofitClientAuth.webServiceAuth))
         )
     }
 
@@ -150,7 +151,7 @@ class SearchActivity : AppCompatActivity(), VacantAdapter.OnVacantClickListener 
             if (w.title.trim().lowercase().contains(word.lowercase())) {
                 newVacants.add(w)
             }
-            if (w.location.trim().lowercase().contains(word.lowercase())) {
+            if (w.location[0].state.trim().lowercase().contains(word.lowercase())) {
                 newVacants.add(w)
             }
         }

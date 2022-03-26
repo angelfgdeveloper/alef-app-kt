@@ -71,8 +71,8 @@ class VacantDetailsFragment : Fragment(R.layout.fragment_vacant_details) {
     private fun setupData() {
         with(mBinding) {
             tvTitleVacantDetails.text = mVacant?.title
-            tvCompany.text = mVacant?.company
-            tvLocation.text = mVacant?.location
+            tvCompany.text = mVacant?.company?.name
+            tvLocation.text = "${mVacant!!.location[0].state} ${mVacant!!.location[0].town}"
 
             tvMode.text = mVacantInfoExtra?.mode
 
@@ -160,7 +160,7 @@ class VacantDetailsFragment : Fragment(R.layout.fragment_vacant_details) {
                 vAvailability.visibility = View.GONE
             }
 
-            val createdAt = (mVacant?.timestamp?.time?.div(1000L))?.let {
+            val createdAt = (mVacant?.created?.time?.div(1000L))?.let {
                 Timestamp.getTimeAgo(it.toInt())
             }
 

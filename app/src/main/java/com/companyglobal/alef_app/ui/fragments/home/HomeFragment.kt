@@ -8,6 +8,7 @@ import android.database.Cursor
 import android.database.MatrixCursor
 import android.os.Bundle
 import android.provider.BaseColumns
+import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
@@ -28,6 +29,7 @@ import com.companyglobal.alef_app.databinding.FragmentHomeBinding
 import com.companyglobal.alef_app.domain.home.HomeRepoImpl
 import com.companyglobal.alef_app.presentation.home.HomeViewModel
 import com.companyglobal.alef_app.presentation.home.HomeViewModelFactory
+import com.companyglobal.alef_app.services.auth.RetrofitClientAuth
 import com.companyglobal.alef_app.ui.LoginActivity
 import com.companyglobal.alef_app.ui.SearchActivity
 import com.companyglobal.alef_app.ui.fragments.home.adapter.VacantAdapter
@@ -45,7 +47,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
 
     private val mViewModel by viewModels<HomeViewModel> {
         HomeViewModelFactory(
-            HomeRepoImpl(RemoteHomeDataSource())
+            HomeRepoImpl(RemoteHomeDataSource(RetrofitClientAuth.webServiceAuth))
         )
     }
 
@@ -158,6 +160,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
 
     private fun setupVacancies() {
         mViewModel.fetchVacancies().observe(viewLifecycleOwner) { result ->
+            Log.d("TAG",  result.toString())
             when (result) {
                 is Result.Failure -> {
                     mBinding.llLoading.visibility = View.GONE
