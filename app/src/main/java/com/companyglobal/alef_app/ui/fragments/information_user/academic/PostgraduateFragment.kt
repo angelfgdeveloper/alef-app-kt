@@ -2,25 +2,37 @@ package com.companyglobal.alef_app.ui.fragments.information_user.academic
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.AutoCompleteTextView
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.companyglobal.alef_app.R
+import com.companyglobal.alef_app.core.Result
 import com.companyglobal.alef_app.core.StepViewListener
 import com.companyglobal.alef_app.core.utils.Validators.Companion.addAllMonths
 import com.companyglobal.alef_app.core.utils.Validators.Companion.validateFields
+import com.companyglobal.alef_app.data.model.info.AllPosgraduates
+import com.companyglobal.alef_app.data.model.info.RequestPosgraduate
+import com.companyglobal.alef_app.data.remote.info.RemoteInformationUser
 import com.companyglobal.alef_app.databinding.FragmentPostgraduateBinding
+import com.companyglobal.alef_app.domain.info.InformationUserRepoImpl
+import com.companyglobal.alef_app.presentation.info.InformationUserViewModel
+import com.companyglobal.alef_app.presentation.info.InformationUserViewModelFactory
+import com.companyglobal.alef_app.services.info.RetrofitClient
 import com.companyglobal.alef_app.ui.fragments.information_user.viewmodel.InfoUserViewModel
 import com.companyglobal.alef_app.ui.fragments.information_user.viewmodel.Posgraduate
 import com.companyglobal.alef_app.ui.fragments.information_user.viewmodel.PosgraduateUser
 import com.companyglobal.alef_app.ui.fragments.information_user.viewmodel.STATE
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import kotlinx.android.synthetic.main.fragment_academic.fabNext
 import kotlinx.android.synthetic.main.fragment_postgraduate.*
 
 class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
@@ -31,6 +43,14 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
 
     private var mNumberPosgraduate: String = ""
     private var mState: Int = 0
+
+    private val mViewModel by viewModels<InformationUserViewModel> {
+        InformationUserViewModelFactory(
+            InformationUserRepoImpl(
+                RemoteInformationUser(RetrofitClient.webService)
+            )
+        )
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -439,9 +459,10 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
                                             etEndYear1.text.toString().trim().isNotEmpty()
                                         ) {
 
-                                            val posgraduate: ArrayList<Posgraduate> = ArrayList()
+                                            val posgraduate: ArrayList<AllPosgraduates> =
+                                                ArrayList()
                                             posgraduate.add(
-                                                Posgraduate(
+                                                AllPosgraduates(
                                                     type = atvType1.text.toString().trim(),
                                                     title = etTitleAchieved1.text.toString().trim(),
                                                     startMonth = atvStartMonth1.text.toString()
@@ -458,18 +479,43 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
                                                 )
                                             )
 
-                                            mInfoUserViewModel.setPosgraduateUser(
-                                                PosgraduateUser(
-                                                    state = STATE.IN_PROCESS,
-                                                    total = posgraduate.size,
-                                                    totalPosgraduate = posgraduate
-                                                )
+                                            val requestPosgraduate = RequestPosgraduate(
+                                                state = STATE.YES.state,
+                                                total = posgraduate.size,
+                                                posgraduates = posgraduate
                                             )
 
-                                            listener?.onSelectStepView(
-                                                2,
-                                                R.id.workExperienceFragment
-                                            )
+                                            mViewModel.setPosgraduate(requestPosgraduate)
+                                                .observe(viewLifecycleOwner) { result ->
+                                                    when (result) {
+                                                        is Result.Failure -> {
+                                                            Log.d("TAG", result.toString())
+                                                        }
+                                                        is Result.Loading -> {
+                                                            Log.d("TAG", result.toString())
+                                                        }
+                                                        is Result.Success -> {
+                                                            Log.d(
+                                                                "TAG",
+                                                                result.data.body().toString()
+                                                            )
+
+                                                            if (result.data.code().equals(400)) {
+                                                                Toast.makeText(
+                                                                    requireContext(),
+                                                                    "Datos agregados",
+                                                                    Toast.LENGTH_SHORT
+                                                                ).show()
+                                                            }
+
+                                                            listener?.onSelectStepView(
+                                                                2,
+                                                                R.id.workExperienceFragment
+                                                            )
+                                                        }
+                                                    }
+
+                                                }
                                         }
                                     }
 
@@ -506,9 +552,10 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
                                             etEndYear2.text.toString().trim().isNotEmpty()
                                         ) {
 
-                                            val posgraduate: ArrayList<Posgraduate> = ArrayList()
+                                            val posgraduate: ArrayList<AllPosgraduates> =
+                                                ArrayList()
                                             posgraduate.add(
-                                                Posgraduate(
+                                                AllPosgraduates(
                                                     type = atvType1.text.toString().trim(),
                                                     title = etTitleAchieved1.text.toString().trim(),
                                                     startMonth = atvStartMonth1.text.toString()
@@ -526,7 +573,7 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
                                             )
 
                                             posgraduate.add(
-                                                Posgraduate(
+                                                AllPosgraduates(
                                                     type = atvType2.text.toString().trim(),
                                                     title = etTitleAchieved2.text.toString().trim(),
                                                     startMonth = atvStartMonth2.text.toString()
@@ -543,18 +590,44 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
                                                 )
                                             )
 
-                                            mInfoUserViewModel.setPosgraduateUser(
-                                                PosgraduateUser(
-                                                    state = STATE.IN_PROCESS,
-                                                    total = posgraduate.size,
-                                                    totalPosgraduate = posgraduate
-                                                )
+                                            val requestPosgraduate = RequestPosgraduate(
+                                                state = STATE.YES.state,
+                                                total = posgraduate.size,
+                                                posgraduates = posgraduate
                                             )
 
-                                            listener?.onSelectStepView(
-                                                2,
-                                                R.id.workExperienceFragment
-                                            )
+                                            mViewModel.setPosgraduate(requestPosgraduate)
+                                                .observe(viewLifecycleOwner) { result ->
+                                                    when (result) {
+                                                        is Result.Failure -> {
+                                                            Log.d("TAG", result.toString())
+                                                        }
+                                                        is Result.Loading -> {
+                                                            Log.d("TAG", result.toString())
+                                                        }
+                                                        is Result.Success -> {
+                                                            Log.d(
+                                                                "TAG",
+                                                                result.data.body().toString()
+                                                            )
+
+                                                            if (result.data.code().equals(400)) {
+                                                                Toast.makeText(
+                                                                    requireContext(),
+                                                                    "Datos agregados",
+                                                                    Toast.LENGTH_SHORT
+                                                                ).show()
+                                                            }
+
+                                                            listener?.onSelectStepView(
+                                                                2,
+                                                                R.id.workExperienceFragment
+                                                            )
+                                                        }
+                                                    }
+
+                                                }
+
                                         }
                                     }
                                 }
@@ -602,9 +675,10 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
                                             etEndYear3.text.toString().trim().isNotEmpty()
                                         ) {
 
-                                            val posgraduate: ArrayList<Posgraduate> = ArrayList()
+                                            val posgraduate: ArrayList<AllPosgraduates> =
+                                                ArrayList()
                                             posgraduate.add(
-                                                Posgraduate(
+                                                AllPosgraduates(
                                                     type = atvType1.text.toString().trim(),
                                                     title = etTitleAchieved1.text.toString().trim(),
                                                     startMonth = atvStartMonth1.text.toString()
@@ -622,7 +696,7 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
                                             )
 
                                             posgraduate.add(
-                                                Posgraduate(
+                                                AllPosgraduates(
                                                     type = atvType2.text.toString().trim(),
                                                     title = etTitleAchieved2.text.toString().trim(),
                                                     startMonth = atvStartMonth2.text.toString()
@@ -640,7 +714,7 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
                                             )
 
                                             posgraduate.add(
-                                                Posgraduate(
+                                                AllPosgraduates(
                                                     type = atvType3.text.toString().trim(),
                                                     title = etTitleAchieved3.text.toString().trim(),
                                                     startMonth = atvStartMonth3.text.toString()
@@ -657,34 +731,87 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
                                                 )
                                             )
 
-                                            mInfoUserViewModel.setPosgraduateUser(
-                                                PosgraduateUser(
-                                                    state = STATE.IN_PROCESS,
-                                                    total = posgraduate.size,
-                                                    totalPosgraduate = posgraduate
-                                                )
+                                            val requestPosgraduate = RequestPosgraduate(
+                                                state = STATE.YES.state,
+                                                total = posgraduate.size,
+                                                posgraduates = posgraduate
                                             )
 
-                                            listener?.onSelectStepView(
-                                                2,
-                                                R.id.workExperienceFragment
-                                            )
+                                            mViewModel.setPosgraduate(requestPosgraduate)
+                                                .observe(viewLifecycleOwner) { result ->
+                                                    when (result) {
+                                                        is Result.Failure -> {
+                                                            Log.d("TAG", result.toString())
+                                                        }
+                                                        is Result.Loading -> {
+                                                            Log.d("TAG", result.toString())
+                                                        }
+                                                        is Result.Success -> {
+                                                            Log.d(
+                                                                "TAG",
+                                                                result.data.body().toString()
+                                                            )
+
+                                                            if (result.data.code().equals(400)) {
+                                                                Toast.makeText(
+                                                                    requireContext(),
+                                                                    "Datos agregados",
+                                                                    Toast.LENGTH_SHORT
+                                                                ).show()
+                                                            }
+
+                                                            listener?.onSelectStepView(
+                                                                2,
+                                                                R.id.workExperienceFragment
+                                                            )
+                                                        }
+                                                    }
+
+                                                }
                                         }
                                     }
                                 }
-                                4 -> {}
+                                4 -> {
+
+                                }
                             }
                         }
                     }
                 }
                 STATE.NO.state -> {
-                    mInfoUserViewModel.setPosgraduateUser(
-                        PosgraduateUser(
-                            state = STATE.NO
-                        )
+
+                    val requestPosgraduate = RequestPosgraduate(
+                        state = STATE.NO.state
                     )
 
-                    listener?.onSelectStepView(2, R.id.workExperienceFragment)
+                    mViewModel.setPosgraduate(requestPosgraduate)
+                        .observe(viewLifecycleOwner) { result ->
+                            when (result) {
+                                is Result.Failure -> {
+                                    Log.d("TAG", result.toString())
+                                }
+                                is Result.Loading -> {
+                                    Log.d("TAG", result.toString())
+                                }
+                                is Result.Success -> {
+                                    Log.d("TAG", result.data.body().toString())
+
+                                    if (result.data.code().equals(400)) {
+                                        Toast.makeText(
+                                            requireContext(),
+                                            "Datos agregados",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+
+                                    listener?.onSelectStepView(
+                                        2,
+                                        R.id.workExperienceFragment
+                                    )
+                                }
+                            }
+
+                        }
                 }
                 STATE.IN_PROCESS.state -> {
                     with(mBinding) {
@@ -708,29 +835,60 @@ class PostgraduateFragment : Fragment(R.layout.fragment_postgraduate) {
                                 etEndYear1.text.toString().trim().isNotEmpty()
                             ) {
 
-                                val posgraduate: ArrayList<Posgraduate> = ArrayList()
+                                val posgraduate: ArrayList<AllPosgraduates> =
+                                    ArrayList()
                                 posgraduate.add(
-                                    Posgraduate(
+                                    AllPosgraduates(
                                         type = atvType1.text.toString().trim(),
                                         title = etTitleAchieved1.text.toString().trim(),
-                                        startMonth = atvStartMonth1.text.toString().trim(),
-                                        startYear = if (etStartYear1.text.toString().isEmpty()) 0
+                                        startMonth = atvStartMonth1.text.toString()
+                                            .trim(),
+                                        startYear = if (etStartYear1.text.toString()
+                                                .isEmpty()
+                                        ) 0
                                         else etStartYear1.text.toString().toInt(),
                                         endMonth = atvEndMonth1.text.toString().trim(),
-                                        endYear = if (etEndYear1.text.toString().isEmpty()) 0
+                                        endYear = if (etEndYear1.text.toString()
+                                                .isEmpty()
+                                        ) 0
                                         else etEndYear1.text.toString().toInt()
                                     )
                                 )
 
-                                mInfoUserViewModel.setPosgraduateUser(
-                                    PosgraduateUser(
-                                        state = STATE.IN_PROCESS,
-                                        total = posgraduate.size,
-                                        totalPosgraduate = posgraduate
-                                    )
+                                val requestPosgraduate = RequestPosgraduate(
+                                    state = STATE.IN_PROCESS.state,
+                                    posgraduates = posgraduate
                                 )
 
-                                listener?.onSelectStepView(2, R.id.workExperienceFragment)
+                                mViewModel.setPosgraduate(requestPosgraduate)
+                                    .observe(viewLifecycleOwner) { result ->
+                                        when (result) {
+                                            is Result.Failure -> {
+                                                Log.d("TAG", result.toString())
+                                            }
+                                            is Result.Loading -> {
+                                                Log.d("TAG", result.toString())
+                                            }
+                                            is Result.Success -> {
+                                                Log.d("TAG", result.data.body().toString())
+
+                                                if (result.data.code().equals(400)) {
+                                                    Toast.makeText(
+                                                        requireContext(),
+                                                        "Datos agregados",
+                                                        Toast.LENGTH_SHORT
+                                                    ).show()
+                                                }
+
+                                                listener?.onSelectStepView(
+                                                    2,
+                                                    R.id.workExperienceFragment
+                                                )
+                                            }
+                                        }
+
+                                    }
+
                             }
 
                         }

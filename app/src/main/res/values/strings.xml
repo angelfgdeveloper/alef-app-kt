@@ -125,4 +125,5 @@
     <string name="work_text_workstation">Area o departamento</string>
     <string name="drawer_open">Abrir menù</string>
     <string name="drawer_close">Cerrar menù</string>
+    <string name="dialog_loading">Cargando..</string>
 </resources>

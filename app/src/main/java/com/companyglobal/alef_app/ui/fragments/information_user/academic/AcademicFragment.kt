@@ -2,6 +2,7 @@ package com.companyglobal.alef_app.ui.fragments.information_user.academic
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
@@ -9,10 +10,18 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.companyglobal.alef_app.R
+import com.companyglobal.alef_app.core.Result
 import com.companyglobal.alef_app.core.StepViewListener
 import com.companyglobal.alef_app.core.utils.Validators.Companion.validateFields
+import com.companyglobal.alef_app.data.model.info.RequestAcademic
+import com.companyglobal.alef_app.data.remote.info.RemoteInformationUser
 import com.companyglobal.alef_app.databinding.FragmentAcademicBinding
+import com.companyglobal.alef_app.domain.info.InformationUserRepoImpl
+import com.companyglobal.alef_app.presentation.info.InformationUserViewModel
+import com.companyglobal.alef_app.presentation.info.InformationUserViewModelFactory
+import com.companyglobal.alef_app.services.info.RetrofitClient
 import com.companyglobal.alef_app.ui.fragments.information_user.viewmodel.AcademicUser
 import com.companyglobal.alef_app.ui.fragments.information_user.viewmodel.InfoUserViewModel
 import kotlinx.android.synthetic.main.fragment_academic.*
@@ -31,6 +40,14 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
     private var mCertificate: Boolean? = null
     private var mTitleAchieved: Boolean? = null
     private var mIdentificationCard: Boolean? = null
+
+    private val mViewModel by viewModels<InformationUserViewModel> {
+        InformationUserViewModelFactory(
+            InformationUserRepoImpl(
+                RemoteInformationUser(RetrofitClient.webService)
+            )
+        )
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -396,47 +413,138 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                             if (mIdentificationCard == true && atvAcademicLevel.text.toString()
                                     .trim() == "Universidad"
                             ) {
-                                mInfoUserViewModel.setAcademicUser(
-                                    AcademicUser(
-                                        levelAcademic = atvAcademicLevel.text.toString().trim(),
-                                        school = etSchool.text.toString().trim(),
-                                        academicAdvance = atvAcademicAdvance.text.toString().trim(),
-                                        startMonth = atvStartMonth.text.toString().trim(),
-                                        startYear = if (etStartYear.text.toString()
-                                                .isEmpty()
-                                        ) 0 else etStartYear.text.toString().toInt(),
-                                        endMonth = atvEndMonth.text.toString().trim(),
-                                        endYear = if (etEndYear.text.toString()
-                                                .isEmpty()
-                                        ) 0 else etEndYear.text.toString().toInt(),
-                                        certificate = mCertificate!!,
-                                        titleAchieved = mTitleAchieved!!,
-                                        identificationCard = mIdentificationCard!!
-                                    )
+//                                mInfoUserViewModel.setAcademicUser(
+//                                    AcademicUser(
+//                                        levelAcademic = atvAcademicLevel.text.toString().trim(),
+//                                        school = etSchool.text.toString().trim(),
+//                                        academicAdvance = atvAcademicAdvance.text.toString().trim(),
+//                                        startMonth = atvStartMonth.text.toString().trim(),
+//                                        startYear = if (etStartYear.text.toString()
+//                                                .isEmpty()
+//                                        ) 0 else etStartYear.text.toString().toInt(),
+//                                        endMonth = atvEndMonth.text.toString().trim(),
+//                                        endYear = if (etEndYear.text.toString()
+//                                                .isEmpty()
+//                                        ) 0 else etEndYear.text.toString().toInt(),
+//                                        certificate = mCertificate!!,
+//                                        titleAchieved = mTitleAchieved!!,
+//                                        identificationCard = mIdentificationCard!!
+//                                    )
+//                                )
+
+                                val requestAcademic = RequestAcademic(
+                                    levelAcademic = atvAcademicLevel.text.toString().trim(),
+                                    institute = etSchool.text.toString().trim(),
+                                    academicAdvance = atvAcademicAdvance.text.toString().trim(),
+                                    startMonth = atvStartMonth.text.toString().trim(),
+                                    startYear = if (etStartYear.text.toString()
+                                            .isEmpty()
+                                    ) 0 else etStartYear.text.toString().toInt(),
+                                    endMonth = atvEndMonth.text.toString().trim(),
+                                    endYear = if (etEndYear.text.toString()
+                                            .isEmpty()
+                                    ) 0 else etEndYear.text.toString().toInt(),
+                                    certificate = mCertificate!!,
+                                    titleAchieved = mTitleAchieved!!,
+                                    identificationCard = mIdentificationCard!!
                                 )
 
-                                listener?.onSelectStepView(1, R.id.postgraduateFragment)
+                                mViewModel.setAcademic(requestAcademic)
+                                    .observe(viewLifecycleOwner) { result ->
+                                        when (result) {
+                                            is Result.Failure -> {
+                                                Log.d("TAG", result.toString())
+                                            }
+                                            is Result.Loading -> {
+                                                Log.d("TAG", result.toString())
+                                            }
+                                            is Result.Success -> {
+                                                Log.d("TAG", result.data.body().toString())
+
+                                                if (result.data.code().equals(400)) {
+                                                    Toast.makeText(
+                                                        requireContext(),
+                                                        "Datos agregados",
+                                                        Toast.LENGTH_SHORT
+                                                    ).show()
+                                                }
+
+                                                listener?.onSelectStepView(
+                                                    1,
+                                                    R.id.postgraduateFragment
+                                                )
+                                            }
+                                        }
+
+                                    }
+
                             } else {
-                                mInfoUserViewModel.setAcademicUser(
-                                    AcademicUser(
-                                        levelAcademic = atvAcademicLevel.text.toString().trim(),
-                                        school = etSchool.text.toString().trim(),
-                                        academicAdvance = atvAcademicAdvance.text.toString().trim(),
-                                        startMonth = atvStartMonth.text.toString().trim(),
-                                        startYear = if (etStartYear.text.toString()
-                                                .isEmpty()
-                                        ) 0 else etStartYear.text.toString().toInt(),
-                                        endMonth = atvEndMonth.text.toString().trim(),
-                                        endYear = if (etEndYear.text.toString()
-                                                .isEmpty()
-                                        ) 0 else etEndYear.text.toString().toInt(),
-                                        certificate = mCertificate!!,
-                                        titleAchieved = mTitleAchieved!!,
-                                        identificationCard = mIdentificationCard!!
-                                    )
+//                                mInfoUserViewModel.setAcademicUser(
+//                                    AcademicUser(
+//                                        levelAcademic = atvAcademicLevel.text.toString().trim(),
+//                                        school = etSchool.text.toString().trim(),
+//                                        academicAdvance = atvAcademicAdvance.text.toString().trim(),
+//                                        startMonth = atvStartMonth.text.toString().trim(),
+//                                        startYear = if (etStartYear.text.toString()
+//                                                .isEmpty()
+//                                        ) 0 else etStartYear.text.toString().toInt(),
+//                                        endMonth = atvEndMonth.text.toString().trim(),
+//                                        endYear = if (etEndYear.text.toString()
+//                                                .isEmpty()
+//                                        ) 0 else etEndYear.text.toString().toInt(),
+//                                        certificate = mCertificate!!,
+//                                        titleAchieved = mTitleAchieved!!,
+//                                        identificationCard = mIdentificationCard!!
+//                                    )
+//                                )
+
+                                val requestAcademic = RequestAcademic(
+                                    levelAcademic = atvAcademicLevel.text.toString().trim(),
+                                    institute = etSchool.text.toString().trim(),
+                                    academicAdvance = atvAcademicAdvance.text.toString().trim(),
+                                    startMonth = atvStartMonth.text.toString().trim(),
+                                    startYear = if (etStartYear.text.toString()
+                                            .isEmpty()
+                                    ) 0 else etStartYear.text.toString().toInt(),
+                                    endMonth = atvEndMonth.text.toString().trim(),
+                                    endYear = if (etEndYear.text.toString()
+                                            .isEmpty()
+                                    ) 0 else etEndYear.text.toString().toInt(),
+                                    certificate = mCertificate!!,
+                                    titleAchieved = mTitleAchieved!!,
+                                    identificationCard = mIdentificationCard!!
                                 )
 
-                                listener?.onSelectStepView(2, R.id.workExperienceFragment)
+                                mViewModel.setAcademic(requestAcademic)
+                                    .observe(viewLifecycleOwner) { result ->
+                                        when (result) {
+                                            is Result.Failure -> {
+                                                Log.d("TAG", result.toString())
+                                            }
+                                            is Result.Loading -> {
+                                                Log.d("TAG", result.toString())
+                                            }
+                                            is Result.Success -> {
+                                                Log.d("TAG", result.data.body().toString())
+
+                                                if (result.data.code().equals(400)) {
+                                                    Toast.makeText(
+                                                        requireContext(),
+                                                        "Datos agregados",
+                                                        Toast.LENGTH_SHORT
+                                                    ).show()
+                                                }
+
+                                                listener?.onSelectStepView(
+                                                    2,
+                                                    R.id.workExperienceFragment
+                                                )
+                                            }
+                                        }
+
+                                    }
+
+
                             }
 
                         } else {
@@ -448,22 +556,61 @@ class AcademicFragment : Fragment(R.layout.fragment_academic) {
                         }
                     }
                 } else {
-                    mInfoUserViewModel.setAcademicUser(
-                        AcademicUser(
-                            levelAcademic = atvAcademicLevel.text.toString().trim(),
-                            school = etSchool.text.toString().trim(),
-                            academicAdvance = atvAcademicAdvance.text.toString().trim(),
-                            startMonth = atvStartMonth.text.toString().trim(),
-                            startYear = if (etStartYear.text.toString()
-                                    .isEmpty()
-                            ) 0 else etStartYear.text.toString().toInt(),
-                            endMonth = atvEndMonth.text.toString().trim(),
-                            endYear = if (etEndYear.text.toString()
-                                    .isEmpty()
-                            ) 0 else etEndYear.text.toString().toInt()
-                        )
+//                    mInfoUserViewModel.setAcademicUser(
+//                        AcademicUser(
+//                            levelAcademic = atvAcademicLevel.text.toString().trim(),
+//                            school = etSchool.text.toString().trim(),
+//                            academicAdvance = atvAcademicAdvance.text.toString().trim(),
+//                            startMonth = atvStartMonth.text.toString().trim(),
+//                            startYear = if (etStartYear.text.toString()
+//                                    .isEmpty()
+//                            ) 0 else etStartYear.text.toString().toInt(),
+//                            endMonth = atvEndMonth.text.toString().trim(),
+//                            endYear = if (etEndYear.text.toString()
+//                                    .isEmpty()
+//                            ) 0 else etEndYear.text.toString().toInt()
+//                        )
+//                    )
+
+                    val requestAcademic = RequestAcademic(
+                        levelAcademic = atvAcademicLevel.text.toString().trim(),
+                        institute = etSchool.text.toString().trim(),
+                        academicAdvance = atvAcademicAdvance.text.toString().trim(),
+                        startMonth = atvStartMonth.text.toString().trim(),
+                        startYear = if (etStartYear.text.toString()
+                                .isEmpty()
+                        ) 0 else etStartYear.text.toString().toInt(),
+                        endMonth = atvEndMonth.text.toString().trim(),
+                        endYear = if (etEndYear.text.toString()
+                                .isEmpty()
+                        ) 0 else etEndYear.text.toString().toInt()
                     )
-                    listener?.onSelectStepView(2, R.id.workExperienceFragment)
+
+                    mViewModel.setAcademic(requestAcademic).observe(viewLifecycleOwner) { result ->
+                        when (result) {
+                            is Result.Failure -> {
+                                Log.d("TAG", result.toString())
+                            }
+                            is Result.Loading -> {
+                                Log.d("TAG", result.toString())
+                            }
+                            is Result.Success -> {
+                                Log.d("TAG", result.data.body().toString())
+
+                                if (result.data.code().equals(400)) {
+                                    Toast.makeText(
+                                        requireContext(),
+                                        "Datos agregados",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+
+                                listener?.onSelectStepView(2, R.id.workExperienceFragment)
+                            }
+                        }
+
+                    }
+
                 }
 
             }

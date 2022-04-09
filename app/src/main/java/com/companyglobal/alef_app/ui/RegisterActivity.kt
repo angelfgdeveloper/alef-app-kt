@@ -1,17 +1,39 @@
 package com.companyglobal.alef_app.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.companyglobal.alef_app.R
+import com.companyglobal.alef_app.core.AppConstants
+import com.companyglobal.alef_app.core.Result
+import com.companyglobal.alef_app.core.utils.MessageFactory
+import com.companyglobal.alef_app.core.utils.SharedPreferencesManager
 import com.companyglobal.alef_app.core.utils.Validators
+import com.companyglobal.alef_app.data.model.auth.RequestRegister
+import com.companyglobal.alef_app.data.remote.auth.AuthDataSource
 import com.companyglobal.alef_app.databinding.ActivityRegisterBinding
+import com.companyglobal.alef_app.domain.auth.AuthRepoImpl
+import com.companyglobal.alef_app.presentation.auth.AuthViewModel
+import com.companyglobal.alef_app.presentation.auth.AuthViewModelFactory
+import com.companyglobal.alef_app.services.auth.RetrofitClientAuth
 
 class RegisterActivity : AppCompatActivity() {
 
     private lateinit var mBinding: ActivityRegisterBinding
+
+    private val mViewModel by viewModels<AuthViewModel> {
+        AuthViewModelFactory(
+            AuthRepoImpl(
+                AuthDataSource(RetrofitClientAuth.webServiceAuth)
+            )
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +73,7 @@ class RegisterActivity : AppCompatActivity() {
             if (Validators.isValidEmail(email)) {
                 if (Validators.isValidPassword(password)) {
                     if (password == confPassword) {
-                        goToHome()
+                        authRegisterUser(email, password, confPassword)
                     } else {
                         Toast.makeText(
                             this,
@@ -75,16 +97,49 @@ class RegisterActivity : AppCompatActivity() {
         }
     }
 
-    private fun goToHome() {
-//        val userToken =
-//            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkFuZ2VsIiwiaWF0IjoxNTE2MjM5MDIyfQ.5sqP7aP7XI_UOCQLvRQuWTDCusnyq-WVsBex8rrX_ic"
-//        SharedPreferencesManager.setStringValue(AppConstants.USER_TOKEN, userToken)
-//
-//        val intent = Intent(this@RegisterActivity, NavigationActivity::class.java)
-//        intent.putExtra(AppConstants.IS_LOGIN_USER, true)
-//        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
-//        startActivity(intent)
-//        finishAffinity()
+    private fun authRegisterUser(email: String, password: String, confPassword: String) {
+        val requestRegister = RequestRegister(email, password, "", confPassword)
+//        MessageFactory.getDialog(this, R.layout.dialog_loading, MessageFactory.TYPE_LOADING)?.show()
+
+        mViewModel.register(requestRegister).observe(this) { result ->
+            when(result) {
+                is Result.Failure -> {
+                    Log.d("Auth-Register", result.toString())
+                }
+                is Result.Loading -> {
+                    Log.d("Auth-Register", result.toString())
+                }
+                is Result.Success -> {
+                    val accessToken = result.data.body()?.accessToken.toString()
+                    val uid = result.data.body()?.userStore?.uid.toString()
+
+                    if (accessToken.isNotEmpty() && accessToken != "null") {
+                        SharedPreferencesManager.setStringValue(
+                            AppConstants.USER_TOKEN,
+                            accessToken
+                        )
+
+                        if (uid.isNotEmpty() && uid != "null") {
+                            SharedPreferencesManager.setStringValue(
+                                AppConstants.USER_ID_GOOGLE,
+                                uid
+                            )
+
+                            goToHome(accessToken)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private fun goToHome(accessToken: String = "") {
+        SharedPreferencesManager.setStringValue(AppConstants.USER_TOKEN, accessToken)
+
+        val intent = Intent(this@RegisterActivity, AvatarActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
+        finishAffinity()
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -2,19 +2,29 @@ package com.companyglobal.alef_app.ui.fragments.information_user.personal
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.ArrayAdapter
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.companyglobal.alef_app.R
+import com.companyglobal.alef_app.core.Result
 import com.companyglobal.alef_app.core.StepViewListener
 import com.companyglobal.alef_app.core.utils.Validators.Companion.onBackPress
 import com.companyglobal.alef_app.core.utils.Validators.Companion.validateFields
+import com.companyglobal.alef_app.data.model.info.RequestPersonal
+import com.companyglobal.alef_app.data.remote.info.RemoteInformationUser
 import com.companyglobal.alef_app.databinding.FragmentPersonalBinding
+import com.companyglobal.alef_app.domain.info.InformationUserRepoImpl
+import com.companyglobal.alef_app.presentation.info.InformationUserViewModel
+import com.companyglobal.alef_app.presentation.info.InformationUserViewModelFactory
+import com.companyglobal.alef_app.services.info.RetrofitClient
 import com.companyglobal.alef_app.ui.fragments.information_user.viewmodel.InfoUser
 import com.companyglobal.alef_app.ui.fragments.information_user.viewmodel.InfoUserViewModel
 import kotlinx.android.synthetic.main.fragment_personal.*
@@ -28,6 +38,14 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
 
     private var mGender = ""
     private var mState = ""
+
+    private val mViewModel by viewModels<InformationUserViewModel> {
+        InformationUserViewModelFactory(
+            InformationUserRepoImpl(
+                RemoteInformationUser(RetrofitClient.webService)
+            )
+        )
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -47,7 +65,7 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
             etLastName.setText("Crown")
             etMotherLastName.setText("Lower")
             etName.setText("Lorrey")
-            etDateOfBirth.setText("10/12/1994")
+            etDateOfBirth.setText("1993-12-15")
             atvGender.setText("Otro")
             atvState.setText("Durango")
             etTwon.setText("Durango")
@@ -164,25 +182,64 @@ class PersonalFragment : Fragment(R.layout.fragment_personal) {
                 context = requireContext()
             )
         ) {
-            mInfoUserViewModel.setInfoUser(
-                InfoUser(
-                    lastName = etLastName.text.toString().trim(),
-                    motherLastName = etMotherLastName.text.toString().trim(),
-                    name = etName.text.toString().trim(),
-                    dateOfBirth = etDateOfBirth.text.toString().trim(),
-                    gender = atvGender.text.toString().trim(),
-                    state = atvState.text.toString().trim(),
-                    town = etTwon.text.toString().trim(),
-                    suburb = etSuburb.text.toString().trim(),
-                    street = etStreet.text.toString().trim(),
-                    numberHome = etNumberHome.text.toString().toInt(),
-                    postalCode = etCP.text.toString().toInt(),
-                    telephone = etTelephone.text.toString().trim(),
-                    cellphone = etMobile.text.toString().trim(),
-                )
+
+            val requestPersonal = RequestPersonal(
+                lastName = etLastName.text.toString().trim(),
+                motherLastName = etMotherLastName.text.toString().trim(),
+                name = etName.text.toString().trim(),
+                birth = etDateOfBirth.text.toString().trim(),
+                gender = atvGender.text.toString().trim(),
+                state = atvState.text.toString().trim(),
+                town = etTwon.text.toString().trim(),
+                suburb = etSuburb.text.toString().trim(),
+                street = etStreet.text.toString().trim(),
+                numberHome = etNumberHome.text.toString().toInt(),
+                postalCode = etCP.text.toString().toInt(),
+                telephone = etTelephone.text.toString().trim(),
+                cellphone = etMobile.text.toString().trim(),
             )
 
-            listener?.onSelectStepView(1, R.id.academicFragment)
+            mViewModel.setPersonal(requestPersonal).observe(viewLifecycleOwner) { result ->
+                when (result) {
+                    is Result.Failure -> {
+                        Log.d("TAG", result.toString())
+                    }
+                    is Result.Loading -> {
+                        Log.d("TAG", result.toString())
+                    }
+                    is Result.Success -> {
+                        Log.d("TAG", result.data.body().toString())
+
+                        if (result.data.code().equals(400)) {
+                            Toast.makeText(requireContext(), "Datos ya agregados", Toast.LENGTH_SHORT).show()
+                        }
+
+                        listener?.onSelectStepView(1, R.id.academicFragment)
+                    }
+                }
+
+            }
+
+
+//            mInfoUserViewModel.setInfoUser(
+//                InfoUser(
+//                    lastName = etLastName.text.toString().trim(),
+//                    motherLastName = etMotherLastName.text.toString().trim(),
+//                    name = etName.text.toString().trim(),
+//                    dateOfBirth = etDateOfBirth.text.toString().trim(),
+//                    gender = atvGender.text.toString().trim(),
+//                    state = atvState.text.toString().trim(),
+//                    town = etTwon.text.toString().trim(),
+//                    suburb = etSuburb.text.toString().trim(),
+//                    street = etStreet.text.toString().trim(),
+//                    numberHome = etNumberHome.text.toString().toInt(),
+//                    postalCode = etCP.text.toString().toInt(),
+//                    telephone = etTelephone.text.toString().trim(),
+//                    cellphone = etMobile.text.toString().trim(),
+//                )
+//            )
+
+//            listener?.onSelectStepView(1, R.id.academicFragment)
 // //               findNavController().navigate(R.id.action_personalFragment_to_academicFragment)
         }
     }

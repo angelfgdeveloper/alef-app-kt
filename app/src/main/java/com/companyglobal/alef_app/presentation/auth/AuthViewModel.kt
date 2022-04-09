@@ -6,10 +6,21 @@ import androidx.lifecycle.liveData
 import com.companyglobal.alef_app.core.Result
 import com.companyglobal.alef_app.data.model.auth.RequestAuth
 import com.companyglobal.alef_app.data.model.auth.RequestGoogle
+import com.companyglobal.alef_app.data.model.auth.RequestRegister
 import com.companyglobal.alef_app.domain.auth.AuthRepo
 import kotlinx.coroutines.Dispatchers
 
 class AuthViewModel(private val repo: AuthRepo) : ViewModel() {
+
+    fun register(requestRegister: RequestRegister) = liveData(Dispatchers.IO) {
+        emit(Result.Loading())
+
+        try {
+            emit(Result.Success(repo.register(requestRegister)))
+        } catch (e: Exception) {
+            emit(Result.Failure(e))
+        }
+    }
 
     fun signIn(requestAuth: RequestAuth) = liveData(Dispatchers.IO) {
         emit(Result.Loading())
