@@ -16,4 +16,8 @@ class InformationUserRepoImpl(private val dataSource: RemoteInformationUser): In
     override suspend fun setPosgraduate(requestPosgraduate: RequestPosgraduate): Response<ResponsePosgraduate> {
         return dataSource.setPosgraduate(requestPosgraduate)
     }
+
+    override suspend fun setWork(requestWork: RequestWork): Response<ResponsetWork> {
+        return dataSource.setWork(requestWork)
+    }
 }

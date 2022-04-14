@@ -7,6 +7,7 @@ import com.companyglobal.alef_app.core.Result
 import com.companyglobal.alef_app.data.model.info.RequestAcademic
 import com.companyglobal.alef_app.data.model.info.RequestPersonal
 import com.companyglobal.alef_app.data.model.info.RequestPosgraduate
+import com.companyglobal.alef_app.data.model.info.RequestWork
 import com.companyglobal.alef_app.domain.info.InformationUserRepo
 import kotlinx.coroutines.Dispatchers
 
@@ -37,6 +38,16 @@ class InformationUserViewModel(private val repo: InformationUserRepo) : ViewMode
 
         try {
             emit(Result.Success(repo.setPosgraduate(requestPosgraduate)))
+        } catch (e: Exception) {
+            emit(Result.Failure(e))
+        }
+    }
+
+    fun setWork(requestWork: RequestWork) = liveData(Dispatchers.IO) {
+        emit(Result.Loading())
+
+        try {
+            emit(Result.Success(repo.setWork(requestWork)))
         } catch (e: Exception) {
             emit(Result.Failure(e))
         }

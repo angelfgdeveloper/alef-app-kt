@@ -12,18 +12,25 @@ import androidx.activity.OnBackPressedCallback
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import com.companyglobal.alef_app.R
 import com.companyglobal.alef_app.core.AppConstants
+import com.companyglobal.alef_app.core.Result
 import com.companyglobal.alef_app.core.StepViewListener
 import com.companyglobal.alef_app.core.utils.SharedPreferencesManager
 import com.companyglobal.alef_app.core.utils.Validators.Companion.addAllMonths
 import com.companyglobal.alef_app.core.utils.Validators.Companion.validateFields
+import com.companyglobal.alef_app.data.model.info.AllWorks
+import com.companyglobal.alef_app.data.model.info.RequestWork
+import com.companyglobal.alef_app.data.remote.info.RemoteInformationUser
 import com.companyglobal.alef_app.databinding.FragmentWorkExperienceBinding
+import com.companyglobal.alef_app.domain.info.InformationUserRepoImpl
+import com.companyglobal.alef_app.presentation.info.InformationUserViewModel
+import com.companyglobal.alef_app.presentation.info.InformationUserViewModelFactory
+import com.companyglobal.alef_app.services.info.RetrofitClient
 import com.companyglobal.alef_app.ui.HomeActivity
 import com.companyglobal.alef_app.ui.fragments.information_user.viewmodel.InfoUserViewModel
 import com.companyglobal.alef_app.ui.fragments.information_user.viewmodel.STATE
-import com.companyglobal.alef_app.ui.fragments.information_user.viewmodel.Work
-import com.companyglobal.alef_app.ui.fragments.information_user.viewmodel.WorkExperience
 import com.google.android.material.textfield.TextInputEditText
 
 class WorkExperienceFragment : Fragment(R.layout.fragment_work_experience) {
@@ -34,6 +41,14 @@ class WorkExperienceFragment : Fragment(R.layout.fragment_work_experience) {
 
     private var mIsStepView = false
     private var mIsActive = false
+
+    private val mViewModel by viewModels<InformationUserViewModel> {
+        InformationUserViewModelFactory(
+            InformationUserRepoImpl(
+                RemoteInformationUser(RetrofitClient.webService)
+            )
+        )
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -141,11 +156,10 @@ class WorkExperienceFragment : Fragment(R.layout.fragment_work_experience) {
                         context = requireContext()
                     )
                 ) {
+                    val works: ArrayList<AllWorks> = ArrayList()
 
-                    val totalWorkExperiences: ArrayList<WorkExperience> = ArrayList()
-                    totalWorkExperiences.add(
-                        WorkExperience(
-                            id = 1,
+                    works.add(
+                        AllWorks(
                             company = etCompany1.text.toString(),
                             job = etJob1.text.toString(),
                             area = etArea1.text.toString(),
@@ -159,18 +173,17 @@ class WorkExperienceFragment : Fragment(R.layout.fragment_work_experience) {
                         )
                     )
 
-                    if (etCompany2.text.toString().isNotEmpty() ||
-                        etJob2.text.toString().isNotEmpty() ||
-                        etArea2.text.toString().isEmpty() ||
-                        atvStartMonth2.text.toString().isNotEmpty() ||
-                        etStartYear2.text.toString().isNotEmpty() ||
-                        atvEndMonth2.text.toString().isNotEmpty() ||
-                        etEndYear2.text.toString().isNotEmpty() ||
+                    if (etCompany2.text.toString().isNotEmpty() &&
+                        etJob2.text.toString().isNotEmpty() &&
+                        etArea2.text.toString().isNotEmpty() &&
+                        atvStartMonth2.text.toString().isNotEmpty() &&
+                        etStartYear2.text.toString().isNotEmpty() &&
+                        atvEndMonth2.text.toString().isNotEmpty() &&
+                        etEndYear2.text.toString().isNotEmpty() &&
                         etDescription2.text.toString().isNotEmpty()
                     ) {
-                        totalWorkExperiences.add(
-                            WorkExperience(
-                                id = 2,
+                        works.add(
+                            AllWorks(
                                 company = etCompany2.text.toString(),
                                 job = etJob2.text.toString(),
                                 area = etArea2.text.toString(),
@@ -183,20 +196,20 @@ class WorkExperienceFragment : Fragment(R.layout.fragment_work_experience) {
                                 description = etDescription2.text.toString()
                             )
                         )
+
                     }
 
-                    if (etCompany3.text.toString().isNotEmpty() ||
-                        etJob3.text.toString().isNotEmpty() ||
-                        etArea3.text.toString().isEmpty() ||
-                        atvStartMonth3.text.toString().isNotEmpty() ||
-                        etStartYear3.text.toString().isNotEmpty() ||
-                        atvEndMonth3.text.toString().isNotEmpty() ||
-                        etEndYear3.text.toString().isNotEmpty() ||
+                    if (etCompany3.text.toString().isNotEmpty() &&
+                        etJob3.text.toString().isNotEmpty() &&
+                        etArea3.text.toString().isNotEmpty() &&
+                        atvStartMonth3.text.toString().isNotEmpty() &&
+                        etStartYear3.text.toString().isNotEmpty() &&
+                        atvEndMonth3.text.toString().isNotEmpty() &&
+                        etEndYear3.text.toString().isNotEmpty() &&
                         etDescription3.text.toString().isNotEmpty()
                     ) {
-                        totalWorkExperiences.add(
-                            WorkExperience(
-                                id = 3,
+                        works.add(
+                            AllWorks(
                                 company = etCompany3.text.toString(),
                                 job = etJob3.text.toString(),
                                 area = etArea3.text.toString(),
@@ -211,28 +224,59 @@ class WorkExperienceFragment : Fragment(R.layout.fragment_work_experience) {
                         )
                     }
 
-                    mInfoUserViewModel.setWork(
-                        Work(
-                            state = STATE.YES,
-                            totalWorkExperience = totalWorkExperiences
-                        )
-                    )
+                    val requestWork = RequestWork(state = STATE.YES.state, works = works)
 
-                    SharedPreferencesManager.removeAllData(AppConstants.USER_ID_GOOGLE)
-                    val intent = Intent(requireContext(), HomeActivity::class.java)
-                    intent.putExtra(AppConstants.IS_LOGIN_USER, true)
-                    startActivity(intent)
-                    activity?.finishAffinity()
+                    mViewModel.setWork(requestWork).observe(viewLifecycleOwner) { result ->
+                        when (result) {
+                            is Result.Failure -> {
+                                Log.d("WorkExperience", "Failure.. $result")
+                            }
+                            is Result.Loading -> {
+                                Log.d("WorkExperience", "Loading.. $result")
+                            }
+                            is Result.Success -> {
+                                Log.d("WorkExperience", result.data.body().toString())
+
+                                SharedPreferencesManager.removeAllData(AppConstants.USER_ID_GOOGLE)
+                                val intent = Intent(requireContext(), HomeActivity::class.java)
+                                intent.putExtra(AppConstants.IS_LOGIN_USER, true)
+                                startActivity(intent)
+                                activity?.finishAffinity()
+                            }
+                        }
+                    }
+
                 } else {
-                    Toast.makeText(requireContext(), "Denegado", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Solicitud denegada, requiere llenar todos los campos",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         } else {
-            SharedPreferencesManager.removeAllData(AppConstants.USER_ID_GOOGLE)
-            val intent = Intent(requireContext(), HomeActivity::class.java)
-            intent.putExtra(AppConstants.IS_LOGIN_USER, true)
-            startActivity(intent)
-            activity?.finishAffinity()
+
+            val requestWork = RequestWork(state = STATE.NO.state)
+
+            mViewModel.setWork(requestWork).observe(viewLifecycleOwner) { result ->
+                when (result) {
+                    is Result.Failure -> {
+                        Log.d("WorkExperience", "Failure.. $result")
+                    }
+                    is Result.Loading -> {
+                        Log.d("WorkExperience", "Loading.. $result")
+                    }
+                    is Result.Success -> {
+                        Log.d("WorkExperience", result.data.body().toString())
+
+                        SharedPreferencesManager.removeAllData(AppConstants.USER_ID_GOOGLE)
+                        val intent = Intent(requireContext(), HomeActivity::class.java)
+                        intent.putExtra(AppConstants.IS_LOGIN_USER, true)
+                        startActivity(intent)
+                        activity?.finishAffinity()
+                    }
+                }
+            }
         }
     }
 

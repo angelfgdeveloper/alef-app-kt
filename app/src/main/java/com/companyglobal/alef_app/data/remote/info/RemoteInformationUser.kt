@@ -31,4 +31,12 @@ class RemoteInformationUser(private val webService: WebService) {
         return posgraduate
     }
 
+    suspend fun setWork(requestWork: RequestWork): Response<ResponsetWork> {
+        val work: Response<ResponsetWork>
+        withContext(Dispatchers.IO) {
+            work = webService.setWork(requestWork)
+        }
+        return work
+    }
+
 }

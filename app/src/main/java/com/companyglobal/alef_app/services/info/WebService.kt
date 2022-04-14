@@ -20,6 +20,9 @@ interface WebService {
 
     @POST("user/posgraduate")
     suspend fun setPosgraduate(@Body requestPosgraduate: RequestPosgraduate): Response<ResponsePosgraduate>
+
+    @POST("user/work")
+    suspend fun setWork(@Body requestWork: RequestWork): Response<ResponsetWork>
 }
 
 object RetrofitClient {

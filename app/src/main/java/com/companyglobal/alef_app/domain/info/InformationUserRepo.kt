@@ -7,4 +7,5 @@ interface InformationUserRepo {
     suspend fun setPersonal(requestPersonal: RequestPersonal): Response<ResponsePersonal>
     suspend fun setAcademic(requestAcademic: RequestAcademic): Response<ResponseAcademic>
     suspend fun setPosgraduate(requestPosgraduate: RequestPosgraduate): Response<ResponsePosgraduate>
+    suspend fun setWork(requestWork: RequestWork): Response<ResponsetWork>
 }

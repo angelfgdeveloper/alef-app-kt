@@ -26,7 +26,7 @@ class VacantDetailsFragment : Fragment(R.layout.fragment_vacant_details) {
     private var listener: OnCloseBackPress? = null
 
     private var mVacant: Vacant? = null
-    private var mVacantInfoExtra: VacantInfoExtra? = null
+//    private var mVacantInfoExtra: VacantInfoExtra? = null
     private var mIsActivity: Boolean? = null
     private var mIdFragment: Int? = null
 
@@ -53,7 +53,7 @@ class VacantDetailsFragment : Fragment(R.layout.fragment_vacant_details) {
         mIdFragment = arguments?.getInt(AppConstants.ID_NAV_FRAGMENT)
 
         mVacant = gson.fromJson(jsonVacant, Vacant::class.java)
-        mVacantInfoExtra = gson.fromJson(jsonVacantInfoExtra, VacantInfoExtra::class.java)
+//        mVacantInfoExtra = gson.fromJson(jsonVacantInfoExtra, VacantInfoExtra::class.java)
     }
 
     private fun setupActionBar() {
@@ -101,12 +101,12 @@ class VacantDetailsFragment : Fragment(R.layout.fragment_vacant_details) {
                 }
             }
 
-            if (!mVacantInfoExtra?.availability.isNullOrEmpty()) {
+            if (!mVacant?.availability.isNullOrEmpty()) {
                 llCompanyInfoExtra.visibility = View.VISIBLE
                 tvTitleAvailability.visibility = View.VISIBLE
                 vAvailability.visibility = View.VISIBLE
 
-                val availabilityMap = mVacantInfoExtra?.availability
+                val availabilityMap = mVacant?.availability
                 if (availabilityMap != null) {
                     for ((title, checked) in availabilityMap) {
                         val radioButtons: View = layoutInflater.inflate(

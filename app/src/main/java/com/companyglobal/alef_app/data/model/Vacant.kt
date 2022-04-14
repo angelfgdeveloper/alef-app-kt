@@ -7,6 +7,7 @@ data class Vacant(
     val id: String = "",
     val location: ArrayList<Location> = arrayListOf(),
     val workDay: ArrayList<WorkDay> = arrayListOf(),
+    val availability: ArrayList<Availability> = arrayListOf(),
     val title: String = "",
     val company: Company? = null,
     val description: String = "",
@@ -19,8 +20,7 @@ data class Vacant(
     val outstading: Int = -1,
     val created: Date? = null,
 
-    val isFavorite: Boolean = false,
-    val vacantInfoExtra: VacantInfoExtra? = null
+    val isFavorite: Boolean = false
 )
 
 data class Location(
@@ -33,10 +33,14 @@ data class WorkDay(
     val hour: String = ""
 )
 
+data class Availability(
+    val key: String = "",
+    val value: Boolean = false
+)
+
 data class Company(
     val name: String = ""
 )
-
 
 enum class DAYS(val num: Int, val day: String) {
     MONDAY(0, "Lunes"),
@@ -47,10 +51,3 @@ enum class DAYS(val num: Int, val day: String) {
     SATURDAY(5, "Sabado"),
     SUNDAY(6, "Domingo")
 }
-
-data class VacantInfoExtra(
-    val companyPaid: Boolean = false,
-    val workDay: Map<Int, String>? = null,
-    val mode: String = "",
-    val availability: Map<String, Boolean> = mapOf(),
-)
