@@ -12,7 +12,6 @@ import com.companyglobal.alef_app.core.OnVacantClickListener
 import com.companyglobal.alef_app.core.Result
 import com.companyglobal.alef_app.core.utils.OnCloseBackPress
 import com.companyglobal.alef_app.data.model.Vacant
-import com.companyglobal.alef_app.data.model.VacantInfoExtra
 import com.companyglobal.alef_app.data.remote.home.RemoteHomeDataSource
 import com.companyglobal.alef_app.databinding.FragmentFavoritesBinding
 import com.companyglobal.alef_app.domain.home.HomeRepoImpl

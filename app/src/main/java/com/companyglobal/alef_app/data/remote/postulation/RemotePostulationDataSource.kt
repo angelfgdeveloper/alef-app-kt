@@ -1,12 +1,38 @@
 package com.companyglobal.alef_app.data.remote.postulation
 
 import com.companyglobal.alef_app.data.model.Postulation
+import com.companyglobal.alef_app.data.model.postulation.RequestPostulation
+import com.companyglobal.alef_app.data.model.postulation.ResponsePostulation
+import com.companyglobal.alef_app.data.model.postulation.ResponsePostulationStatus
+import com.companyglobal.alef_app.services.routes.WebServiceAPI
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import retrofit2.Response
 
-class RemotePostulationDataSource {
+class RemotePostulationDataSource(private val webService: WebServiceAPI) {
+
+    suspend fun getPostulation(
+        idVacant: String
+    ): Response<ResponsePostulationStatus> {
+        val hasPostulation: Response<ResponsePostulationStatus>
+        withContext(Dispatchers.IO) {
+            hasPostulation = webService.getPostulation(idVacant)
+        }
+        return hasPostulation
+    }
+
+    suspend fun createPostulation(
+        idVacant: String,
+        requestPostulation: RequestPostulation
+    ): Response<ResponsePostulation> {
+        val postulation: Response<ResponsePostulation>
+        withContext(Dispatchers.IO) {
+            postulation = webService.createPostulation(idVacant, requestPostulation)
+        }
+        return postulation
+    }
 
     suspend fun getPostulations(): ArrayList<Postulation> {
         val postulationList: ArrayList<Postulation> = ArrayList()

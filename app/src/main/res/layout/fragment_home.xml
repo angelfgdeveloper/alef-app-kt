@@ -33,80 +33,19 @@
 
         </LinearLayout>
 
-        <androidx.core.widget.NestedScrollView
-            android:id="@+id/nestedScrollView"
+
+        <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+            android:id="@+id/swipeRefreshLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:fillViewport="true"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-            <LinearLayout
+            <androidx.core.widget.NestedScrollView
+                android:id="@+id/nestedScrollView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/common_padding_min"
-                    android:orientation="vertical">
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/tilSearch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginVertical="@dimen/common_padding_min"
-                        android:layout_marginTop="@dimen/common_padding_min"
-                        android:background="@drawable/bg_search"
-                        app:boxBackgroundMode="none"
-                        app:endIconDrawable="@drawable/ic_clear"
-                        app:endIconMode="clear_text"
-                        app:hintEnabled="false"
-                        app:startIconDrawable="@drawable/ic_search">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/etSearch"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/search_job"
-                            android:imeOptions="actionNext"
-                            android:inputType="text"
-                            android:minLines="@integer/line"
-                            android:padding="@dimen/common_padding_min"
-                            android:singleLine="true"
-                            android:textSize="@dimen/text_normal" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <androidx.appcompat.widget.SearchView
-                        android:id="@+id/svLocation"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:theme="@style/SearchViewStyle"
-                        android:layout_marginTop="@dimen/common_padding_min"
-                        android:imeOptions="actionDone"
-                        android:background="@drawable/bg_search"
-                        android:inputType="text"
-                        android:singleLine="true"
-                        app:closeIcon="@drawable/ic_clear"
-                        app:queryHint="@string/search_location"
-                        app:searchHintIcon="@null"
-                        app:iconifiedByDefault="false"
-                        android:paddingStart="-2dp"
-                        app:searchIcon="@drawable/ic_location_on" />
-
-                    <Button
-                        android:id="@+id/btnSearch"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/common_padding_default"
-                        android:backgroundTint="@color/purple_700"
-                        android:text="@string/search_btn"
-                        android:textAllCaps="false"
-                        android:textSize="@dimen/text_normal"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
+                android:fillViewport="true"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -114,73 +53,144 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:id="@+id/llLoading"
                         android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:visibility="gone">
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/common_padding_min"
+                        android:orientation="vertical">
 
-                        <ProgressBar
-                            android:id="@+id/progressBar"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:indeterminate="true" />
-
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:id="@+id/llDisconnected"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:visibility="gone">
-
-                        <!--                <ImageView-->
-                        <!--                    android:id="@+id/ivHome"-->
-                        <!--                    android:layout_width="150dp"-->
-                        <!--                    android:layout_height="150dp"-->
-                        <!--                    android:layout_gravity="center"-->
-                        <!--                    android:layout_marginStart="8dp"-->
-                        <!--                    android:layout_marginEnd="8dp"-->
-                        <!--                    android:src="@drawable/ic_img_home" />-->
-
-                        <TextView
+                        <com.google.android.material.textfield.TextInputLayout
+                            android:id="@+id/tilSearch"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginHorizontal="@dimen/common_padding_middle"
+                            android:layout_marginVertical="@dimen/common_padding_min"
+                            android:layout_marginTop="@dimen/common_padding_min"
+                            android:background="@drawable/bg_search"
+                            app:boxBackgroundMode="none"
+                            app:endIconDrawable="@drawable/ic_clear"
+                            app:endIconMode="clear_text"
+                            app:hintEnabled="false"
+                            app:startIconDrawable="@drawable/ic_search">
+
+                            <com.google.android.material.textfield.TextInputEditText
+                                android:id="@+id/etSearch"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:hint="@string/search_job"
+                                android:imeOptions="actionNext"
+                                android:inputType="text"
+                                android:minLines="@integer/line"
+                                android:padding="@dimen/common_padding_min"
+                                android:singleLine="true"
+                                android:textSize="@dimen/text_normal" />
+
+                        </com.google.android.material.textfield.TextInputLayout>
+
+                        <androidx.appcompat.widget.SearchView
+                            android:id="@+id/svLocation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/common_padding_min"
+                            android:background="@drawable/bg_search"
+                            android:imeOptions="actionDone"
+                            android:inputType="text"
+                            android:paddingStart="-2dp"
+                            android:singleLine="true"
+                            android:theme="@style/SearchViewStyle"
+                            app:closeIcon="@drawable/ic_clear"
+                            app:iconifiedByDefault="false"
+                            app:queryHint="@string/search_location"
+                            app:searchHintIcon="@null"
+                            app:searchIcon="@drawable/ic_location_on" />
+
+                        <Button
+                            android:id="@+id/btnSearch"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/common_padding_default"
-                            android:text="@string/no_vacancies"
-                            android:textAlignment="center"
-                            android:textSize="@dimen/text_normal" />
+                            android:backgroundTint="@color/purple_700"
+                            android:text="@string/search_btn"
+                            android:textAllCaps="false"
+                            android:textSize="@dimen/text_normal"
+                            android:textStyle="bold" />
 
                     </LinearLayout>
 
                     <LinearLayout
-                        android:id="@+id/llConnected"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:gravity="center"
-                        android:orientation="vertical"
-                        android:visibility="gone">
+                        android:orientation="vertical">
 
-                        <androidx.recyclerview.widget.RecyclerView
-                            android:id="@+id/rvVacancies"
+                        <LinearLayout
+                            android:id="@+id/llLoading"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
+                            android:gravity="center"
                             android:orientation="vertical"
-                            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                            tools:listitem="@layout/item_vacant" />
+                            android:visibility="gone">
+
+                            <ProgressBar
+                                android:id="@+id/progressBar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:indeterminate="true" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llDisconnected"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+                            <!--                <ImageView-->
+                            <!--                    android:id="@+id/ivHome"-->
+                            <!--                    android:layout_width="150dp"-->
+                            <!--                    android:layout_height="150dp"-->
+                            <!--                    android:layout_gravity="center"-->
+                            <!--                    android:layout_marginStart="8dp"-->
+                            <!--                    android:layout_marginEnd="8dp"-->
+                            <!--                    android:src="@drawable/ic_img_home" />-->
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginHorizontal="@dimen/common_padding_middle"
+                                android:layout_marginTop="@dimen/common_padding_default"
+                                android:text="@string/no_vacancies"
+                                android:textAlignment="center"
+                                android:textSize="@dimen/text_normal" />
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/llConnected"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:focusableInTouchMode="true"
+                            android:gravity="center"
+                            android:orientation="vertical"
+                            android:visibility="gone">
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:id="@+id/rvVacancies"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                                app:layout_behavior="@string/appbar_scrolling_view_behavior"
+                                tools:listitem="@layout/item_vacant" />
+
+                        </LinearLayout>
 
                     </LinearLayout>
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </androidx.core.widget.NestedScrollView>
 
-        </androidx.core.widget.NestedScrollView>
+        </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
     </LinearLayout>
 

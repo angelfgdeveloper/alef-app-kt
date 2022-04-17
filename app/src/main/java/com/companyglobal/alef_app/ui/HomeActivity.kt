@@ -169,6 +169,11 @@ class HomeActivity : AppCompatActivity(), OnVacantClickListener, OnCloseBackPres
             tvSpecialist.text = "Para tener más detalles y una mejor experiencia"
         } else {
             val civAvatar = hView.findViewById<ImageView>(R.id.civAvatar)
+            val tvFullName = hView.findViewById<TextView>(R.id.tvFullName)
+            val tvSpecialist = hView.findViewById<TextView>(R.id.tvSpecialist)
+
+            tvFullName.text = "Test 1"
+            tvSpecialist.text = "Desarrollador"
 
             val pictureGoogle =
                 SharedPreferencesManager.getStringValue(AppConstants.USER_PICTURE_PROFILE)

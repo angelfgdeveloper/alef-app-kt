@@ -2,6 +2,7 @@ package com.companyglobal.alef_app.ui.fragments.home.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +14,6 @@ import com.companyglobal.alef_app.R
 import com.companyglobal.alef_app.core.BaseViewHolder
 import com.companyglobal.alef_app.core.utils.Timestamp
 import com.companyglobal.alef_app.data.model.Vacant
-import com.companyglobal.alef_app.data.model.VacantInfoExtra
 import com.companyglobal.alef_app.databinding.ItemVacantBinding
 import java.util.ArrayList
 

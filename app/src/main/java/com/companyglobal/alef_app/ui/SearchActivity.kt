@@ -16,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.companyglobal.alef_app.core.AppConstants
 import com.companyglobal.alef_app.core.Result
 import com.companyglobal.alef_app.data.model.Vacant
-import com.companyglobal.alef_app.data.model.VacantInfoExtra
 import com.companyglobal.alef_app.data.remote.home.RemoteHomeDataSource
 import com.companyglobal.alef_app.databinding.ActivitySearchBinding
 import com.companyglobal.alef_app.domain.home.HomeRepoImpl

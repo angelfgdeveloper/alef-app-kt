@@ -1,4 +1,4 @@
-package com.companyglobal.alef_app.services.info
+package com.companyglobal.alef_app.services
 
 import android.util.Log
 import com.companyglobal.alef_app.core.AppConstants

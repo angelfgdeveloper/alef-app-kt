@@ -124,7 +124,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/common_padding_min"
                     android:layout_weight="1"
-                    android:backgroundTint="@color/purple_700"
                     android:text="@string/btn_apply"
                     android:textAllCaps="false"
                     android:textSize="@dimen/text_normal"

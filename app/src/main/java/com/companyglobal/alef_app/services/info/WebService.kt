@@ -2,6 +2,7 @@ package com.companyglobal.alef_app.services.info
 
 import com.companyglobal.alef_app.core.AppConstants
 import com.companyglobal.alef_app.data.model.info.*
+import com.companyglobal.alef_app.services.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Response
 import retrofit2.Retrofit

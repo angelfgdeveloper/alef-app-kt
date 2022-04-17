@@ -1,9 +1,11 @@
 package com.companyglobal.alef_app.data.model
 
+import com.google.gson.annotations.SerializedName
 import java.util.*
 import kotlin.collections.ArrayList
 
 data class Vacant(
+    @SerializedName("_id")
     val id: String = "",
     val location: ArrayList<Location> = arrayListOf(),
     val workDay: ArrayList<WorkDay> = arrayListOf(),
@@ -39,7 +41,9 @@ data class Availability(
 )
 
 data class Company(
-    val name: String = ""
+    @SerializedName("_id")
+    val id: String? = "",
+    val name: String? = ""
 )
 
 enum class DAYS(val num: Int, val day: String) {

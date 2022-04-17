@@ -17,6 +17,7 @@ import com.companyglobal.alef_app.databinding.FragmentPostulationBinding
 import com.companyglobal.alef_app.domain.postulation.PostulationRepoImpl
 import com.companyglobal.alef_app.presentation.postulation.PostulationViewModel
 import com.companyglobal.alef_app.presentation.postulation.PostulationViewModelFactory
+import com.companyglobal.alef_app.services.routes.RetrofitClientAPI
 import com.companyglobal.alef_app.ui.fragments.postulation.adapter.PostulationAdapter
 
 class PostulationFragment : Fragment(R.layout.fragment_postulation),
@@ -28,7 +29,7 @@ class PostulationFragment : Fragment(R.layout.fragment_postulation),
 
     private val mViewModel by viewModels<PostulationViewModel> {
         PostulationViewModelFactory(
-            PostulationRepoImpl(RemotePostulationDataSource())
+            PostulationRepoImpl(RemotePostulationDataSource(RetrofitClientAPI.webServiceAPI))
         )
     }
 

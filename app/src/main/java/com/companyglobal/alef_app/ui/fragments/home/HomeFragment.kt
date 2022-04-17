@@ -6,6 +6,7 @@ import android.content.Context
 import android.content.Intent
 import android.database.Cursor
 import android.database.MatrixCursor
+import android.os.Build
 import android.os.Bundle
 import android.provider.BaseColumns
 import android.util.Log
@@ -13,17 +14,19 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.activity.OnBackPressedCallback
+import androidx.annotation.RequiresApi
 import androidx.appcompat.widget.SearchView
 import androidx.cursoradapter.widget.CursorAdapter
 import androidx.cursoradapter.widget.SimpleCursorAdapter
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.companyglobal.alef_app.R
 import com.companyglobal.alef_app.core.AppConstants
 import com.companyglobal.alef_app.core.OnVacantClickListener
 import com.companyglobal.alef_app.core.Result
+import com.companyglobal.alef_app.core.utils.Validators
 import com.companyglobal.alef_app.data.model.Vacant
-import com.companyglobal.alef_app.data.model.VacantInfoExtra
 import com.companyglobal.alef_app.data.remote.home.RemoteHomeDataSource
 import com.companyglobal.alef_app.databinding.FragmentHomeBinding
 import com.companyglobal.alef_app.domain.home.HomeRepoImpl
@@ -56,6 +59,7 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
         if (activity is OnVacantClickListener) listener = activity as OnVacantClickListener?
     }
 
+    @RequiresApi(Build.VERSION_CODES.M)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mBinding = FragmentHomeBinding.bind(view)
@@ -63,7 +67,15 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
 
         onBackPress()
         setupArguments()
-        setupVacancies()
+
+        mBinding.swipeRefreshLayout.setOnRefreshListener {
+            mBinding.swipeRefreshLayout.isRefreshing = true
+            mBinding.llLoading.visibility = View.VISIBLE
+            mBinding.llConnected.visibility = View.GONE
+            setupVacancies(true)
+        }
+
+        setupVacancies(false)
         setupTextField()
         setupSearch()
     }
@@ -158,7 +170,8 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
         }
     }
 
-    private fun setupVacancies() {
+    private fun setupVacancies(isRefresh: Boolean) {
+
         mViewModel.fetchVacancies().observe(viewLifecycleOwner) { result ->
             Log.d("TAG",  result.toString())
             when (result) {
@@ -189,6 +202,10 @@ class HomeFragment : Fragment(R.layout.fragment_home), VacantAdapter.OnVacantCli
                     mBinding.rvVacancies.adapter = mAdapter
                 }
             }
+        }
+
+        if (isRefresh) {
+            mBinding.swipeRefreshLayout.isRefreshing = false
         }
     }
 
