@@ -23,11 +23,31 @@ class InformationUserViewModel(private val repo: InformationUserRepo) : ViewMode
         }
     }
 
+    fun getPersonal() = liveData(Dispatchers.IO) {
+        emit(Result.Loading())
+
+        try {
+            emit(Result.Success(repo.getPersonal()))
+        } catch (e: Exception) {
+            emit(Result.Failure(e))
+        }
+    }
+
     fun setAcademic(requestAcademic: RequestAcademic) = liveData(Dispatchers.IO) {
         emit(Result.Loading())
 
         try {
             emit(Result.Success(repo.setAcademic(requestAcademic)))
+        } catch (e: Exception) {
+            emit(Result.Failure(e))
+        }
+    }
+
+    fun getAcademic() = liveData(Dispatchers.IO) {
+        emit(Result.Loading())
+
+        try {
+            emit(Result.Success(repo.getAcademic()))
         } catch (e: Exception) {
             emit(Result.Failure(e))
         }
@@ -43,11 +63,31 @@ class InformationUserViewModel(private val repo: InformationUserRepo) : ViewMode
         }
     }
 
+    fun getPosgraduate() = liveData(Dispatchers.IO) {
+        emit(Result.Loading())
+
+        try {
+            emit(Result.Success(repo.getPosgraduate()))
+        } catch (e: Exception) {
+            emit(Result.Failure(e))
+        }
+    }
+
     fun setWork(requestWork: RequestWork) = liveData(Dispatchers.IO) {
         emit(Result.Loading())
 
         try {
             emit(Result.Success(repo.setWork(requestWork)))
+        } catch (e: Exception) {
+            emit(Result.Failure(e))
+        }
+    }
+
+    fun getWork() = liveData(Dispatchers.IO) {
+        emit(Result.Loading())
+
+        try {
+            emit(Result.Success(repo.getWork()))
         } catch (e: Exception) {
             emit(Result.Failure(e))
         }

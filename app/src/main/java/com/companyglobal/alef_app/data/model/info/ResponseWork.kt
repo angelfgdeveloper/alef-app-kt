@@ -2,7 +2,7 @@ package com.companyglobal.alef_app.data.model.info
 
 import com.google.gson.annotations.SerializedName
 
-data class ResponsetWork(
+data class ResponseWork(
     @SerializedName("_id")
     override var uid: String? = "",
     @SerializedName("state")

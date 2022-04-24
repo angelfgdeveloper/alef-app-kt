@@ -15,10 +15,26 @@ class RemoteInformationUser(private val webService: WebService) {
         return personal
     }
 
+    suspend fun getPersonal(): ResponsePersonal {
+        val personal: ResponsePersonal
+        withContext(Dispatchers.IO) {
+            personal = webService.getPersonal()
+        }
+        return personal
+    }
+
     suspend fun setAcademic(requestAcademic: RequestAcademic): Response<ResponseAcademic> {
         val academic: Response<ResponseAcademic>
         withContext(Dispatchers.IO) {
             academic = webService.setAcademic(requestAcademic)
+        }
+        return academic
+    }
+
+    suspend fun getAcademic(): ResponseAcademic {
+        val academic: ResponseAcademic
+        withContext(Dispatchers.IO) {
+            academic = webService.getAcademic()
         }
         return academic
     }
@@ -31,10 +47,26 @@ class RemoteInformationUser(private val webService: WebService) {
         return posgraduate
     }
 
-    suspend fun setWork(requestWork: RequestWork): Response<ResponsetWork> {
-        val work: Response<ResponsetWork>
+    suspend fun getPosgraduate(): ResponsePosgraduate {
+        val posgraduate: ResponsePosgraduate
+        withContext(Dispatchers.IO) {
+            posgraduate = webService.getPosgraduate()
+        }
+        return posgraduate
+    }
+
+    suspend fun setWork(requestWork: RequestWork): Response<ResponseWork> {
+        val work: Response<ResponseWork>
         withContext(Dispatchers.IO) {
             work = webService.setWork(requestWork)
+        }
+        return work
+    }
+
+    suspend fun getWork(): ResponseWork {
+        val work: ResponseWork
+        withContext(Dispatchers.IO) {
+            work = webService.getWork()
         }
         return work
     }

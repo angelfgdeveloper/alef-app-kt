@@ -57,7 +57,7 @@
                 android:layout_marginHorizontal="@dimen/common_padding_default"
                 android:layout_marginTop="@dimen/common_padding_default"
                 android:gravity="center"
-                android:text="Mark Zuckerberg"
+                tools:text="Mark Zuckerberg"
                 android:textSize="@dimen/text_normal" />
 
             <TextView
@@ -192,7 +192,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/common_padding_min"
                                         android:layout_weight="@integer/layout_weight_default"
-                                        android:text="Mark Zuckererg"
+                                        tools:text="Mark Zuckererg"
                                         android:textColor="@android:color/black"
                                         android:textSize="@dimen/text_normal" />
 
@@ -217,7 +217,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/common_padding_min"
                                         android:layout_weight="@integer/layout_weight_default"
-                                        android:text="15 de Diciembre de 2023"
+                                        tools:text="15 de Diciembre de 2023"
                                         android:textColor="@android:color/black"
                                         android:textSize="@dimen/text_normal" />
 
@@ -242,7 +242,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/common_padding_min"
                                         android:layout_weight="@integer/layout_weight_default"
-                                        android:text="Durango, Dgo."
+                                        tools:text="Durango, Dgo."
                                         android:textColor="@android:color/black"
                                         android:textSize="@dimen/text_normal" />
 
@@ -267,7 +267,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/common_padding_min"
                                         android:layout_weight="@integer/layout_weight_default"
-                                        android:text="Calle street #165, Fracc. Dolor bendig C.P. 3400"
+                                        tools:text="Calle street #165, Fracc. Dolor bendig C.P. 3400"
                                         android:textColor="@android:color/black"
                                         android:textSize="@dimen/text_normal" />
 
@@ -292,7 +292,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/common_padding_min"
                                         android:layout_weight="@integer/layout_weight_default"
-                                        android:text="Sin datos"
+                                        tools:text="Sin datos"
                                         android:textSize="@dimen/text_normal" />
 
                                 </LinearLayout>
@@ -316,7 +316,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/common_padding_min"
                                         android:layout_weight="@integer/layout_weight_default"
-                                        android:text="Sin datos"
+                                        tools:text="Sin datos"
                                         android:textSize="@dimen/text_normal" />
 
                                 </LinearLayout>
@@ -340,7 +340,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/common_padding_min"
                                         android:layout_weight="@integer/layout_weight_default"
-                                        android:text="Sin datos"
+                                        tools:text="Sin datos"
                                         android:textSize="@dimen/text_normal" />
 
                                 </LinearLayout>
@@ -439,12 +439,12 @@
                                         android:textStyle="bold" />
 
                                     <TextView
-                                        android:id="@+id/tvÍnstitute"
+                                        android:id="@+id/tvInstitute"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/common_padding_min"
                                         android:layout_weight="@integer/layout_weight_default"
-                                        android:text="Instituto Tecnologico de Monterrey"
+                                        tools:text="Instituto Tecnologico de Monterrey"
                                         android:textColor="@android:color/black"
                                         android:textSize="@dimen/text_normal" />
 
@@ -469,7 +469,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/common_padding_min"
                                         android:layout_weight="@integer/layout_weight_default"
-                                        android:text="Ingenerio de software"
+                                        tools:text="Ingenerio de software"
                                         android:textColor="@android:color/black"
                                         android:textSize="@dimen/text_normal" />
 
@@ -494,7 +494,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/common_padding_min"
                                         android:layout_weight="@integer/layout_weight_default"
-                                        android:text="Febrero de 2023"
+                                        tools:text="Febrero de 2023"
                                         android:textColor="@android:color/black"
                                         android:textSize="@dimen/text_normal" />
 
@@ -599,7 +599,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/common_padding_min"
                                         android:layout_weight="@integer/layout_weight_default"
-                                        android:text="Indeend Company"
+                                        tools:text="Indeend Company"
                                         android:textColor="@android:color/black"
                                         android:textSize="@dimen/text_normal" />
 
@@ -624,7 +624,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/common_padding_min"
                                         android:layout_weight="@integer/layout_weight_default"
-                                        android:text="Julio de 2020"
+                                        tools:text="Julio de 2020"
                                         android:textColor="@android:color/black"
                                         android:textSize="@dimen/text_normal" />
 
@@ -649,7 +649,7 @@
                                         android:layout_height="wrap_content"
                                         android:layout_marginStart="@dimen/common_padding_min"
                                         android:layout_weight="@integer/layout_weight_default"
-                                        android:text="Marzo de 2022"
+                                        tools:text="Marzo de 2022"
                                         android:textColor="@android:color/black"
                                         android:textSize="@dimen/text_normal" />
 

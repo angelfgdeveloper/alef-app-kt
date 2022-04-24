@@ -5,7 +5,14 @@ import retrofit2.Response
 
 interface InformationUserRepo {
     suspend fun setPersonal(requestPersonal: RequestPersonal): Response<ResponsePersonal>
+    suspend fun getPersonal(): ResponsePersonal
+
     suspend fun setAcademic(requestAcademic: RequestAcademic): Response<ResponseAcademic>
+    suspend fun getAcademic(): ResponseAcademic
+
     suspend fun setPosgraduate(requestPosgraduate: RequestPosgraduate): Response<ResponsePosgraduate>
-    suspend fun setWork(requestWork: RequestWork): Response<ResponsetWork>
+    suspend fun getPosgraduate(): ResponsePosgraduate
+
+    suspend fun setWork(requestWork: RequestWork): Response<ResponseWork>
+    suspend fun getWork(): ResponseWork
 }
